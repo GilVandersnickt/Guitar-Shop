@@ -4,15 +4,16 @@
 
 Voor de module **Programming Integration** zou ik een webshop willen maken die allerlei producten verkoopt omtrent gitaren.  
 
-- Een gebruiker zou kunnen registreren/inloggen.
+- Een administrator zou beheer hebben over de gebruikers, producten, categorieën, subcategorieën en merken.
+- Een gebruiker zou zich kunnen registreren of inloggen.
 - Een gebruiker zou een winkelmandje kunnen gebruiken.
 - De producten kunnen gefilterd worden op basis van de categorie, subcategorie, het merk of zoekwoord.
 - De gefilterde producten worden weergegeven in een lijst voorzien van paginatie.
 
 ## Rollen
 
-- Een **administrator** zou producten, merken, categorieën, subcategorieën en leden kunnen toevoegen, editeren en verwijderen.
-- Een **gebruiker** zou toegang hebben tot een winkelmandje waarin die producten zou kunnen toevoegen, editeren en verwijderen. Ook kan een gebruiker zich registreren of inloggen.
+- Een **administrator** zou producten, merken, categorieën, subcategorieën en gebruikers kunnen toevoegen, editeren en verwijderen.
+- Een **gebruiker** zou toegang hebben tot een winkelmandje waarin die producten zou kunnen toevoegen, editeren en verwijderen. Ook zou een gebruiker zich kunnen registreren of kunnen inloggen.
 
 ## Database structuur
 
