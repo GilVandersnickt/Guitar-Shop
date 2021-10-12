@@ -17,30 +17,33 @@ Voor de module **Programming Integration** zou ik een webshop willen maken die a
 
 ## Endpoints
 
+### Products
 - GET /api/products
 - GET /api/products/id
 - POST /api/products
 - PUT /api/products
 - DELETE /api/products
 
+### Brands
 - GET /api/brands
 - GET /api/brands/id
 - POST /api/brands
 - PUT /api/brands
 - DELETE /api/brands
 
+### Categories
 - GET /api/categories
 - GET /api/categories/id
 - POST /api/categories
 - PUT /api/categories
 - DELETE /api/categories
 
+### Subcategories
 - GET /api/subcategories
 - GET /api/subcategories/id
 - POST /api/subcategories
 - PUT /api/subcategories
 - DELETE /api/subcategories
-
 
 ## Database structuur
 
