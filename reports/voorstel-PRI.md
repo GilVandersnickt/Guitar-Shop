@@ -15,6 +15,33 @@ Voor de module **Programming Integration** zou ik een webshop willen maken die a
 - Een **administrator** zou producten, merken, categorieën, subcategorieën en gebruikers kunnen toevoegen, editeren en verwijderen.
 - Een **gebruiker** zou toegang hebben tot een winkelmandje waarin die producten zou kunnen toevoegen, editeren en verwijderen. Ook zou een gebruiker zich kunnen registreren of kunnen inloggen.
 
+## Endpoints
+
+- GET /api/products
+- GET /api/products/id
+- POST /api/products
+- PUT /api/products
+- DELETE /api/products
+
+- GET /api/brands
+- GET /api/brands/id
+- POST /api/brands
+- PUT /api/brands
+- DELETE /api/brands
+
+- GET /api/categories
+- GET /api/categories/id
+- POST /api/categories
+- PUT /api/categories
+- DELETE /api/categories
+
+- GET /api/subcategories
+- GET /api/subcategories/id
+- POST /api/subcategories
+- PUT /api/subcategories
+- DELETE /api/subcategories
+
+
 ## Database structuur
 
 ### Entiteiten
