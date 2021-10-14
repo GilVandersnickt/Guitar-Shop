@@ -6,6 +6,7 @@ Voor de module **Mobile Development** zou ik een webshop willen maken die allerl
 
 - Een gebruiker zou zich kunnen registreren of inloggen.
 - Een gebruiker zou een winkelmandje kunnen gebruiken.
+- Een gebruiker zou producten kunnen toevoegen, aanpassen of verwijderen in de winkelmand.
 - De producten kunnen gefilterd worden op basis van de categorie, subcategorie of het merk.
 - De gefilterde producten worden weergegeven in een lijst voorzien van paginatie.
 
