@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Entities
 {
-    public class Category : BaseEntity
+    public class Category : EntityBase
     {
         [Required]
         public string Name { get; set; }
-        public string Image { get; set; }
+        public Uri Image { get; set; }
         public ICollection<Product> Products { get; set; }
         public ICollection<BrandsCategories> Brands { get; set; }
         public ICollection<Subcategory> Subcategories { get; set; }

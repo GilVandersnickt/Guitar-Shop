@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Entities
 {
-    public class Product : BaseEntity
+    public class Product : EntityBase
     {
         [Required]
         public string Name { get; set; }
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public string Image { get; set; }
+        public Uri Image { get; set; }
         [Required]
         public Guid BrandId { get; set; }
         public Brand Brand { get; set; }
