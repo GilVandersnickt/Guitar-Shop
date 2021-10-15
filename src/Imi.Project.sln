@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Mobile.Infrastr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Common", "Imi.Project.Common\Imi.Project.Common.csproj", "{A8584E32-5D0F-457A-904B-B8F1564CAFD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imi.Project.Vue", "Imi.Project.Vue\Imi.Project.Vue.csproj", "{44AF898A-23F0-4435-A3D6-DCE16BF97922}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Vue", "Imi.Project.Vue\Imi.Project.Vue.csproj", "{44AF898A-23F0-4435-A3D6-DCE16BF97922}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
