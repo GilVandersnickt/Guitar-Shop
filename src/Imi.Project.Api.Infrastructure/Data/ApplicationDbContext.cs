@@ -12,13 +12,60 @@ namespace Imi.Project.Api.Infrastructure.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subcategory> Subcategories { get; set; }
+        public DbSet<BrandCategory> BrandCategories { get; set; }
+        public DbSet<BrandSubcategory> BrandSubcategories { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,4)");
+
+            //modelBuilder.Entity<Brand>()
+            //    .HasMany(b => b.Products)
+            //    .WithOne(p => p.Brand)
+            //    .HasForeignKey(p => p.BrandId);
+
+            //modelBuilder.Entity<Category>()
+            //    .HasMany(c => c.Products)
+            //    .WithOne(p => p.Category)
+            //    .HasForeignKey(p => p.CategoryId);
+
+            //modelBuilder.Entity<Subcategory>()
+            //    .HasMany(c => c.Products)
+            //    .WithOne(p => p.Subcategory)
+            //    .HasForeignKey(p => p.CategoryId);
+
+            // Many to many brands categories
+            modelBuilder.Entity<BrandCategory>()
+                .ToTable("BrandCategory")
+                .HasKey(bc => new { bc.BrandId, bc.CategoryId });
+            modelBuilder.Entity<BrandCategory>()
+                .HasOne(bc => bc.Category)
+                .WithMany(c => c.Brands)
+                .HasForeignKey(bc => bc.CategoryId);
+            modelBuilder.Entity<BrandCategory>()
+                .HasOne(bc => bc.Brand)
+                .WithMany(b => b.Categories)
+                .HasForeignKey(bc => bc.BrandId);
+
+            // Many to many brands subcategories
+            modelBuilder.Entity<BrandSubcategory>()
+                .ToTable("BrandSubcategory")
+                .HasKey(bc => new { bc.BrandId, bc.SubcategoryId });
+            modelBuilder.Entity<BrandSubcategory>()
+                .HasOne(bc => bc.Subcategory)
+                .WithMany(c => c.Brands)
+                .HasForeignKey(bc => bc.SubcategoryId);
+            modelBuilder.Entity<BrandSubcategory>()
+                .HasOne(bc => bc.Brand)
+                .WithMany(b => b.Subcategories)
+                .HasForeignKey(bc => bc.BrandId);
+
 
             // Brands
             modelBuilder.Entity<Brand>().HasData(
@@ -76,6 +123,7 @@ namespace Imi.Project.Api.Infrastructure.Data
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                         Name = "Fender Stratocaster",
+                        Price = 1000M,
                         BrandId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                         CategoryId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
                         SubcategoryId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
@@ -84,6 +132,7 @@ namespace Imi.Project.Api.Infrastructure.Data
                     {
                         Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                         Name = "Marshall JVM",
+                        Price = 1000M,
                         BrandId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                         CategoryId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
                         SubcategoryId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
