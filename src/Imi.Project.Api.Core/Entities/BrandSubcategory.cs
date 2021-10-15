@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Entities
 {
-    public class BrandsSubcategories
+    public class BrandSubcategory
     {
         public Guid BrandId { get; set; }
         public Guid SubcategoryId { get; set; }

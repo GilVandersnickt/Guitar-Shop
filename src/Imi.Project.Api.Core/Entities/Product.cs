@@ -10,9 +10,7 @@ namespace Imi.Project.Api.Entities
     {
         [Required]
         public string Name { get; set; }
-        [Required]
         public decimal Price { get; set; }
-        [Required]
         public Uri Image { get; set; }
         [Required]
         public Guid BrandId { get; set; }

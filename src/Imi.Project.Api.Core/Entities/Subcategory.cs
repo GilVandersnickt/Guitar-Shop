@@ -12,6 +12,6 @@ namespace Imi.Project.Api.Entities
         public string Name { get; set; }
         public Category Category { get; set; }
         public ICollection<Product> Products { get; set; }
-        public ICollection<BrandsSubcategories> Brands { get; set; }
+        public ICollection<BrandSubcategory> Brands { get; set; }
     }
 }
