@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Entities
 {
-    public class Subcategory : EntityBase
+    public class Subcategory : BaseEntity
     {
         [Required]
         public string Name { get; set; }
