@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Entities;
+using Imi.Project.Api.Infrastructure.Data.Seeding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -54,78 +55,11 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .HasForeignKey(bc => bc.BrandId);
 
 
-            // Brands
-            modelBuilder.Entity<Brand>().HasData(
-                new[]
-                {
-                    new Brand
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                        Name = "Fender",
-                    }, new Brand
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                        Name = "Marshall",
-                    },
-                }
-                );
+            BrandSeeder.Seed(modelBuilder);
+            CategorySeeder.Seed(modelBuilder);
+            SubcategorySeeder.Seed(modelBuilder);
+            ProductSeeder.Seed(modelBuilder);
 
-            // Categories
-            modelBuilder.Entity<Category>().HasData(
-                new[]
-                {
-                    new Category
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                        Name = "Guitars",
-                    }, new Category
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                        Name = "Amps",
-                    },
-                }
-                );
-
-            // Subcategories
-            modelBuilder.Entity<Subcategory>().HasData(
-                new[]
-                {
-                    new Subcategory
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                        Name = "Electric guitars",
-                    }, new Subcategory
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                        Name = "Tube amps",
-                    },
-                }
-                );
-
-            //Products
-            modelBuilder.Entity<Product>().HasData(
-            new[]
-            {
-                    new Product
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                        Name = "Fender Stratocaster",
-                        Price = 1000M,
-                        BrandId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                        CategoryId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                        SubcategoryId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
-                    },
-                    new Product
-                    {
-                        Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                        Name = "Marshall JVM",
-                        Price = 1000M,
-                        BrandId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                        CategoryId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                        SubcategoryId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
-                    },
-            }
-            );
         }
     }
 }
