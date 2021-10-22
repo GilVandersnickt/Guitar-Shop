@@ -10,8 +10,9 @@ namespace Imi.Project.Api.Entities
     {
         [Required]
         public string Name { get; set; }
+        public Guid CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<Product> Products { get; set; }
-        public ICollection<BrandSubcategory> Brands { get; set; }
+        public ICollection<BrandSubcategory> BrandSubcategories { get; set; }
     }
 }
