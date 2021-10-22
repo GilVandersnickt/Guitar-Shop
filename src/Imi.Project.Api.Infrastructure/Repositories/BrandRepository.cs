@@ -43,7 +43,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         }
         public async Task<IEnumerable<Brand>> GetByCategoryIdAsync(Guid id)
         {
-            var brands = await GetAll().Where(b => b.BrandCategories.Any(bs => bs.CategoryId.Equals(id))).ToListAsync();
+            var brands = await GetAll().Where(b => b.BrandCategories.Any(bc => bc.CategoryId.Equals(id))).ToListAsync();
             return brands;
         }
 

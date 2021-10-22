@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
     public class SubcategoryRepository : BaseRepository<Subcategory>, ISubcategoryRepository
     {
-        public SubcategoryRepository(ApplicationDbContext dbContext) : base (dbContext)
+        public SubcategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
 
         }

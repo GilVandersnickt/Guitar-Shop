@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
@@ -33,8 +32,8 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async override Task<Category> GetByIdAsync(Guid id)
         {
-            var categories = await GetAll().SingleOrDefaultAsync(c => c.Id.Equals(id));
-            return categories;
+            var category = await GetAll().SingleOrDefaultAsync(c => c.Id.Equals(id));
+            return category;
         }
 
         public async Task<IEnumerable<Category>> GetBySubcategoryIdAsync(Guid id)

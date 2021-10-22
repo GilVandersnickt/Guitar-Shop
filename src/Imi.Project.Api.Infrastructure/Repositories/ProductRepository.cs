@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
@@ -55,7 +54,10 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         public async Task<IEnumerable<Product>> SearchAsync(string search)
         {
             var products = await GetAll()
-                .Where(p => p.Name.Contains(search.Trim().ToUpper()) || p.Category.Name.Contains(search.Trim().ToUpper()))
+                .Where(p => p.Name.Contains(search.Trim().ToUpper())
+                || p.Category.Name.Contains(search.Trim().ToUpper())
+                || p.Subcategory.Name.Contains(search.Trim().ToUpper())
+                || p.Brand.Name.Contains(search.Trim().ToUpper()))
                 .ToListAsync();
 
             return products;
