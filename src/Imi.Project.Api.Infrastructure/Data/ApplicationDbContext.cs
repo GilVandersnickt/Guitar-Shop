@@ -21,6 +21,8 @@ namespace Imi.Project.Api.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Product>()
                 .Property(p => p.Price)
                 .HasColumnType("decimal(18,4)");
@@ -31,11 +33,11 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .HasKey(bc => new { bc.BrandId, bc.CategoryId });
             modelBuilder.Entity<BrandCategory>()
                 .HasOne(bc => bc.Category)
-                .WithMany(c => c.Brands)
+                .WithMany(c => c.BrandCategories)
                 .HasForeignKey(bc => bc.CategoryId);
             modelBuilder.Entity<BrandCategory>()
                 .HasOne(bc => bc.Brand)
-                .WithMany(b => b.Categories)
+                .WithMany(b => b.BrandCategories)
                 .HasForeignKey(bc => bc.BrandId);
 
             // Many to many brands subcategories
@@ -44,11 +46,11 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .HasKey(bc => new { bc.BrandId, bc.SubcategoryId });
             modelBuilder.Entity<BrandSubcategory>()
                 .HasOne(bc => bc.Subcategory)
-                .WithMany(c => c.Brands)
+                .WithMany(c => c.BrandSubcategories)
                 .HasForeignKey(bc => bc.SubcategoryId);
             modelBuilder.Entity<BrandSubcategory>()
                 .HasOne(bc => bc.Brand)
-                .WithMany(b => b.Subcategories)
+                .WithMany(b => b.BrandSubcategories)
                 .HasForeignKey(bc => bc.BrandId);
 
 
