@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Interfaces
 {
-    public interface IRepository<T> where T : BaseEntity
+    public interface IBaseRepository<T> where T : BaseEntity
     {
         Task<T> GetByIdAsync(Guid id);
         Task<T> GetByIdAsync(Guid id, string[] includes);

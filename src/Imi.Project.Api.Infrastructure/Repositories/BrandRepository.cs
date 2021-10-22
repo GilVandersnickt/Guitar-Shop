@@ -1,6 +1,7 @@
-﻿using Imi.Project.Api.Entities;
+﻿using Imi.Project.Api.Core.Interfaces;
+using Imi.Project.Api.Core.Interfaces.Repositories;
+using Imi.Project.Api.Entities;
 using Imi.Project.Api.Infrastructure.Data;
-using Imi.Project.Api.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
-    public class BrandRepository : EfRepository<Brand>, IBrandRepository
+    public class BrandRepository : BaseRepository<Brand>, IBrandRepository
     {
         public BrandRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
@@ -23,16 +24,19 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                 .Include(b => b.BrandCategories).ThenInclude(b => b.Category)
                 .Include(b => b.BrandSubcategories).ThenInclude(b => b.Subcategory);
         }
+
         public async override Task<IEnumerable<Brand>> ListAllAsync()
         {
             var brands = await GetAllAsync().ToListAsync();
             return brands;
         }
+
         public async override Task<Brand> GetByIdAsync(Guid id)
         {
             var brand = await GetAllAsync().SingleOrDefaultAsync(b => b.Id.Equals(id));
             return brand;
         }
+
         public async Task<IEnumerable<Brand>> GetBySubcategoryIdAsync(Guid id)
         {
             var brands = await GetAllAsync().Where(b => b.BrandSubcategories.Any(bs => bs.SubcategoryId.Equals(id))).ToListAsync();
@@ -43,6 +47,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             var brands = await GetAllAsync().Where(b => b.BrandCategories.Any(bc => bc.CategoryId.Equals(id))).ToListAsync();
             return brands;
         }
+
         public async Task<IEnumerable<Brand>> SearchAsync(string search)
         {
             var brands = await GetAllAsync()
@@ -51,5 +56,6 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
             return brands;
         }
+
     }
 }

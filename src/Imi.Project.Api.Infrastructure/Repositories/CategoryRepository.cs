@@ -1,6 +1,6 @@
-﻿using Imi.Project.Api.Entities;
+﻿using Imi.Project.Api.Core.Interfaces.Repositories;
+using Imi.Project.Api.Entities;
 using Imi.Project.Api.Infrastructure.Data;
-using Imi.Project.Api.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
-    public class CategoryRepository : EfRepository<Category>, ICategoryRepository
+    public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
         public CategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
@@ -23,16 +23,19 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                 .Include(c => c.Subcategories)
                 .Include(c => c.BrandCategories).ThenInclude(c => c.Brand);
         }
+
         public async override Task<IEnumerable<Category>> ListAllAsync()
         {
             var categories = await GetAllAsync().ToListAsync();
             return categories;
         }
+
         public async override Task<Category> GetByIdAsync(Guid id)
         {
             var category = await GetAllAsync().SingleOrDefaultAsync(c => c.Id.Equals(id));
             return category;
         }
+
         public async Task<IEnumerable<Category>> GetBySubcategoryIdAsync(Guid id)
         {
             var categories = await GetAllAsync().Where(c => c.Subcategories.Any(s => s.Id.Equals(id))).ToListAsync();
@@ -43,6 +46,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             var categories = await GetAllAsync().Where(c => c.BrandCategories.Any(bc => bc.BrandId.Equals(id))).ToListAsync();
             return categories;
         }
+
         public async Task<IEnumerable<Category>> SearchAsync(string search)
         {
             var categories = await GetAllAsync()
@@ -50,5 +54,6 @@ namespace Imi.Project.Api.Infrastructure.Repositories
                 .ToListAsync();
             return categories;
         }
+
     }
 }
