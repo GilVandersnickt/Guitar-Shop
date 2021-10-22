@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
@@ -24,7 +23,6 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-
         public async Task<T> GetByIdAsync(Guid id, string[] includes)
         {
             var query = _dbContext.Set<T>().AsQueryable();
@@ -36,12 +34,11 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
             return await query.SingleOrDefaultAsync(t => t.Id.Equals(id));
         }
-
-        public IQueryable<T> GetAllAsync()
+        public virtual IQueryable<T> GetAllAsync()
         {
             return _dbContext.Set<T>().AsNoTracking();
         }
-        public async Task<IEnumerable<T>> ListAllAsync()
+        public virtual async Task<IEnumerable<T>> ListAllAsync()
         {
             return await GetAllAsync().ToListAsync();
         }

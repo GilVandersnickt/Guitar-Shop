@@ -9,7 +9,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories.Interfaces
 {
     public interface IBaseRepository<T> where T : BaseEntity
     {
-        IQueryable<T> GetAll(); 
+        IQueryable<T> GetAllAsync(); 
         Task<IEnumerable<T>> ListAllAsync(); 
         Task<T> GetByIdAsync(Guid id); 
         Task<T> UpdateAsync(T entity); 
