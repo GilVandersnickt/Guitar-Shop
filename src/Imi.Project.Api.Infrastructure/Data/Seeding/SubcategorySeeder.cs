@@ -1,8 +1,6 @@
 ﻿using Imi.Project.Api.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Imi.Project.Api.Infrastructure.Data.Seeding
 {
@@ -15,10 +13,13 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                 {
                     Id = Guid.Parse("00000000-0000-0000-0003-000000000001"),
                     Name = "Electric guitars",
-                }, new Subcategory
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001")
+                },
+                new Subcategory
                 {
                     Id = Guid.Parse("00000000-0000-0000-0003-000000000002"),
                     Name = "Tube amps",
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002")
                 }
             );
         }
