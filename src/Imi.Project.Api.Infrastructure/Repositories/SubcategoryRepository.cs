@@ -9,50 +9,45 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
 {
-    public class SubcategoryRepository : BaseRepository<Subcategory>, ISubcategoryRepository
+    public class SubcategoryRepository : EfRepository<Subcategory>, ISubcategoryRepository
     {
         public SubcategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
 
         }
-        public override IQueryable<Subcategory> GetAll()
+        public override IQueryable<Subcategory> GetAllAsync()
         {
             return _dbContext.Subcategories
                 .Include(s => s.Products)
                 .Include(s => s.BrandSubcategories).ThenInclude(bs => bs.Brand);
         }
-
         public async override Task<IEnumerable<Subcategory>> ListAllAsync()
         {
-            var subcategories = await GetAll().ToListAsync();
+            var subcategories = await GetAllAsync().ToListAsync();
             return subcategories;
         }
 
         public async override Task<Subcategory> GetByIdAsync(Guid id)
         {
-            var subcategory = await GetAll().SingleOrDefaultAsync(s => s.Id.Equals(id));
+            var subcategory = await GetAllAsync().SingleOrDefaultAsync(s => s.Id.Equals(id));
             return subcategory;
         }
-
         public async Task<IEnumerable<Subcategory>> GetByCategoryIdAsync(Guid id)
         {
-            var subcategories = await GetAll().Where(s => s.CategoryId.Equals(id)).ToListAsync();
+            var subcategories = await GetAllAsync().Where(s => s.CategoryId.Equals(id)).ToListAsync();
             return subcategories;
         }
         public async Task<IEnumerable<Subcategory>> GetByBrandIdAsync(Guid id)
         {
-            var subcategories = await GetAll().Where(s => s.BrandSubcategories.Any(bc => bc.BrandId.Equals(id))).ToListAsync();
+            var subcategories = await GetAllAsync().Where(s => s.BrandSubcategories.Any(bc => bc.BrandId.Equals(id))).ToListAsync();
             return subcategories;
         }
-
         public async Task<IEnumerable<Subcategory>> SearchAsync(string search)
         {
-            var subcategories = await GetAll()
+            var subcategories = await GetAllAsync()
                 .Where(s => s.Name.Contains(search.Trim().ToUpper()))
                 .ToListAsync();
             return subcategories;
         }
-
-
     }
 }

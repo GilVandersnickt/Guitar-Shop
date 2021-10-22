@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Infrastructure.Repositories
@@ -19,21 +18,18 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAllAsync()
         {
             return _dbContext.Set<T>().AsQueryable();
         }
-
         public virtual async Task<T> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<T>().SingleOrDefaultAsync(t => t.Id.Equals(id));
         }
-
         public virtual async Task<IEnumerable<T>> ListAllAsync()
         {
             return await _dbContext.Set<T>().ToListAsync();
         }
-
         public async Task<T> AddAsync(T entity)
         {
             entity.CreatedOn = DateTime.UtcNow;
@@ -43,14 +39,12 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
             return entity;
         }
-
         public async Task<T> DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
         }
-
         public async Task<T> UpdateAsync(T entity)
         {
             entity.LastEditedOn = DateTime.UtcNow;
