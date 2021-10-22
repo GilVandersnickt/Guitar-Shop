@@ -28,6 +28,13 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .Property(p => p.Price)
                 .HasColumnType("decimal(18,4)");
 
+            modelBuilder.Entity<Product>()
+                 .HasOne<Subcategory>(s => s.Subcategory)
+                 .WithMany(p => p.Products)
+                 .HasForeignKey(p => p.SubcategoryId)
+                 .IsRequired(false)
+                 .OnDelete(DeleteBehavior.Restrict);
+
             // Many to many brands categories
             modelBuilder.Entity<BrandCategory>()
                 .ToTable("BrandCategory")
@@ -44,22 +51,22 @@ namespace Imi.Project.Api.Infrastructure.Data
             // Many to many brands subcategories
             modelBuilder.Entity<BrandSubcategory>()
                 .ToTable("BrandSubcategory")
-                .HasKey(bc => new { bc.BrandId, bc.SubcategoryId });
+                .HasKey(bs => new { bs.BrandId, bs.SubcategoryId });
             modelBuilder.Entity<BrandSubcategory>()
-                .HasOne(bc => bc.Subcategory)
-                .WithMany(c => c.BrandSubcategories)
-                .HasForeignKey(bc => bc.SubcategoryId);
+                .HasOne(bs => bs.Subcategory)
+                .WithMany(bs => bs.BrandSubcategories)
+                .HasForeignKey(bs => bs.SubcategoryId);
             modelBuilder.Entity<BrandSubcategory>()
                 .HasOne(bc => bc.Brand)
                 .WithMany(b => b.BrandSubcategories)
                 .HasForeignKey(bc => bc.BrandId);
 
-
+            ProductSeeder.Seed(modelBuilder);
             BrandSeeder.Seed(modelBuilder);
             CategorySeeder.Seed(modelBuilder);
             SubcategorySeeder.Seed(modelBuilder);
-            ProductSeeder.Seed(modelBuilder);
-
+            BrandCategorySeeder.Seed(modelBuilder);
+            BrandSubcategorySeeder.Seed(modelBuilder);
         }
     }
 }

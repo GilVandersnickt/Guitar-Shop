@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211015084819_InitialMigration")]
+    [Migration("20211022141812_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,8 +27,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastEditedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -41,12 +47,16 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Id = new Guid("00000000-0000-0000-0001-000000000001"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Fender"
                         },
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Id = new Guid("00000000-0000-0000-0001-000000000002"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Marshall"
                         });
                 });
@@ -64,6 +74,18 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("BrandCategory");
+
+                    b.HasData(
+                        new
+                        {
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000001"),
+                            CategoryId = new Guid("00000000-0000-0000-0002-000000000001")
+                        },
+                        new
+                        {
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000002"),
+                            CategoryId = new Guid("00000000-0000-0000-0002-000000000002")
+                        });
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Entities.BrandSubcategory", b =>
@@ -79,6 +101,18 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasIndex("SubcategoryId");
 
                     b.ToTable("BrandSubcategory");
+
+                    b.HasData(
+                        new
+                        {
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000001"),
+                            SubcategoryId = new Guid("00000000-0000-0000-0003-000000000001")
+                        },
+                        new
+                        {
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000002"),
+                            SubcategoryId = new Guid("00000000-0000-0000-0003-000000000002")
+                        });
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Entities.Category", b =>
@@ -87,8 +121,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastEditedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -101,12 +141,16 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Id = new Guid("00000000-0000-0000-0002-000000000001"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Guitars"
                         },
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Id = new Guid("00000000-0000-0000-0002-000000000002"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Amps"
                         });
                 });
@@ -123,8 +167,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastEditedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -150,20 +200,24 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
-                            BrandId = new Guid("00000000-0000-0000-0000-000000000001"),
-                            CategoryId = new Guid("00000000-0000-0000-0000-000000000001"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000001"),
+                            CategoryId = new Guid("00000000-0000-0000-0002-000000000001"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Fender Stratocaster",
                             Price = 1000m,
-                            SubcategoryId = new Guid("00000000-0000-0000-0000-000000000001")
+                            SubcategoryId = new Guid("00000000-0000-0000-0003-000000000001")
                         },
                         new
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
-                            BrandId = new Guid("00000000-0000-0000-0000-000000000002"),
-                            CategoryId = new Guid("00000000-0000-0000-0000-000000000002"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000002"),
+                            CategoryId = new Guid("00000000-0000-0000-0002-000000000002"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Marshall JVM",
                             Price = 1000m,
-                            SubcategoryId = new Guid("00000000-0000-0000-0000-000000000002")
+                            SubcategoryId = new Guid("00000000-0000-0000-0003-000000000002")
                         });
                 });
 
@@ -173,8 +227,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CategoryId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastEditedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -189,12 +249,18 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            Id = new Guid("00000000-0000-0000-0003-000000000001"),
+                            CategoryId = new Guid("00000000-0000-0000-0002-000000000001"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Electric guitars"
                         },
                         new
                         {
-                            Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                            Id = new Guid("00000000-0000-0000-0003-000000000002"),
+                            CategoryId = new Guid("00000000-0000-0000-0002-000000000002"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastEditedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Tube amps"
                         });
                 });
@@ -202,13 +268,13 @@ namespace Imi.Project.Api.Infrastructure.Migrations
             modelBuilder.Entity("Imi.Project.Api.Entities.BrandCategory", b =>
                 {
                     b.HasOne("Imi.Project.Api.Entities.Brand", "Brand")
-                        .WithMany("Categories")
+                        .WithMany("BrandCategories")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Imi.Project.Api.Entities.Category", "Category")
-                        .WithMany("Brands")
+                        .WithMany("BrandCategories")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -217,13 +283,13 @@ namespace Imi.Project.Api.Infrastructure.Migrations
             modelBuilder.Entity("Imi.Project.Api.Entities.BrandSubcategory", b =>
                 {
                     b.HasOne("Imi.Project.Api.Entities.Brand", "Brand")
-                        .WithMany("Subcategories")
+                        .WithMany("BrandSubcategories")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Imi.Project.Api.Entities.Subcategory", "Subcategory")
-                        .WithMany("Brands")
+                        .WithMany("BrandSubcategories")
                         .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -246,15 +312,16 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasOne("Imi.Project.Api.Entities.Subcategory", "Subcategory")
                         .WithMany("Products")
                         .HasForeignKey("SubcategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Imi.Project.Api.Entities.Subcategory", b =>
                 {
                     b.HasOne("Imi.Project.Api.Entities.Category", "Category")
                         .WithMany("Subcategories")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

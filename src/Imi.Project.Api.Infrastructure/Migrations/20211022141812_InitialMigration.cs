@@ -12,6 +12,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastEditedOn = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Image = table.Column<string>(nullable: true)
                 },
@@ -25,6 +27,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastEditedOn = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Image = table.Column<string>(nullable: true)
                 },
@@ -62,8 +66,10 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastEditedOn = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    CategoryId = table.Column<Guid>(nullable: true)
+                    CategoryId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,7 +79,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -105,6 +111,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastEditedOn = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     Image = table.Column<string>(nullable: true),
@@ -132,45 +140,62 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         column: x => x.SubcategoryId,
                         principalTable: "Subcategories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Brands",
-                columns: new[] { "Id", "Image", "Name" },
+                columns: new[] { "Id", "CreatedOn", "Image", "LastEditedOn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000001"), null, "Fender" },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), null, "Marshall" }
+                    { new Guid("00000000-0000-0000-0001-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fender" },
+                    { new Guid("00000000-0000-0000-0001-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Marshall" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "Id", "Image", "Name" },
+                columns: new[] { "Id", "CreatedOn", "Image", "LastEditedOn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000001"), null, "Guitars" },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), null, "Amps" }
+                    { new Guid("00000000-0000-0000-0002-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Guitars" },
+                    { new Guid("00000000-0000-0000-0002-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amps" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BrandCategory",
+                columns: new[] { "BrandId", "CategoryId" },
+                values: new object[,]
+                {
+                    { new Guid("00000000-0000-0000-0001-000000000001"), new Guid("00000000-0000-0000-0002-000000000001") },
+                    { new Guid("00000000-0000-0000-0001-000000000002"), new Guid("00000000-0000-0000-0002-000000000002") }
                 });
 
             migrationBuilder.InsertData(
                 table: "Subcategories",
-                columns: new[] { "Id", "CategoryId", "Name" },
+                columns: new[] { "Id", "CategoryId", "CreatedOn", "LastEditedOn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000001"), null, "Electric guitars" },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), null, "Tube amps" }
+                    { new Guid("00000000-0000-0000-0003-000000000001"), new Guid("00000000-0000-0000-0002-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Electric guitars" },
+                    { new Guid("00000000-0000-0000-0003-000000000002"), new Guid("00000000-0000-0000-0002-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Tube amps" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BrandSubcategory",
+                columns: new[] { "BrandId", "SubcategoryId" },
+                values: new object[,]
+                {
+                    { new Guid("00000000-0000-0000-0001-000000000001"), new Guid("00000000-0000-0000-0003-000000000001") },
+                    { new Guid("00000000-0000-0000-0001-000000000002"), new Guid("00000000-0000-0000-0003-000000000002") }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "BrandId", "CategoryId", "Image", "Name", "Price", "SubcategoryId" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-000000000001"), null, "Fender Stratocaster", 1000m, new Guid("00000000-0000-0000-0000-000000000001") });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "BrandId", "CategoryId", "Image", "Name", "Price", "SubcategoryId" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000002"), new Guid("00000000-0000-0000-0000-000000000002"), new Guid("00000000-0000-0000-0000-000000000002"), null, "Marshall JVM", 1000m, new Guid("00000000-0000-0000-0000-000000000002") });
+                columns: new[] { "Id", "BrandId", "CategoryId", "CreatedOn", "Image", "LastEditedOn", "Name", "Price", "SubcategoryId" },
+                values: new object[,]
+                {
+                    { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0001-000000000001"), new Guid("00000000-0000-0000-0002-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fender Stratocaster", 1000m, new Guid("00000000-0000-0000-0003-000000000001") },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), new Guid("00000000-0000-0000-0001-000000000002"), new Guid("00000000-0000-0000-0002-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Marshall JVM", 1000m, new Guid("00000000-0000-0000-0003-000000000002") }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BrandCategory_CategoryId",
