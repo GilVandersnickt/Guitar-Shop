@@ -92,6 +92,7 @@ namespace Imi.Project.Api.Core.Services
 
             return await GetByIdAsync(id); 
         }
+
         public async Task<IEnumerable<ProductResponseDto>> SearchAsync(string name)
         {
             var products = await _productRepository.SearchAsync(name);

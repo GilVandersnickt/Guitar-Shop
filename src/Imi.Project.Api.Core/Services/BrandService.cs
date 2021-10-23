@@ -22,6 +22,7 @@ namespace Imi.Project.Api.Core.Services
             _imageService = imageService;
             _mapper = mapper;
         }
+
         public async Task<BrandResponseDto> GetByIdAsync(Guid id)
         {
             var result = await _brandRepository.GetByIdAsync(id);
@@ -87,10 +88,11 @@ namespace Imi.Project.Api.Core.Services
 
             return await GetByIdAsync(id);
         }
+
         public async Task<IEnumerable<BrandResponseDto>> SearchAsync(string name)
-        { 
-            var brands = await _brandRepository.SearchAsync(name); 
-            return _mapper.Map<IEnumerable<BrandResponseDto>>(brands); 
+        {
+            var brands = await _brandRepository.SearchAsync(name);
+            return _mapper.Map<IEnumerable<BrandResponseDto>>(brands);
         }
     }
 }

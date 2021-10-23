@@ -14,11 +14,13 @@ namespace Imi.Project.Api.Core.Services
     { 
         private readonly IHostEnvironment _webHostEnvironment; 
         private readonly IHttpContextAccessor _httpContextAccessor; 
+
         public ImageService(IHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor) 
         { 
             _webHostEnvironment = webHostEnvironment; 
             _httpContextAccessor = httpContextAccessor; 
         } 
+
         public async Task<Uri> AddOrUpdateImageAsync<T>(Guid id, IFormFile image) where T : BaseEntity 
         { 
             var newFileNameWithExtension = $"{id}{Path.GetExtension(image.FileName)}";
