@@ -1,5 +1,6 @@
 using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -83,6 +84,17 @@ namespace Imi.Project.Api.Controllers
             }
             await _categoryService.DeleteAsync(id);
             return Ok();
+        }
+
+        [HttpPost("{id}/image"), HttpPut("{id}/image")]
+        public async Task<IActionResult> Image([FromRoute] Guid id, IFormFile image)
+        {
+            var category = await _categoryService.AddOrUpdateImageAsync(id, image);
+            if (category == null)
+            {
+                return NotFound($"Category with ID {id} does not exist");
+            }
+            return Ok(category);
         }
     }
 }

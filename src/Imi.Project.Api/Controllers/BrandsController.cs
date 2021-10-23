@@ -95,5 +95,17 @@ namespace Imi.Project.Api.Controllers
             await _brandService.DeleteAsync(id);
             return Ok();
         }
+
+        [HttpPost("{id}/image"), HttpPut("{id}/image")]
+        public async Task<IActionResult> Image([FromRoute] Guid id, IFormFile image)
+        {
+            var brand = await _brandService.AddOrUpdateImageAsync(id, image);
+            if (brand == null)
+            {
+                return NotFound($"Brand with ID {id} does not exist");
+            }
+            return Ok(brand);
+        }
+
     }
 }
