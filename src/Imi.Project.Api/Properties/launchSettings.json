@@ -20,7 +20,7 @@
     "Imi.Project.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/products",
+      "launchUrl": "index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

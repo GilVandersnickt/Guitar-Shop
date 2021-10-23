@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System;
 
 namespace Imi.Project.Api
@@ -45,6 +46,12 @@ namespace Imi.Project.Api
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c => 
+            { 
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Guitarshop API", Version = "v1" }); 
+            });
+
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -58,6 +65,15 @@ namespace Imi.Project.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger(); 
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c => 
+            { 
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Guitarshop API"); 
+                c.RoutePrefix = string.Empty; 
+            });
 
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
