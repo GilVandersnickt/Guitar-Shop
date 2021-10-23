@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -96,5 +97,25 @@ namespace Imi.Project.Api.Controllers
             }
             return Ok(category);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] string name)
+        {
+            if (name != null)
+            {
+                var categories = await _categoryService.SearchAsync(name);
+                if (categories.Any())
+                {
+                    return Ok(categories);
+                }
+                return NotFound($"There were no categories found that contain {name} in their name");
+            }
+            else
+            {
+                var categories = await _brandService.ListAllAsync();
+                return Ok(categories);
+            }
+        }
+
     }
 }

@@ -2,6 +2,7 @@ using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -88,5 +89,25 @@ namespace Imi.Project.Api.Controllers
             await _subcategoryService.DeleteAsync(id);
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] string name)
+        {
+            if (name != null)
+            {
+                var subcategories = await _subcategoryService.SearchAsync(name);
+                if (subcategories.Any())
+                {
+                    return Ok(subcategories);
+                }
+                return NotFound($"There were no subcategories found that contain {name} in their name");
+            }
+            else
+            {
+                var subcategories = await _subcategoryService.ListAllAsync();
+                return Ok(subcategories);
+            }
+        }
+
     }
 }
