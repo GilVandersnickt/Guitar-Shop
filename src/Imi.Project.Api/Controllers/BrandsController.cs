@@ -109,7 +109,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(brand);
         }
 
-        [HttpGet]
+        [HttpGet("search")]
         public async Task<IActionResult> Get([FromQuery] string name)
         {
             if (name != null) 
