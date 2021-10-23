@@ -7,6 +7,7 @@ using Imi.Project.Api.Infrastructure.Data;
 using Imi.Project.Api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +30,6 @@ namespace Imi.Project.Api
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
 
-            services.AddControllers();
-
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISubcategoryRepository, SubcategoryRepository>();
@@ -40,6 +39,11 @@ namespace Imi.Project.Api
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ISubcategoryService, SubcategoryService>();
             services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IImageService, ImageService>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
