@@ -73,6 +73,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
             return entity;
         }
+
         public async Task<T> DeleteAsync(Guid id)
         {
             var entity = await GetByIdAsync(id);

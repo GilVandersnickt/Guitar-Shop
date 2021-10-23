@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Mapper
 {

@@ -39,6 +39,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             var subcategories = await GetAllAsync().Where(s => s.CategoryId.Equals(id)).ToListAsync();
             return subcategories;
         }
+
         public async Task<IEnumerable<Subcategory>> GetByBrandIdAsync(Guid id)
         {
             var subcategories = await GetAllAsync().Where(s => s.BrandSubcategories.Any(bc => bc.BrandId.Equals(id))).ToListAsync();
@@ -50,6 +51,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             var subcategories = await GetAllAsync()
                 .Where(s => s.Name.ToUpper().Contains(search.Trim().ToUpper()))
                 .ToListAsync();
+
             return subcategories;
         }
 
