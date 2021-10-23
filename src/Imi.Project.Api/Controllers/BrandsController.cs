@@ -12,10 +12,16 @@ namespace Imi.Project.Api.Controllers
     public class BrandsController : ControllerBase
     {
         private readonly IBrandService _brandService;
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+        private readonly ISubcategoryService _subcategoryService;
 
-        public BrandsController(IBrandService brandService)
+        public BrandsController(IBrandService brandService, IProductService productService, ICategoryService categoryService, ISubcategoryService subcategoryService)
         {
             _brandService = brandService;
+            _productService = productService;
+            _categoryService = categoryService;
+            _subcategoryService = subcategoryService;
         }
 
         [HttpGet] 
@@ -32,6 +38,27 @@ namespace Imi.Project.Api.Controllers
                 return NotFound($"Brand with ID {id} does not exist"); 
             } 
             return Ok(brand); 
+        }
+
+        [HttpGet("{id}/products")]
+        public async Task<IActionResult> GetProductsFromBrand(Guid id)
+        {
+            var productResponseDtos = await _productService.GetByBrandIdAsync(id);
+            return Ok(productResponseDtos);
+        }
+
+        [HttpGet("{id}/categories")]
+        public async Task<IActionResult> GetCategoriesFromBrand(Guid id)
+        {
+            var categoryResponseDtos = await _categoryService.GetByBrandIdAsync(id);
+            return Ok(categoryResponseDtos);
+        }
+        
+        [HttpGet("{id}/subcategories")]
+        public async Task<IActionResult> GetSubcategoriesFromBrand(Guid id)
+        {
+            var subcategoryResponseDtos = await _subcategoryService.GetByBrandIdAsync(id);
+            return Ok(subcategoryResponseDtos);
         }
 
         [HttpPost]
