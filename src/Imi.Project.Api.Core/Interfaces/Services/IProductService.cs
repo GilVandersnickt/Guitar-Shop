@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,5 +18,6 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<ProductResponseDto> AddAsync(ProductRequestDto productRequestDto);
         Task<ProductResponseDto> UpdateAsync(ProductRequestDto productRequestDto);
         Task DeleteAsync(Guid id);
+        Task<ProductResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile image);
     }
 }

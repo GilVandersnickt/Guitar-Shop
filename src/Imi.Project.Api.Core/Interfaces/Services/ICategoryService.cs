@@ -1,4 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,5 +15,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<CategoryResponseDto> AddAsync(CategoryRequestDto categoryRequestDto);
         Task<CategoryResponseDto> UpdateAsync(CategoryRequestDto categoryRequestDto);
         Task DeleteAsync(Guid id);
+        Task<CategoryResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile image);
+
     }
 }
