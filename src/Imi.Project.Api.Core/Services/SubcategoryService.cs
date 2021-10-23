@@ -2,6 +2,7 @@
 using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -44,6 +45,28 @@ namespace Imi.Project.Api.Core.Services
             var result = await _subcategoryRepository.GetByCategoryIdAsync(id);
             var dto = _mapper.Map<IEnumerable<SubcategoryResponseDto>>(result);
             return dto;
+        }
+
+        public async Task<SubcategoryResponseDto> AddAsync(SubcategoryRequestDto subcategoryRequestDto)
+        {
+            var subcategory = _mapper.Map<Subcategory>(subcategoryRequestDto);
+
+            var result = await _subcategoryRepository.AddAsync(subcategory);
+            var dto = _mapper.Map<SubcategoryResponseDto>(result);
+            return dto;
+        }
+
+        public async Task<SubcategoryResponseDto> UpdateAsync(SubcategoryRequestDto subcategoryRequestDto)
+        {
+            var subcategory = _mapper.Map<Subcategory>(subcategoryRequestDto);
+            var result = await _subcategoryRepository.UpdateAsync(subcategory);
+            var dto = _mapper.Map<SubcategoryResponseDto>(result);
+            return dto;
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            await _subcategoryRepository.DeleteAsync(id);
         }
     }
 }

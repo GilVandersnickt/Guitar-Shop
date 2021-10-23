@@ -2,6 +2,7 @@
 using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -39,6 +40,31 @@ namespace Imi.Project.Api.Core.Services
             return dto;
         }
 
+        public async Task<CategoryResponseDto> AddAsync(CategoryRequestDto categoryRequestDto)
+        {
+            var category = _mapper.Map<Category>(categoryRequestDto);
 
+            if (category.Image == null)
+            {
+                category.Image = new Uri("https://via.placeholder.com/150/AFFAF0/000000?text=" + category.Name.Replace(" ", "+"), UriKind.Absolute);
+            }
+
+            var result = await _categoryRepository.AddAsync(category);
+            var dto = _mapper.Map<CategoryResponseDto>(result);
+            return dto;
+        }
+
+        public async Task<CategoryResponseDto> UpdateAsync(CategoryRequestDto categoryRequestDto)
+        {
+            var category = _mapper.Map<Category>(categoryRequestDto);
+            var result = await _categoryRepository.UpdateAsync(category);
+            var dto = _mapper.Map<CategoryResponseDto>(result);
+            return dto;
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            await _categoryRepository.DeleteAsync(id);
+        }
     }
 }
