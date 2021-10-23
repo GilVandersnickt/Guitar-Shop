@@ -50,7 +50,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         public async Task<IEnumerable<Category>> SearchAsync(string search)
         {
             var categories = await GetAllAsync()
-                .Where(c => c.Name.Contains(search.Trim().ToUpper()))
+                .Where(c => c.Name.ToUpper().Contains(search.Trim().ToUpper()))
                 .ToListAsync();
             return categories;
         }
