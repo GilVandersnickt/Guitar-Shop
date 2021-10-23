@@ -11,10 +11,14 @@ namespace Imi.Project.Api.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
+        private readonly IBrandService _brandService;
 
-        public CategoriesController(ICategoryService categoryService)
+        public CategoriesController(ICategoryService categoryService, IProductService productService, IBrandService brandService)
         {
             _categoryService = categoryService;
+            _productService = productService;
+            _brandService = brandService;
         }
 
         [HttpGet]
@@ -34,7 +38,18 @@ namespace Imi.Project.Api.Controllers
             }
             return Ok(category);
         }
-
+        [HttpGet("{id}/products")] 
+        public async Task<IActionResult> GetProductsFromCategory(Guid id) 
+        { 
+            var productResponseDtos = await _productService.GetByCategoryIdAsync(id); 
+            return Ok(productResponseDtos); 
+        }
+        [HttpGet("{id}/brands")] 
+        public async Task<IActionResult> GetBrandsFromCategory(Guid id) 
+        { 
+            var brandResponseDtos = await _brandService.GetByCategoryIdAsync(id); 
+            return Ok(brandResponseDtos); 
+        }
         [HttpPost]
         public async Task<IActionResult> Post(CategoryRequestDto categoryRequestDto)
         {

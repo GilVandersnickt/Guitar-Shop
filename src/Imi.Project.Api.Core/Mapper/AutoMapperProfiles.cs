@@ -20,11 +20,13 @@ namespace Imi.Project.Api.Core.Mapper
 
             CreateMap<Category, CategoryResponseDto>()
                 .ForMember(dest => dest.Brands, opt => opt.MapFrom(src => src.BrandCategories
-                .Select(bc => new BrandResponseDto { Id = bc.BrandId, Name = bc.Brand.Name })));
+                .Select(bc => new BrandResponseDto { Id = bc.BrandId, Name = bc.Brand.Name })))
+                .ForMember(dest => dest.Subcategories, opt => opt.MapFrom(src => src.Subcategories.Select(name => name.Name).ToList()));
 
             CreateMap<Subcategory, SubcategoryResponseDto>()
                 .ForMember(dest => dest.Brands, opt => opt.MapFrom(src => src.BrandSubcategories
-                .Select(bs => new BrandResponseDto { Id = bs.BrandId, Name = bs.Brand.Name })));
+                .Select(bs => new BrandResponseDto { Id = bs.BrandId, Name = bs.Brand.Name })))
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name));
 
             CreateMap<Product, ProductResponseDto>()
                 .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.Name))
