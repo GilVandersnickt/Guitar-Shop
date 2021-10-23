@@ -98,8 +98,8 @@ namespace Imi.Project.Api.Controllers
             return Ok(category);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] string name)
+        [HttpGet("search")]
+        public async Task<IActionResult> Search([FromQuery] string name)
         {
             if (name != null)
             {
