@@ -7,8 +7,8 @@ namespace Imi.Project.Api.Core.Dtos
         public string Name { get; set; }
         public decimal Price { get; set; }
         public Uri Image { get; set; }
-        public BrandResponseDto Brand { get; set; }
-        public CategoryResponseDto Category { get; set; }
-        public SubcategoryResponseDto Subcategory { get; set; }
+        public string Brand { get; set; }
+        public string Category { get; set; }
+        public string Subcategory { get; set; }
     }
 }
