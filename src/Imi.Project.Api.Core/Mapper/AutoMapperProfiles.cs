@@ -27,9 +27,9 @@ namespace Imi.Project.Api.Core.Mapper
                 .Select(bs => new BrandResponseDto { Id = bs.BrandId, Name = bs.Brand.Name })));
 
             CreateMap<Product, ProductResponseDto>()
-                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand))
-                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
-                .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => src.Subcategory));
+                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.Name))
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
+                .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => src.Subcategory.Name));
         }
     }
 }
