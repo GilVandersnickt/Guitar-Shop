@@ -52,6 +52,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             var categories = await GetAllAsync()
                 .Where(c => c.Name.ToUpper().Contains(search.Trim().ToUpper()))
                 .ToListAsync();
+
             return categories;
         }
 

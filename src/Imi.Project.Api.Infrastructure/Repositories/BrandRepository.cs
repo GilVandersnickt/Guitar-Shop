@@ -1,5 +1,4 @@
-﻿using Imi.Project.Api.Core.Interfaces;
-using Imi.Project.Api.Core.Interfaces.Repositories;
+﻿using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Entities;
 using Imi.Project.Api.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +41,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             var brands = await GetAllAsync().Where(b => b.BrandSubcategories.Any(bs => bs.SubcategoryId.Equals(id))).ToListAsync();
             return brands;
         }
+
         public async Task<IEnumerable<Brand>> GetByCategoryIdAsync(Guid id)
         {
             var brands = await GetAllAsync().Where(b => b.BrandCategories.Any(bc => bc.CategoryId.Equals(id))).ToListAsync();

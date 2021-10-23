@@ -54,10 +54,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         public async Task<IEnumerable<Product>> SearchAsync(string search)
         {
             var products = await GetAllAsync()
-                .Where(p => p.Name.Contains(search.Trim().ToUpper())
-                || p.Category.Name.Contains(search.Trim().ToUpper())
-                || p.Subcategory.Name.Contains(search.Trim().ToUpper())
-                || p.Brand.Name.Contains(search.Trim().ToUpper()))
+                .Where(c => c.Name.ToUpper().Contains(search.Trim().ToUpper()))
                 .ToListAsync();
 
             return products;
