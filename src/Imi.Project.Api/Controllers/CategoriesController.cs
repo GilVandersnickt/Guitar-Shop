@@ -1,10 +1,7 @@
-﻿using Imi.Project.Api.Core.Dtos;
+using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -72,6 +69,5 @@ namespace Imi.Project.Api.Controllers
             await _categoryService.DeleteAsync(id);
             return Ok();
         }
-
     }
 }
