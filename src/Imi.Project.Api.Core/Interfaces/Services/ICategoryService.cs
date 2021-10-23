@@ -16,6 +16,6 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<CategoryResponseDto> UpdateAsync(CategoryRequestDto categoryRequestDto);
         Task DeleteAsync(Guid id);
         Task<CategoryResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile image);
-
+        Task<IEnumerable<CategoryResponseDto>> SearchAsync(string name);
     }
 }

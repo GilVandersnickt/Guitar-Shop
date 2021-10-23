@@ -19,5 +19,6 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<ProductResponseDto> UpdateAsync(ProductRequestDto productRequestDto);
         Task DeleteAsync(Guid id);
         Task<ProductResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile image);
+        Task<IEnumerable<ProductResponseDto>> SearchAsync(string name);
     }
 }

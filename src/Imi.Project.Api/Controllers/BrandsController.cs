@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -24,20 +25,21 @@ namespace Imi.Project.Api.Controllers
             _subcategoryService = subcategoryService;
         }
 
-        [HttpGet] 
-        public async Task<IActionResult> Get() 
-        { 
-            var brands = await _brandService.ListAllAsync(); 
-            return Ok(brands); 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var brands = await _brandService.ListAllAsync();
+            return Ok(brands);
         }
-        [HttpGet("{id}")] 
-        public async Task<IActionResult> Get(Guid id) 
-        { var brand = await _brandService.GetByIdAsync(id); 
-            if (brand == null) 
-            { 
-                return NotFound($"Brand with ID {id} does not exist"); 
-            } 
-            return Ok(brand); 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var brand = await _brandService.GetByIdAsync(id);
+            if (brand == null)
+            {
+                return NotFound($"Brand with ID {id} does not exist");
+            }
+            return Ok(brand);
         }
 
         [HttpGet("{id}/products")]
@@ -53,7 +55,7 @@ namespace Imi.Project.Api.Controllers
             var categoryResponseDtos = await _categoryService.GetByBrandIdAsync(id);
             return Ok(categoryResponseDtos);
         }
-        
+
         [HttpGet("{id}/subcategories")]
         public async Task<IActionResult> GetSubcategoriesFromBrand(Guid id)
         {
@@ -107,5 +109,23 @@ namespace Imi.Project.Api.Controllers
             return Ok(brand);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get([FromQuery] string name)
+        {
+            if (name != null) 
+            { 
+                var brands = await _brandService.SearchAsync(name); 
+                if (brands.Any()) 
+                { 
+                    return Ok(brands);
+                } 
+                return NotFound($"There were no brands found that contain {name} in their name"); 
+            }
+            else 
+            { 
+                var brands = await _brandService.ListAllAsync(); 
+                return Ok(brands); 
+            }
+        }
     }
 }
