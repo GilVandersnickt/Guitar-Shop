@@ -31,6 +31,7 @@ namespace Imi.Project.Api.Controllers
             var brands = await _brandService.ListAllAsync();
             return Ok(brands);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -112,19 +113,19 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("search")]
         public async Task<IActionResult> Get([FromQuery] string name)
         {
-            if (name != null) 
-            { 
-                var brands = await _brandService.SearchAsync(name); 
-                if (brands.Any()) 
-                { 
+            if (name != null)
+            {
+                var brands = await _brandService.SearchAsync(name);
+                if (brands.Any())
+                {
                     return Ok(brands);
-                } 
-                return NotFound($"There were no brands found that contain {name} in their name"); 
+                }
+                return NotFound($"There were no brands found that contain {name} in their name");
             }
-            else 
-            { 
-                var brands = await _brandService.ListAllAsync(); 
-                return Ok(brands); 
+            else
+            {
+                var brands = await _brandService.ListAllAsync();
+                return Ok(brands);
             }
         }
     }
