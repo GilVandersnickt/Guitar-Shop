@@ -2,6 +2,7 @@
 using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Imi.Project.Api.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -48,6 +49,33 @@ namespace Imi.Project.Api.Core.Services
             var result = await _productRepository.GetBySubcategoryIdAsync(id);
             var dto = _mapper.Map<IEnumerable<ProductResponseDto>>(result);
             return dto;
+        }
+
+        public async Task<ProductResponseDto> AddAsync(ProductRequestDto productRequestDto)
+        {
+            var product = _mapper.Map<Product>(productRequestDto);
+
+            if (product.Image == null)
+            {
+                product.Image = new Uri("https://via.placeholder.com/150/AFFAF0/000000?text=" + product.Name.Replace(" ", "+"), UriKind.Absolute);
+            }
+
+            var result = await _productRepository.AddAsync(product);
+            var dto = _mapper.Map<ProductResponseDto>(result);
+            return dto;
+        }
+
+        public async Task<ProductResponseDto> UpdateAsync(ProductRequestDto productRequestDto)
+        {
+            var product = _mapper.Map<Product>(productRequestDto);
+            var result = await _productRepository.UpdateAsync(product);
+            var dto = _mapper.Map<ProductResponseDto>(result);
+            return dto;
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            await _productRepository.DeleteAsync(id);
         }
     }
 }
