@@ -32,6 +32,11 @@ namespace Imi.Project.Api.Core.Mapper
                 .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.Name))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => src.Subcategory.Name));
+
+            CreateMap<BrandRequestDto, Brand>();
+            CreateMap<CategoryRequestDto, Category>();
+            CreateMap<SubcategoryRequestDto, Subcategory>();
+            CreateMap<ProductRequestDto, Product>();
         }
     }
 }
