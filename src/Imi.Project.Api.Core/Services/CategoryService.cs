@@ -81,5 +81,11 @@ namespace Imi.Project.Api.Core.Services
 
             return await GetByIdAsync(id);
         }
+        public async Task<IEnumerable<CategoryResponseDto>> SearchAsync(string name)
+        {
+            var categories = await _categoryRepository.SearchAsync(name);
+            return _mapper.Map<IEnumerable<CategoryResponseDto>>(categories);
+        }
+
     }
 }
