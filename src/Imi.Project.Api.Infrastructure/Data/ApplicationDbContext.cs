@@ -28,13 +28,6 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .Property(p => p.Price)
                 .HasColumnType("decimal(18,4)");
 
-            modelBuilder.Entity<Product>()
-                 .HasOne<Subcategory>(s => s.Subcategory)
-                 .WithMany(p => p.Products)
-                 .HasForeignKey(p => p.SubcategoryId)
-                 .IsRequired(false)
-                 .OnDelete(DeleteBehavior.Restrict);
-
             // Many to many brands categories
             modelBuilder.Entity<BrandCategory>()
                 .ToTable("BrandCategory")
