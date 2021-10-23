@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,11 +13,13 @@ namespace Imi.Project.Api.Core.Services
     public class BrandService : IBrandService
     {
         private readonly IBrandRepository _brandRepository;
+        private readonly IImageService _imageService;
         private readonly IMapper _mapper;
 
-        public BrandService(IBrandRepository brandRepository, IMapper mapper)
+        public BrandService(IBrandRepository brandRepository, IImageService imageService, IMapper mapper)
         {
             _brandRepository = brandRepository;
+            _imageService = imageService;
             _mapper = mapper;
         }
         public async Task<BrandResponseDto> GetByIdAsync(Guid id)
@@ -71,6 +74,18 @@ namespace Imi.Project.Api.Core.Services
         public async Task DeleteAsync(Guid id)
         {
             await _brandRepository.DeleteAsync(id);
+        }
+
+        public async Task<BrandResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile image)
+        {
+            var brand = await _brandRepository.GetByIdAsync(id);
+            if (brand == null)
+                return null;
+
+            brand.Image = await _imageService.AddOrUpdateImageAsync<Brand>(id, image);
+            await _brandRepository.UpdateAsync(brand);
+
+            return await GetByIdAsync(id);
         }
     }
 }

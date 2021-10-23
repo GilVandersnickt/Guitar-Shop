@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,11 +13,13 @@ namespace Imi.Project.Api.Core.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IImageService _imageService;
         private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
+        public CategoryService(ICategoryRepository categoryRepository, IImageService imageService, IMapper mapper)
         {
             _categoryRepository = categoryRepository;
+            _imageService = imageService;
             _mapper = mapper;
         }
 
@@ -65,6 +68,18 @@ namespace Imi.Project.Api.Core.Services
         public async Task DeleteAsync(Guid id)
         {
             await _categoryRepository.DeleteAsync(id);
+        }
+
+        public async Task<CategoryResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile image)
+        {
+            var category = await _categoryRepository.GetByIdAsync(id);
+            if (category == null)
+                return null;
+
+            category.Image = await _imageService.AddOrUpdateImageAsync<Category>(id, image);
+            await _categoryRepository.UpdateAsync(category);
+
+            return await GetByIdAsync(id);
         }
     }
 }

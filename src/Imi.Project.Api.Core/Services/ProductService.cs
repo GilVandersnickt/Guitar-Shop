@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Entities;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,11 +13,13 @@ namespace Imi.Project.Api.Core.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
+        private readonly IImageService _imageService;
         private readonly IMapper _mapper;
 
-        public ProductService(IProductRepository productRepository, IMapper mapper)
+        public ProductService(IProductRepository productRepository, IImageService imageService, IMapper mapper)
         {
             _productRepository = productRepository;
+            _imageService = imageService;
             _mapper = mapper;
         }
 
@@ -76,6 +79,18 @@ namespace Imi.Project.Api.Core.Services
         public async Task DeleteAsync(Guid id)
         {
             await _productRepository.DeleteAsync(id);
+        }
+
+        public async Task<ProductResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile image) 
+        { 
+            var product = await _productRepository.GetByIdAsync(id); 
+            if (product == null) 
+                return null; 
+
+            product.Image = await _imageService.AddOrUpdateImageAsync<Product>(id, image); 
+            await _productRepository.UpdateAsync(product); 
+
+            return await GetByIdAsync(id); 
         }
     }
 }
