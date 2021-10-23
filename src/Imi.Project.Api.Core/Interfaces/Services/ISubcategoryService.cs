@@ -16,5 +16,6 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<SubcategoryResponseDto> AddAsync(SubcategoryRequestDto subcategoryRequestDto);
         Task<SubcategoryResponseDto> UpdateAsync(SubcategoryRequestDto subcategoryRequestDto);
         Task DeleteAsync(Guid id);
+        Task<IEnumerable<SubcategoryResponseDto>> SearchAsync(string name);
     }
 }
