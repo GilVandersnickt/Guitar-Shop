@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Infrastructure.Repositories.Interfaces;
+﻿using Imi.Project.Api.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
