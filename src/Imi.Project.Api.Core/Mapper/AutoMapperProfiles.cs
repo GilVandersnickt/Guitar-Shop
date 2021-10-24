@@ -34,7 +34,8 @@ namespace Imi.Project.Api.Core.Mapper
             CreateMap<BrandRequestDto, Brand>();
             CreateMap<CategoryRequestDto, Category>();
             CreateMap<SubcategoryRequestDto, Subcategory>();
-            CreateMap<ProductRequestDto, Product>();
+            CreateMap<ProductRequestDto, Product>()
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => decimal.Parse(src.Price)));
         }
     }
 }
