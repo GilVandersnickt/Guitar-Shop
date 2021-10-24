@@ -19,7 +19,8 @@ namespace Imi.Project.Api.Infrastructure.Repositories
         {
             return _dbContext.Subcategories
                 .Include(s => s.Products)
-                .Include(s => s.BrandSubcategories).ThenInclude(bs => bs.Brand);
+                .Include(s => s.BrandSubcategories).ThenInclude(bs => bs.Brand)
+                .Include(s => s.Category);
         }
 
         public async override Task<IEnumerable<Subcategory>> ListAllAsync()
