@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Imi.Project.Api.Core.Dtos;
+using Imi.Project.Api.Core.Dtos.Partials;
 using Imi.Project.Api.Entities;
 using System.Linq;
 
@@ -11,19 +12,20 @@ namespace Imi.Project.Api.Core.Mapper
         {
             CreateMap<Brand, BrandResponseDto>()
                 .ForMember(dest => dest.Categories, opt => opt.MapFrom(src => src.BrandCategories
-                .Select(bc => new CategoryResponseDto { Id = bc.CategoryId, Name = bc.Category.Name })))
+                .Select(bc => new DefaultResponseDto { Id = bc.CategoryId, Name = bc.Category.Name })))
                 .ForMember(dest => dest.Subcategories, opt => opt.MapFrom(src => src.BrandSubcategories
-                .Select(bc => new SubcategoryResponseDto { Id = bc.SubcategoryId, Name = bc.Subcategory.Name })));
+                .Select(bc => new DefaultResponseDto { Id = bc.SubcategoryId, Name = bc.Subcategory.Name })));
+
 
             CreateMap<Category, CategoryResponseDto>()
                 .ForMember(dest => dest.Brands, opt => opt.MapFrom(src => src.BrandCategories
-                .Select(bc => new BrandResponseDto { Id = bc.BrandId, Name = bc.Brand.Name })))
+                .Select(bc => new DefaultResponseDto { Id = bc.BrandId, Name = bc.Brand.Name })))
                 .ForMember(dest => dest.Subcategories, opt => opt.MapFrom(src => src.Subcategories
-                .Select(c => new SubcategoryResponseDto { Id = c.Id, Name = c.Name, Category = c.Category.Name })));
+                .Select(c => new DefaultResponseDto { Id = c.Id, Name = c.Name })));
 
             CreateMap<Subcategory, SubcategoryResponseDto>()
                 .ForMember(dest => dest.Brands, opt => opt.MapFrom(src => src.BrandSubcategories
-                .Select(bs => new BrandResponseDto { Id = bs.BrandId, Name = bs.Brand.Name })))
+                .Select(bs => new DefaultResponseDto { Id = bs.BrandId, Name = bs.Brand.Name })))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name));
 
             CreateMap<Product, ProductResponseDto>()
