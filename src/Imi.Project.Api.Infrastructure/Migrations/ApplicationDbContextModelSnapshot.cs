@@ -584,6 +584,11 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         },
                         new
                         {
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000007"),
+                            SubcategoryId = new Guid("00000000-0000-0000-0003-000000000046")
+                        },
+                        new
+                        {
                             BrandId = new Guid("00000000-0000-0000-0001-000000000008"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000001")
                         },
@@ -669,37 +674,37 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         },
                         new
                         {
-                            BrandId = new Guid("00000000-0000-0000-0001-000000000012"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000013"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000024")
                         },
                         new
                         {
-                            BrandId = new Guid("00000000-0000-0000-0001-000000000012"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000014"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000038")
                         },
                         new
                         {
-                            BrandId = new Guid("00000000-0000-0000-0001-000000000012"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000014"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000039")
                         },
                         new
                         {
-                            BrandId = new Guid("00000000-0000-0000-0001-000000000012"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000015"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000007")
                         },
                         new
                         {
-                            BrandId = new Guid("00000000-0000-0000-0001-000000000012"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000015"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000009")
                         },
                         new
                         {
-                            BrandId = new Guid("00000000-0000-0000-0001-000000000012"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000015"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000025")
                         },
                         new
                         {
-                            BrandId = new Guid("00000000-0000-0000-0001-000000000012"),
+                            BrandId = new Guid("00000000-0000-0000-0001-000000000015"),
                             SubcategoryId = new Guid("00000000-0000-0000-0003-000000000026")
                         });
                 });
