@@ -27,6 +27,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000041") },
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000042") },
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000043") },
+                new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000045") },
                 // Gibson
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000002"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000003") },
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000002"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000004") },
@@ -41,6 +42,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000012") },
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000022") },
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000032") },
+                new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000045") },
                 // Yamaha
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000005"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000004") },
                 new BrandSubcategory { BrandId = Guid.Parse("00000000-0000-0000-0001-000000000005"), SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000010") },
