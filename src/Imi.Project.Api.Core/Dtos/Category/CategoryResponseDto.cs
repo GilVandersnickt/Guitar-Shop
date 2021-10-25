@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Api.Core.Dtos.Partials;
+using System;
 using System.Collections.Generic;
 
 namespace Imi.Project.Api.Core.Dtos
@@ -7,8 +8,8 @@ namespace Imi.Project.Api.Core.Dtos
     {
         public string Name { get; set; }
         public Uri Image { get; set; }
-        public ICollection<BrandResponseDto> Brands { get; set; }
-        public ICollection<SubcategoryResponseDto> Subcategories { get; set; }
+        public ICollection<DefaultResponseDto> Brands { get; set; }
+        public ICollection<DefaultResponseDto> Subcategories { get; set; }
         public ICollection<ProductResponseDto> Products { get; set; }
     }
 }
