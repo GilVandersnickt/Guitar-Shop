@@ -11,7 +11,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>().HasData(
-            // Electric guitars
+            #region Electric guitars
                 // Stratocaster
                 new Product
                 {
@@ -132,7 +132,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     Name = "Yamaha revstar rs620 seg snake eye green",
                     Price = 1000M,
                     Image = new Uri("https://i.postimg.cc/W1zQP6Q9/yamaha-revstar-rs620-seg-snake-eye-green-1-GIT0045092-000.png"),
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"),
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000005"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000004"),
                 },
@@ -146,7 +146,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000002"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000005"),
-                }, 
+                },
                 new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000014"),
@@ -157,8 +157,9 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000005"),
                 },
-        // Amps
-            // Tube combo amps
+            #endregion
+            #region Amps
+                // Tube combo amps
                 new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000015"),
@@ -219,7 +220,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000007"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000117"),
                     Name = "Boss katana artist mkii",
@@ -228,7 +229,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000015"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000007"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000118"),
                     Name = "Roland jc 120b jazz chorus combo",
@@ -237,7 +238,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000009"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000007"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000119"),
                     Name = "Marshall mg50fx mg gold",
@@ -246,7 +247,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000010"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000007"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000019"),
                     Name = "Vox vx50 gtv",
@@ -308,7 +309,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000012"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000010"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000025"),
                     Name = "Fender bassbreaker 45 head",
@@ -317,7 +318,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000010"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000026"),
                     Name = "Evh 5150iii 50w el34 head",
@@ -326,7 +327,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000008"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000010"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000027"),
                     Name = "Marshall jtm45 head",
@@ -346,7 +347,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000010"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000011"),
-                }, 
+                },
                 new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000029"),
@@ -357,7 +358,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000011"),
                 },
-        // Bass guitars
+            #endregion
+            #region Bass guitars
                 // Electric
                 new Product
                 {
@@ -368,7 +370,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000012"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000031"),
                     Name = "Ibanez standard sr600e ast antique brown stained burst",
@@ -377,7 +379,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000012"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000032"),
                     Name = "Yamaha bbp34 vintage sunburst",
@@ -397,7 +399,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000013"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000034"),
                     Name = "Taylor gs mini e koa bass",
@@ -418,7 +420,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000014"),
                 },
-        // Classical guitars
+            #endregion
+            #region Classical guitars
                 // 1/4 classical
                 // 3/4 classical
                 new Product
@@ -443,8 +446,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000017"),
                 },
                 // Other classical
-
-        // Cables
+            #endregion
+            #region Cables
                 // Guitar cables
                 new Product
                 {
@@ -468,7 +471,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000005"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000021"),
                 },
-        // Capodasters       
+            #endregion
+            #region Capodasters
                 // Flat
                 new Product
                 {
@@ -490,7 +494,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000006"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000023"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000042"),
                     Name = "Taylor capo 6 string nickel curved",
@@ -500,9 +504,9 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000006"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000023"),
                 },
-        // Effects
+            #endregion
+            #region Effects
                 // Reverb delay
-
                 new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000043"),
@@ -512,7 +516,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000013"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000007"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000024"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000044"),
                     Name = "Strymon el capistan tape delay",
@@ -559,7 +563,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                 },
                 // Expression
                 // Other
-        // Miscellaneous instruments
+            #endregion
+            #region Miscellaneous instruments
                 // Mandolines
                 new Product
                 {
@@ -583,7 +588,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000008"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000034"),
                 },
-        // Pickups       
+            #endregion
+            #region Pickups
                 // Humbucker
                 new Product
                 {
@@ -594,7 +600,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000008"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000009"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000035"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000051"),
                     Name = "Fender double tap bridge humbucker",
@@ -616,8 +622,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000036"),
                 },
                 // Other
-
-        // Strings
+            #endregion
+            #region Strings
                 // Electric
                 new Product
                 {
@@ -628,7 +634,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000014"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000010"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000038"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000054"),
                     Name = "Elixir electric nanoweb",
@@ -671,7 +677,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000010"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000041"),
                 },
-        // Acoustic guitars
+            #endregion
+            #region Acoustic guitars
                 // Dreadnought
                 new Product
                 {
@@ -682,7 +689,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000011"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000042"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000155"),
                     Name = "Martin hd 28 ambertone",
@@ -691,7 +698,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000007"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000011"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000042"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000156"),
                     Name = "Taylor 717e wild honey burst",
@@ -700,7 +707,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000006"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000011"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000042"),
-                },new Product
+                }, new Product
                 {
                     Id = Guid.Parse("00000000-0000-0000-0000-000000000057"),
                     Name = "Yamaha fg3",
@@ -732,7 +739,8 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000011"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000044"),
                 },
-        // Ukuleles
+            #endregion
+            #region Ukuleles
                 // Concert
                 new Product
                 {
@@ -752,7 +760,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"),
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000012"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000045"),
-                }, 
+                },
                 // Other               
                 new Product
                 {
@@ -764,6 +772,7 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                     CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000012"),
                     SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000046"),
                 }
+                #endregion
             );
         }
     }
