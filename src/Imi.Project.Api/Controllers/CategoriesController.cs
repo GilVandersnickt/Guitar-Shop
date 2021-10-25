@@ -15,12 +15,14 @@ namespace Imi.Project.Api.Controllers
         private readonly ICategoryService _categoryService;
         private readonly IProductService _productService;
         private readonly IBrandService _brandService;
+        private readonly ISubcategoryService _subcategoryService;
 
-        public CategoriesController(ICategoryService categoryService, IProductService productService, IBrandService brandService)
+        public CategoriesController(ICategoryService categoryService, IProductService productService, IBrandService brandService, ISubcategoryService subcategoryService)
         {
             _categoryService = categoryService;
             _productService = productService;
             _brandService = brandService;
+            _subcategoryService = subcategoryService;
         }
 
         [HttpGet]
@@ -52,6 +54,13 @@ namespace Imi.Project.Api.Controllers
             var brandResponseDtos = await _brandService.GetByCategoryIdAsync(id); 
             return Ok(brandResponseDtos); 
         }
+        [HttpGet("{id}/subcategories")]
+        public async Task<IActionResult> GetSubcategoriesFromCategory(Guid id)
+        {
+            var subcategoryResponseDtos = await _subcategoryService.GetByCategoryIdAsync(id);
+            return Ok(subcategoryResponseDtos);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(CategoryRequestDto categoryRequestDto)
         {
