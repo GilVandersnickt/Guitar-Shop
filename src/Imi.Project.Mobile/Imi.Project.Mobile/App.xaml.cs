@@ -10,7 +10,7 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage( new HomePage());
         }
 
         protected override void OnStart()
