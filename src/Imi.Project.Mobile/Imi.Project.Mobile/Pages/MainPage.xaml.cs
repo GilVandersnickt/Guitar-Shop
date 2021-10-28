@@ -1,14 +1,15 @@
-﻿using Imi.Project.Mobile.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace Imi.Project.Mobile
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace Imi.Project.Mobile.Pages
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
         public MainPage()
@@ -16,16 +17,5 @@ namespace Imi.Project.Mobile
             InitializeComponent();
         }
 
-        private void Login_Clicked(object sender, EventArgs e)
-        {
-            var loginPage = new LoginPage();
-            Navigation.PushAsync(loginPage, true);
-        }
-
-        private void Register_Clicked(object sender, EventArgs e)
-        {
-            var registerPage = new RegisterPage();
-            Navigation.PushAsync(registerPage, true);
-        }
     }
 }
