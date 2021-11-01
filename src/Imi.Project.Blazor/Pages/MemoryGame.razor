@@ -1,0 +1,45 @@
+﻿@using Imi.Project.Blazor.Components
+@using Imi.Project.Blazor.Services
+@using Imi.Project.Blazor.Models
+
+@page "/memorygame"
+@inject MemoryGameService service;
+
+<div>
+    <h2>Memory Game @(wins == 0 ? "" : " - " + wins + (wins == 1 ? " win!" : " wins!"))</h2>
+    <button class="btn btn-warning" style="margin:5px;" @onclick="Restart">Restart</button>
+    
+    <MemoryGameCards OnFlipClick="Flip"
+                     Cards="cards">
+    </MemoryGameCards>
+
+    <h2>Failed attempts: @failedAttempts</h2>
+</div>
+
+@code {
+    private List<List<MemoryGameCard>> cards;
+    private int wins;
+    private int failedAttempts;
+
+    protected override void OnInitialized()
+    {
+        wins = 0;
+        failedAttempts = 0;
+
+        service.StartGame();
+        cards = service.Cards;
+    }
+
+    public async Task Flip(MemoryGameCard card)
+    {
+        await service.Flip(card);
+        wins = service.Wins;
+        failedAttempts = service.FailedAttempts;
+    }
+
+    protected void Restart()
+    {
+        service.ResetGame();
+        failedAttempts = service.FailedAttempts;
+    }
+}
