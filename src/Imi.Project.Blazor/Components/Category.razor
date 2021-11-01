@@ -1,0 +1,29 @@
+﻿@using Imi.Project.Blazor.Models
+
+<EditForm Model="@ProductCategory" OnValidSubmit="@(e => OnSaveClick.InvokeAsync(ProductCategory))">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Name: </label>
+        <InputText id="name" @bind-Value="ProductCategory.Name" class="form-control" />
+        <ValidationMessage For="@(() => ProductCategory.Name)" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description: </label>
+        <InputTextArea id="description" @bind-Value="ProductCategory.Description" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-warning" @onclick="OnCancelClick">Cancel</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public CategoryItem ProductCategory { get; set; }
+    [Parameter]
+    public EventCallback<CategoryItem> OnSaveClick { get; set; }
+    [Parameter]
+    public EventCallback OnCancelClick { get; set; }
+}
