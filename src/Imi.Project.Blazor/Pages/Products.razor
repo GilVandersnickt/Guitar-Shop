@@ -1,0 +1,91 @@
+﻿@using Imi.Project.Blazor.Models
+@using Imi.Project.Blazor.Components
+
+@page "/products"
+@inject ICRUDService<ProductListItem, ProductItem> service;
+
+<h2>Product</h2>
+<div class="mt-3">
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <div class="alert alert-danger">
+            @error
+        </div>
+    }
+
+    @if (currentProduct == null)
+    {
+        <ProductList ProductListItems="productListItems"
+                     OnAddClick="AddProduct"
+                     OnEditClick="EditProduct"
+                     OnDeleteClick="DeleteProduct">
+        </ProductList>
+    }
+    else
+    {
+        <Product Item="currentProduct"
+                 OnSaveClick="SaveProduct"
+                 OnCancelClick="ShowList">
+        </Product>
+    }
+</div>
+
+@code {
+    private ProductListItem[] productListItems = new ProductListItem[0];
+    private ProductItem currentProduct;
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ShowList();
+    }
+
+    public async Task ShowList()
+    {
+        productListItems = await service.GetList();
+        this.currentProduct = null;
+    }
+
+    public async Task AddProduct()
+    {
+        this.currentProduct = await service.GetNew();
+    }
+
+    public async Task EditProduct(ProductListItem item)
+    {
+        this.currentProduct = await service.Get(item.Id);
+    }
+
+    public async Task SaveProduct(ProductItem item)
+    {
+        try
+        {
+            if (currentProduct.Id == 0)
+            {
+                await service.Create(currentProduct);
+            }
+            else
+            {
+                await service.Update(currentProduct);
+            }
+            await this.ShowList();
+        }
+        catch (Exception ex)
+        {
+            this.error = ex.Message;
+        }
+    }
+
+    public async Task DeleteProduct(ProductListItem item)
+    {
+        try
+        {
+            await service.Delete(item.Id);
+            await this.ShowList();
+        }
+        catch (Exception ex)
+        {
+            this.error = ex.Message;
+        }
+    }
+}
