@@ -29,6 +29,7 @@ namespace Imi.Project.Blazor.Services
             {
                 Id = x.Id,
                 Title = x.Title,
+                Price = x.Price,
                 Category = categories
                     .Where(y => y.Value == x.CategoryId)
                     .Select(y => y.Label)

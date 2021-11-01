@@ -10,6 +10,6 @@ namespace Imi.Project.Blazor.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Category { get; set; }
-        public string Brand { get; set; }
+        public string Price { get; set; }
     }
 }
