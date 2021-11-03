@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource BasePageStyle}"
              Title="Add"
              x:Class="Imi.Project.Mobile.Pages.CRUDBrandAddPage">
     <ContentPage.Content>
@@ -11,20 +12,20 @@
                     <Label Text="Add brand" Style="{StaticResource Title}"/>
 
                     <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
-                        <Image/>
+                        <Image x:Name="imgPhoto"/>
                     </Frame>
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                        <Button Text="Take Photo" VerticalOptions="Center"/>
-                        <Button Text="Upload Photo" VerticalOptions="Center" />
+                        <Button x:Name="btnTakePhoto" Text="Take Photo" VerticalOptions="Center" Clicked="btnTakePhoto_Clicked"/>
+                        <Button x:Name="btnUploadPhoto" Text="Upload Photo" VerticalOptions="Center" Clicked="btnUploadPhoto_Clicked"/>
                     </StackLayout>
 
                     <Label Text="Brand name" />
-                    <Entry Text="{Binding ProductDescription}" Placeholder="Name the category here" />
+                    <Entry Text="{Binding BrandDescription}" Placeholder="Name the category here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
 
-                    <Button Text="Save brand"/>
+                    <Button x:Name="btnSave" Text="Save brand" Clicked="btnSave_Clicked"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
