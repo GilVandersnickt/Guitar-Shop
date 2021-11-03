@@ -30,5 +30,15 @@ namespace Imi.Project.Mobile.Pages
             return brandService.Get().Result;
         }
 
+        private async void btnDelete_Clicked(object sender, EventArgs e)
+        {
+            if(pkrBrand.SelectedItem != null)
+            {
+                var brand = (Brand)pkrBrand.SelectedItem;
+                await brandService.Delete(brand.Id);
+                await DisplayAlert("Confirm Delete", "Are you sure you want to delete this brand?", "Yes", "No");
+                await Navigation.PopAsync();
+            }
+        }
     }
 }

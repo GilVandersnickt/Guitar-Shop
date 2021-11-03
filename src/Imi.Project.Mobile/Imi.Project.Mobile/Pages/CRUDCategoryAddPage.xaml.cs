@@ -52,5 +52,21 @@ namespace Imi.Project.Mobile.Pages
             }
         }
 
+        private async void btnSave_Clicked(object sender, EventArgs e)
+        {
+            if(txtCategoryName.Text != null)
+            {
+                Category newCategory = new Category();
+                newCategory.Id = Guid.NewGuid();
+                newCategory.Name = txtCategoryName.Text;
+                if (imgPhoto.Source != null)
+                    newCategory.Image = imgPhoto.Source.ToString();
+                else
+                    newCategory.Image = "";
+
+                await categoryService.Add(newCategory);
+                await Navigation.PopAsync();
+            }
+        }
     }
 }

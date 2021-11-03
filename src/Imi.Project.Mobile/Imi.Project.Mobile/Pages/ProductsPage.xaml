@@ -5,7 +5,7 @@
              x:Class="Imi.Project.Mobile.Pages.ProductsPage">
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
-            <StackLayout BackgroundColor="{StaticResource ColorPrimary}" Padding="10" Margin="10">
+            <StackLayout BackgroundColor="{StaticResource ColorPrimary}" Style="{StaticResource SlDefaultStyle}">
                 <Label Text="Products" Style="{StaticResource Title}"/>
                 <CollectionView x:Name="cvProducts" ItemsSource="{Binding Products}" SelectionMode="Single" SelectionChanged="cvProducts_SelectionChanged" Margin="10">
                     <CollectionView.ItemsLayout>

@@ -9,7 +9,7 @@
 
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
-            <StackLayout BackgroundColor="{StaticResource ColorPrimary}">
+            <StackLayout BackgroundColor="{StaticResource ColorPrimary}" Style="{StaticResource SlDefaultStyle}">
                 <Label Text="All brands" Style="{StaticResource Title}"/>
                 <CollectionView x:Name="cvBrands" ItemsSource="{Binding Brands}" SelectionMode="Single" SelectionChanged="cvBrands_SelectionChanged">
                     <CollectionView.ItemTemplate>

@@ -50,7 +50,11 @@
             </Style>
 
             
-            
+            <!--StackLayout style-->
+            <Style x:Key="SlDefaultStyle" TargetType="StackLayout">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
             
             <!-- On Platform Resources -->
             <OnPlatform x:Key="DefaultThickness" x:TypeArguments="Thickness">

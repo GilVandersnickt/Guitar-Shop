@@ -8,15 +8,16 @@
         <StackLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All"
                         AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <StackLayout>
+                <StackLayout Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Delete product" Style="{StaticResource Title}"/>
 
                     <Label Text="Product" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrProduct"
+                            Title="--Select--" 
                             ItemsSource="{Binding Products}" 
                             ItemDisplayBinding="{Binding Name}"/>
 
-                    <Button Text="Delete product"/>
+                    <Button x:Name="btnDelete" Text="Delete product" Clicked="btnDelete_Clicked"/>
 
                 </StackLayout>
             </ScrollView>

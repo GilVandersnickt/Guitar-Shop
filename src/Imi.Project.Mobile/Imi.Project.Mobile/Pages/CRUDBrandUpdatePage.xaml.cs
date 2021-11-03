@@ -52,5 +52,30 @@ namespace Imi.Project.Mobile.Pages
             }
         }
 
+        private async void btnSave_Clicked(object sender, EventArgs e)
+        {
+            if(pkrBrand.SelectedItem != null)
+            {
+                Brand selectedBrand = (Brand)pkrBrand.SelectedItem;
+                Brand brand = brandService.Get(selectedBrand.Id).Result;
+
+                brand.Id = pkrBrand.Id;
+                brand.Name = txtBrandName.Text;
+                if (imgPhoto.Source != null)
+                    brand.Image = imgPhoto.Source.ToString();
+                else
+                    brand.Image = "";
+
+                await brandService.Update(brand);
+                await Navigation.PopAsync();
+            }
+        }
+
+        private void pkrBrand_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Brand selectedBrand = (Brand)pkrBrand.SelectedItem;
+            imgPhoto.Source = selectedBrand.Image;
+            txtBrandName.Text = selectedBrand.Name;
+        }
     }
 }

@@ -8,7 +8,7 @@
         <StackLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All"
                         AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <StackLayout>
+                <StackLayout Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Add brand" Style="{StaticResource Title}"/>
 
                     <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
@@ -20,7 +20,7 @@
                     </StackLayout>
 
                     <Label Text="Brand name" />
-                    <Entry Text="{Binding BrandDescription}" Placeholder="Name the category here" />
+                    <Entry x:Name="txtBrandName" Placeholder="Name the brand here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />

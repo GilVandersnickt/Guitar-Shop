@@ -8,7 +8,7 @@
         <StackLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All"
                         AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <StackLayout>
+                <StackLayout Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Edit brand" Style="{StaticResource Title}"/>
 
                     <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
@@ -20,18 +20,20 @@
                     </StackLayout>
 
                     <Label Text="Brand" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrBrand"
+                            Title="--Select--" 
                             ItemsSource="{Binding Brands}" 
-                            ItemDisplayBinding="{Binding Name}"/>
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndexChanged="pkrBrand_SelectedIndexChanged"/>
 
 
                     <Label Text="Brand name" />
-                    <Entry Text="{Binding ProductDescription}" Placeholder="Name the category here" />
+                    <Entry x:Name="txtBrandName" Placeholder="Name the brand here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
 
-                    <Button Text="Save brand"/>
+                    <Button x:Name="btnSave" Text="Save brand" Clicked="btnSave_Clicked"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

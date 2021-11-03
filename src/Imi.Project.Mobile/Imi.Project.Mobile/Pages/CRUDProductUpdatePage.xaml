@@ -8,7 +8,7 @@
         <StackLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All"
                         AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <StackLayout>
+                <StackLayout Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Edit product" Style="{StaticResource Title}"/>
 
                     <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
@@ -20,33 +20,37 @@
                     </StackLayout>
 
                     <Label Text="Product" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrProduct"
+                            Title="--Select--" 
                             ItemsSource="{Binding Products}" 
-                            ItemDisplayBinding="{Binding Name}"/>
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndexChanged="pkrProduct_SelectedIndexChanged"/>
 
                     <Label Text="Product name" />
-                    <Entry Text="{Binding ProductDescription}" Placeholder="Name the product here" />
+                    <Entry x:Name="txtProductName" Placeholder="Name the product here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
 
                     <Label Text="Product price" />
-                    <Entry Text="{Binding ProductDescription}" Placeholder="Set price for product here" />
+                    <Entry x:Name="txtPrice" Placeholder="Set price for product here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
 
                     <Label Text="Product category" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrCategory"
+                            Title="--Select--" 
                             ItemsSource="{Binding Categories}" 
                             ItemDisplayBinding="{Binding Name}"/>
 
                     <Label Text="Product brand" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrBrand"
+                            Title="--Select--" 
                             ItemsSource="{Binding Brands}" 
                             ItemDisplayBinding="{Binding Name}"/>
 
-                    <Button Text="Save product"/>
+                    <Button x:Name="btnSave" Text="Save product" Clicked="btnSave_Clicked"/>
 
                 </StackLayout>
             </ScrollView>
