@@ -109,16 +109,16 @@
     <Content Include="Classical_Guitars.PNG" />
     <Content Include="Electric_Guitars.PNG" />
     <Content Include="Fender.PNG" />
-    <AndroidResource Include="fenderericclaptonstratocastermnalmondgreenmasterbuilttoddkrausecz552554GIT0057454000.png" />
-    <AndroidResource Include="fenderamericanultrastratocasterhssmnultraburstGIT0050645000.png" />
-    <AndroidResource Include="fenderamericanoriginal60sprecisionbassrwsurfgreenBAS0010757000.png" />
-    <AndroidResource Include="fender64customdeluxereverbGIT0042604000.png" />
+    <Content Include="fender64customdeluxereverbGIT0042604000.png" />
+    <Content Include="fenderamericanoriginal60sprecisionbassrwsurfgreenBAS0010757000.png" />
+    <Content Include="fenderamericanultrastratocasterhssmnultraburstGIT0050645000.png" />
+    <Content Include="fenderericclaptonstratocastermnalmondgreenmasterbuilttoddkrausecz552554GIT0057454000.png" />
     <Content Include="Gibson.PNG" />
-    <AndroidResource Include="gibsonlespaultributesatintobaccosunburstGIT0049503000.png" />
-    <AndroidResource Include="gibsonlespaulstudiosmokehouseburstGIT0049498000.png" />
+    <Content Include="gibsonlespaulstudiosmokehouseburstGIT0049498000.png" />
+    <Content Include="gibsonlespaultributesatintobaccosunburstGIT0049503000.png" />
     <Content Include="Gretsch.PNG" />
-    <AndroidResource Include="gretschg6128tplayerseditionjetftbigsbyrounduporangeGIT0051980000.png" />
-    <AndroidResource Include="gretschg5230telectromaticjetftsinglecutbigsbyairlinesilverGIT0047791000.png" />
+    <Content Include="gretschg5230telectromaticjetftsinglecutbigsbyairlinesilverGIT0047791000.png" />
+    <Content Include="gretschg6128tplayerseditionjetftbigsbyrounduporangeGIT0051980000.png" />
     <Content Include="Ibanez.PNG" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
@@ -147,16 +147,16 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <AndroidResource Include="ibanezstandardsr600eastantiquebrownstainedburstBAS0011488000.png" />
+    <Content Include="ibanezstandardsr600eastantiquebrownstainedburstBAS0011488000.png" />
     <Content Include="Roland.PNG" />
-    <AndroidResource Include="rolandricg10agoldseriesACC0007014000.png" />
-    <AndroidResource Include="rolandricbpcpatchkabel015mACC0007020000.png" />
+    <Content Include="rolandricbpcpatchkabel015mACC0007020000.png" />
+    <Content Include="rolandricg10agoldseriesACC0007014000.png" />
     <Content Include="Yamaha.PNG" />
     <Content Include="guitar.jpg" />
     <Content Include="Properties\Default.rd.xml" />
-    <AndroidResource Include="yamahathr30iiwirelessGIT0051343000.png" />
-    <AndroidResource Include="yamahacs40nt34naturalGIT0000644000.png" />
-    <AndroidResource Include="yamahac40mmatGIT0019253000.png" />
+    <Content Include="yamahac40mmatGIT0019253000.png" />
+    <Content Include="yamahacs40nt34naturalGIT0000644000.png" />
+    <Content Include="yamahathr30iiwirelessGIT0051343000.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
