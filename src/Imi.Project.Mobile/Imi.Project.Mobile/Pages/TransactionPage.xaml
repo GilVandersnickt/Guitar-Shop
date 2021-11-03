@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.TransactionPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Style="{StaticResource SlDefaultStyle}">
+                <Label Text="Transaction" Style="{StaticResource Title}"/>
+                <StackLayout>
+                    <Label Text="Transaction completed" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </StackLayout>
+                <Button x:Name="btnBackToMain" Text="Return to home page" Style="{StaticResource PrimaryButton}" Clicked="btnBackToMain_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

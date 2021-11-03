@@ -29,9 +29,9 @@ namespace Imi.Project.Mobile.Pages
             return productService.Get(product.Id).Result;
         }
 
-        private void btnCart_Clicked(object sender, EventArgs e)
+        private async void btnCart_Clicked(object sender, EventArgs e)
         {
-
+            await Navigation.PushAsync(new ShoppingCartPage());
         }
     }
 }
