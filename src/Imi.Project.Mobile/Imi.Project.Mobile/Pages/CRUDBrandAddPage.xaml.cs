@@ -32,16 +32,20 @@ namespace Imi.Project.Mobile.Pages
         }
         private async void btnSave_Clicked(object sender, EventArgs e)
         {
-            Brand newBrand = new Brand();
-            newBrand.Id = Guid.NewGuid();
-            newBrand.Name = txtBrandName.Text;
-            if (imgPhoto.Source != null)
-                newBrand.Image = imgPhoto.Source.ToString();
-            else
-                newBrand.Image = "";
-            await brandService.Add(newBrand);
+            if(txtBrandName.Text != null)
+            {
+                Brand newBrand = new Brand();
+                newBrand.Id = Guid.NewGuid();
+                newBrand.Name = txtBrandName.Text;
 
-            await Navigation.PopAsync();
+                if (imgPhoto.Source != null)
+                    newBrand.Image = imgPhoto.Source.ToString();
+                else
+                    newBrand.Image = "";
+
+                await brandService.Add(newBrand);
+                await Navigation.PopAsync();
+            }
         }
         private async void btnTakePhoto_Clicked(object sender, EventArgs e)
         {

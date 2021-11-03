@@ -55,18 +55,22 @@ namespace Imi.Project.Mobile.Pages
 
         private async void btnSave_Clicked(object sender, EventArgs e)
         {
-            Category selectedCategory = (Category)pkrCategory.SelectedItem;
-            Category category = categoryService.Get(selectedCategory.Id).Result;
+            if(pkrCategory.SelectedItem != null)
+            {
+                Category selectedCategory = (Category)pkrCategory.SelectedItem;
+                Category category = categoryService.Get(selectedCategory.Id).Result;
 
-            selectedCategory.Name = txtCategoryName.Text;
+                selectedCategory.Id = pkrCategory.Id;
+                selectedCategory.Name = txtCategoryName.Text;
 
-            if (imgPhoto.Source != null)
-                selectedCategory.Image = imgPhoto.Source.ToString();
-            else
-                selectedCategory.Image = "";
+                if (imgPhoto.Source != null)
+                    selectedCategory.Image = imgPhoto.Source.ToString();
+                else
+                    selectedCategory.Image = "";
 
-            await categoryService.Update(category);
-            await Navigation.PopAsync();
+                await categoryService.Update(category);
+                await Navigation.PopAsync();
+            }
         }
 
         private void pkrCategory_SelectedIndexChanged(object sender, EventArgs e)

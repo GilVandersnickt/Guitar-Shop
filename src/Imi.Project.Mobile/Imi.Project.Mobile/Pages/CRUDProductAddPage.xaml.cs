@@ -67,22 +67,25 @@ namespace Imi.Project.Mobile.Pages
 
         private async void btnSave_Clicked(object sender, EventArgs e)
         {
-            Product newProduct = new Product();
-            var category = (Category)pkrCategory.SelectedItem;
-            var brand = (Brand)pkrBrand.SelectedItem;
+            if(txtProductName.Text != null)
+            {
+                Product newProduct = new Product();
+                var category = (Category)pkrCategory.SelectedItem;
+                var brand = (Brand)pkrBrand.SelectedItem;
 
-            newProduct.Id = Guid.NewGuid();
-            newProduct.Name = txtProductName.Text;
-            newProduct.Price = decimal.Parse(txtPrice.Text);
-            if (imgPhoto.Source != null)
-                newProduct.Image = imgPhoto.Source.ToString();
-            else
-                newProduct.Image = "";
-            newProduct.BrandId = brand.Id;
-            newProduct.CategoryId = category.Id;
+                newProduct.Id = Guid.NewGuid();
+                newProduct.Name = txtProductName.Text;
+                newProduct.Price = decimal.Parse(txtPrice.Text);
+                if (imgPhoto.Source != null)
+                    newProduct.Image = imgPhoto.Source.ToString();
+                else
+                    newProduct.Image = "";
+                newProduct.BrandId = brand.Id;
+                newProduct.CategoryId = category.Id;
 
-            await productService.Add(newProduct);
-            await Navigation.PopAsync();
+                await productService.Add(newProduct);
+                await Navigation.PopAsync();
+            }
         }
     }
 }

@@ -67,25 +67,31 @@ namespace Imi.Project.Mobile.Pages
 
         private async void btnSave_Clicked(object sender, EventArgs e)
         {
-            Product selectedProduct = (Product)pkrProduct.SelectedItem;
-            Product product = productService.Get(selectedProduct.Id).Result;
+            if (pkrProduct.SelectedItem != null)
+            {
+                Product selectedProduct = (Product)pkrProduct.SelectedItem;
+                Product product = productService.Get(selectedProduct.Id).Result;
 
 
-            var selectedCategory = (Category)pkrCategory.SelectedItem;
-            var selectedBrand = (Brand)pkrBrand.SelectedItem;
+                var selectedCategory = (Category)pkrCategory.SelectedItem;
+                var selectedBrand = (Brand)pkrBrand.SelectedItem;
 
-            product.Name = txtProductName.Text;
-            product.Price = decimal.Parse(txtPrice.Text);
-            if (imgPhoto.Source != null)
-                product.Image = imgPhoto.Source.ToString();
-            else
-                product.Image = "";
-            product.BrandId = selectedBrand.Id;
-            product.CategoryId = selectedCategory.Id;
+                product.Id = pkrProduct.Id;
+                product.Name = txtProductName.Text;
+                product.Price = decimal.Parse(txtPrice.Text);
 
-            await productService.Add(product);
-            await Navigation.PopAsync();
+                if (imgPhoto.Source != null)
+                    product.Image = imgPhoto.Source.ToString();
+                else
+                    product.Image = "";
 
+                product.BrandId = selectedBrand.Id;
+                product.CategoryId = selectedCategory.Id;
+
+
+                await productService.Update(product);
+                await Navigation.PopAsync();
+            }
         }
 
         private void pkrProduct_SelectedIndexChanged(object sender, EventArgs e)
