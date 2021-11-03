@@ -20,28 +20,30 @@
                     </StackLayout>
 
                     <Label Text="Product name" />
-                    <Entry Text="{Binding ProductDescription}" Placeholder="Name the product here" />
+                    <Entry x:Name="txtProductName" Placeholder="Name the product here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
                     
                     <Label Text="Product price" />
-                    <Entry Text="{Binding ProductDescription}" Placeholder="Set price for product here" />
+                    <Entry x:Name="txtPrice" Placeholder="Set price for product here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
 
                     <Label Text="Product category" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrCategory"
+                            Title="--Select--" 
                             ItemsSource="{Binding Categories}" 
                             ItemDisplayBinding="{Binding Name}"/>
 
                     <Label Text="Product brand" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrBrand"
+                            Title="--Select--" 
                             ItemsSource="{Binding Brands}" 
                             ItemDisplayBinding="{Binding Name}"/>
 
-                    <Button Text="Save product"/>
+                    <Button x:Name="btnSave" Text="Save product" Clicked="btnSave_Clicked"/>
 
                 </StackLayout>
             </ScrollView>

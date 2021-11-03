@@ -20,7 +20,7 @@
                     </StackLayout>
 
                     <Label Text="Brand name" />
-                    <Entry Text="{Binding BrandDescription}" Placeholder="Name the category here" />
+                    <Entry x:Name="txtBrandName" Placeholder="Name the brand here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />

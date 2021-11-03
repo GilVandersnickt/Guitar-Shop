@@ -18,8 +18,6 @@ namespace Imi.Project.Mobile.Pages
         private readonly IBrandService brandService = new BrandService();
 
         public List<Brand> Brands { get => GetBrands(); }
-        private Brand currentBrand;
-        private bool isNew = true;
         public string BrandDescription { get; set; }
 
 
@@ -34,14 +32,22 @@ namespace Imi.Project.Mobile.Pages
         }
         private async void btnSave_Clicked(object sender, EventArgs e)
         {
-            var selectedBrand = ((Button)sender).CommandParameter as Brand;
+            Brand newBrand = new Brand();
+            newBrand.Id = Guid.NewGuid();
+            newBrand.Name = txtBrandName.Text;
+            if (imgPhoto.Source != null)
+                newBrand.Image = imgPhoto.Source.ToString();
+            else
+                newBrand.Image = "";
+            await brandService.Add(newBrand);
 
+            await Navigation.PopAsync();
         }
         private async void btnTakePhoto_Clicked(object sender, EventArgs e)
         {
             var selectedBrand = ((Button)sender).CommandParameter as Brand;
             var result = await MediaPicker.CapturePhotoAsync();
-            if(result != null)
+            if (result != null)
             {
                 var stream = await result.OpenReadAsync();
                 imgPhoto.Source = ImageSource.FromStream(() => stream);
@@ -54,30 +60,11 @@ namespace Imi.Project.Mobile.Pages
             {
                 Title = "Please choose an image"
             });
-            if(result != null)
+            if (result != null)
             {
                 var stream = await result.OpenReadAsync();
                 imgPhoto.Source = ImageSource.FromStream(() => stream);
             }
         }
-        //public async void btnupload_Clicked(object sender, EventArgs e)
-        //{
-        //    var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
-        //    {
-        //        Title = "Please pick a photo"
-        //    });
-
-        //    fileName = result.FileName;
-        //    var stream = await result.OpenReadAsync();
-
-        //    resultImage.Source = ImageSource.FromStream(() => stream);
-        //}
-
-        //private async void btnCamera_Clicked(object sender, EventArgs e)
-        //{
-        //    var result = await MediaPicker.CapturePhotoAsync();
-        //    var stream = await result.OpenReadAsync();
-        //    resultImage.Source = ImageSource.FromStream(() => stream);
-        //}
     }
 }

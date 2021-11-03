@@ -12,11 +12,12 @@
                     <Label Text="Delete brand" Style="{StaticResource Title}"/>
 
                     <Label Text="Brand" />
-                    <Picker Title="--Select--" 
+                    <Picker x:Name="pkrBrand"
+                            Title="--Select--" 
                             ItemsSource="{Binding Brands}" 
                             ItemDisplayBinding="{Binding Name}"/>
 
-                    <Button Text="Delete brand"/>
+                    <Button x:Name="btnDelete" Text="Delete brand" Clicked="btnDelete_Clicked"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

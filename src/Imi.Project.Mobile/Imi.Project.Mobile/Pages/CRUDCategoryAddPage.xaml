@@ -20,12 +20,12 @@
                     </StackLayout>
 
                     <Label Text="Category name" />
-                    <Entry Text="{Binding ProductDescription}" Placeholder="Name the category here" />
+                    <Entry x:Name="txtCategoryName" Placeholder="Name the category here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
 
-                    <Button Text="Save category"/>
+                    <Button x:Name="btnSave" Text="Save category" Clicked="btnSave_Clicked"/>
                 </StackLayout>
             </ScrollView>
 
