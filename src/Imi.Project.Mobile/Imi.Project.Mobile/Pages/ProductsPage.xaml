@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.ProductsPage">
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+            <StackLayout Padding="10">
+                <Label Text="Products" Style="{StaticResource Title}"/>
+                <CollectionView x:Name="cvProducts" ItemsSource="{Binding Products}" SelectionMode="Single" SelectionChanged="cvProducts_SelectionChanged">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout BackgroundColor="WhiteSmoke" >
+                                <Frame Padding="5" Margin="5" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="250" WidthRequest="250" BorderColor="Black">
+                                    <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Frame>
+                                <Label Text="{Binding Name}"  Style="{StaticResource ProductTitleLabelStyle }" />
+                                <Label Text="{Binding Price, StringFormat='€{0:F2}'}" Style="{StaticResource ProductPriceLabelStyle }" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
