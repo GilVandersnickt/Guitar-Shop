@@ -27,5 +27,11 @@ namespace Imi.Project.Mobile
             var registerPage = new RegisterPage();
             Navigation.PushAsync(registerPage, true);
         }
+
+        private void LoginAdmin_Clicked(object sender, EventArgs e)
+        {
+            var adminPage = new AdminPage();
+            Navigation.PushAsync(adminPage, true);
+        }
     }
 }

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.ProductDetailPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label Text="Product details"/>
+
+                <StackLayout BackgroundColor="White" Padding="10">
+                    <StackLayout>
+                        <Frame Padding="5" Margin="5" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="250" WidthRequest="250" BorderColor="Black">
+                            <Image Source="{Binding ProductDetails.Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                        </Frame>
+                        <Label  Text="Details" FontAttributes="Bold" TextColor="Silver"/>
+                        <Label  Text="{Binding ProductDetails.Name}" FontSize="30" FontAttributes="Bold"/>
+                        <Label Text="{Binding ProductDetails.Price, StringFormat='€{0:F2}'}" FontSize="25" Padding="0,15" TextColor="#49a657" FontAttributes="Bold"/>
+                        <!--<Label Text="{Binding ProductDetails.CategoryId}" TextColor="Silver"/>
+                        <Label Text="{Binding ProductDetails.BrandId}" TextColor="Silver"/>-->
+                        <Button x:Name="btnCart" Text="Add to Cart" CornerRadius="20" BackgroundColor="White" Margin="20" FontAttributes="Bold" HeightRequest="55" TextColor="Black" VerticalOptions="CenterAndExpand" Clicked="btnCart_Clicked"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

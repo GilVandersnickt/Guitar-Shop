@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.BrandsPage"
+             x:Name="page"
+             Title="Brands"
+             xmlns:bhv="clr-namespace:Imi.Project.Mobile.Behaviors" 
+             Style="{StaticResource BasePageStyle}">
+
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
+            <StackLayout>
+                <Label Text="All brands" Style="{StaticResource Title}"/>
+                <CollectionView x:Name="cvBrands" ItemsSource="{Binding Brands}" SelectionMode="Single" SelectionChanged="cvBrands_SelectionChanged">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Frame Grid.Row="1"  Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="120" WidthRequest="200">
+                                    <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                </Frame>
+                                <Label Grid.Row="2" Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

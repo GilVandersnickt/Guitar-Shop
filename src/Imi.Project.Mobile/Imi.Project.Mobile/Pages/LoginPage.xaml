@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Pages.LoginPage">
+             x:Class="Imi.Project.Mobile.Pages.LoginPage"
+             Style="{StaticResource BasePageStyle}">
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Grid RowDefinitions="Auto, *, Auto, Auto, Auto, Auto">
-                    <Label Grid.Row="1" Text="Guitar Shop" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Header"/>
-                    <Frame Grid.Row="2" HorizontalOptions="FillAndExpand" >
-                        <Image Source="guitar.jpg"  HorizontalOptions="Fill" Aspect="AspectFit" />
-                    </Frame>
-                    <Entry Grid.Row="3" Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20"/>
-                    <Entry Grid.Row="4" Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                    <Button Grid.Row="5" Text="Forgot your password?" HorizontalOptions="Center" BackgroundColor="Transparent" BorderWidth="0" FontSize="Micro" />
-                    <Button Grid.Row="6" Text="Login" HorizontalOptions="FillAndExpand" Margin="20, 20, 20, 20" FontSize="Large" Clicked="Login_Clicked"/>
-                </Grid>
+                <Label Text="Log in" Style="{StaticResource Title}"/>
+                <Frame HorizontalOptions="FillAndExpand" >
+                    <Image Source="guitar.jpg"  HorizontalOptions="Fill" Aspect="AspectFit" />
+                </Frame>
+                <Entry  Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20"/>
+                <Entry  Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Button Text="Forgot your password?" HorizontalOptions="Center" BackgroundColor="Transparent" BorderWidth="0" FontSize="Micro" />
+                <Button Text="Login" Style="{StaticResource PrimaryButton}" Clicked="Login_Clicked"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.CRUDProductDeletePage"
+             Title="Delete">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout>
+                    <Label Text="Delete product" Style="{StaticResource Title}"/>
+
+                    <Label Text="Product" />
+                    <Picker Title="--Select--" 
+                            ItemsSource="{Binding Products}" 
+                            ItemDisplayBinding="{Binding Name}"/>
+
+                    <Button Text="Delete product"/>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

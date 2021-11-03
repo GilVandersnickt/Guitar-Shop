@@ -10,17 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Imi.Project.Mobile.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RegisterPage : ContentPage
+    public partial class CRUDCategoryPage : TabbedPage
     {
-        public RegisterPage()
+        public CRUDCategoryPage()
         {
             InitializeComponent();
-        }
-
-        private async void Register_Clicked(object sender, EventArgs e)
-        {
-            var mainPage = new MainPage();
-            await Navigation.PushAsync(mainPage, true);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Imi.Project.Mobile.Domain.Models;
+using Imi.Project.Mobile.Domain.Services;
+using Imi.Project.Mobile.Domain.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +13,12 @@ using Xamarin.Forms.Xaml;
 namespace Imi.Project.Mobile.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RegisterPage : ContentPage
+    public partial class CRUDProductPage : TabbedPage
     {
-        public RegisterPage()
+        public CRUDProductPage()
         {
             InitializeComponent();
         }
 
-        private async void Register_Clicked(object sender, EventArgs e)
-        {
-            var mainPage = new MainPage();
-            await Navigation.PushAsync(mainPage, true);
-        }
     }
 }
