@@ -47,9 +47,22 @@ namespace Imi.Project.Mobile.Pages
             Navigation.PushAsync(brandsPage, true);
         }
 
-        private void cvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void cvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var category = e.CurrentSelection.FirstOrDefault() as Category;
+            if (category == null)
+                return;
+            await Navigation.PushAsync(new ProductsPage(category));
+            ((CollectionView)sender).SelectedItem = null;
+        }
 
+        private async void cvBrands_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var brand = e.CurrentSelection.FirstOrDefault() as Brand;
+            if (brand == null)
+                return;
+            await Navigation.PushAsync(new ProductsPage(brand));
+            ((CollectionView)sender).SelectedItem = null;
         }
     }
 }
