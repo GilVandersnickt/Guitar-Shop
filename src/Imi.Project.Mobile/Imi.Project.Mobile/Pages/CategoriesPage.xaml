@@ -6,7 +6,7 @@
 
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
-            <StackLayout BackgroundColor="{StaticResource ColorPrimary}">
+            <StackLayout BackgroundColor="{StaticResource ColorPrimary}" Style="{StaticResource SlDefaultStyle}">
                 <Label Text="All categories" Style="{StaticResource Title}"/>
                 <CollectionView x:Name="cvCategories" ItemsSource="{Binding Categories}" SelectionMode="Single" SelectionChanged="cvCategories_SelectionChanged">
                     <CollectionView.ItemTemplate>

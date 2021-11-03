@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ScrollView>
-                <StackLayout Spacing="10" VerticalOptions="Center" Padding="10">
+                <StackLayout Spacing="10" VerticalOptions="Center" Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Add, edit or delete" Style="{StaticResource Title}"/>
 
                     <Button x:Name="btnProducts" Text="Products" Clicked="btnProducts_Clicked"/>

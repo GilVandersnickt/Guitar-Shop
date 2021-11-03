@@ -5,7 +5,7 @@
              Style="{StaticResource BasePageStyle}">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout Style="{StaticResource SlDefaultStyle}">
                 <Label Text="Guitar Shop" Style="{StaticResource Title}"/>
                 <Frame HorizontalOptions="FillAndExpand" >
                     <Image Source="guitar.jpg"  HorizontalOptions="Fill" Aspect="AspectFit" />
