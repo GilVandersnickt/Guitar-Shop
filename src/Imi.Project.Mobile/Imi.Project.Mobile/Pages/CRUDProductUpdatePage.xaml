@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.CRUDProductUpdatePage"
+             Title="Edit">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout>
+                    <Label Text="Edit product" Style="{StaticResource Title}"/>
+
+                    <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
+                        <Image/>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                        <Button Text="Take Photo" VerticalOptions="Center" />
+                        <Button Text="Upload Photo" VerticalOptions="Center" />
+                    </StackLayout>
+
+                    <Label Text="Product" />
+                    <Picker Title="--Select--" 
+                            ItemsSource="{Binding Products}" 
+                            ItemDisplayBinding="{Binding Name}"/>
+
+                    <Label Text="Product name" />
+                    <Entry Text="{Binding ProductDescription}" Placeholder="Name the product here" />
+                    <Label Text="{Binding ProductDescriptionError}" 
+                           IsVisible="{Binding ProductDescriptionErrorVisible}" 
+                           StyleClass="errormessage" />
+
+                    <Label Text="Product price" />
+                    <Entry Text="{Binding ProductDescription}" Placeholder="Set price for product here" />
+                    <Label Text="{Binding ProductDescriptionError}" 
+                           IsVisible="{Binding ProductDescriptionErrorVisible}" 
+                           StyleClass="errormessage" />
+
+                    <Label Text="Product category" />
+                    <Picker Title="--Select--" 
+                            ItemsSource="{Binding Categories}" 
+                            ItemDisplayBinding="{Binding Name}"/>
+
+                    <Label Text="Product brand" />
+                    <Picker Title="--Select--" 
+                            ItemsSource="{Binding Brands}" 
+                            ItemDisplayBinding="{Binding Name}"/>
+
+                    <Button Text="Save product"/>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
