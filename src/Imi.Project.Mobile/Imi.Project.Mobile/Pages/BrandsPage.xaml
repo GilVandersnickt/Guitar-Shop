@@ -15,10 +15,10 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout BackgroundColor="{StaticResource ColorSecundary}" Margin="10" Padding="10">
-                                <Frame Grid.Row="1"  Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="120" WidthRequest="200">
+                                <Frame Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="120" WidthRequest="200">
                                     <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                 </Frame>
-                                <Label Grid.Row="2" Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
+                                <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
 
                             </StackLayout>
                         </DataTemplate>
