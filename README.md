@@ -1,13 +1,6 @@
-# Naam van jouw project
+# Guitar shop
 
 ## Project
-Beschrijf hier je project
+De guitar shop is een webshop die producten aanbiedt omtrent gitaren.
+De administator kan producten, categorieën en merken toevoegen, aanpassen en verwijderen.
 
-## Extra info
-Plaats hier de nodig informatie om het
-project te kunnen uitvoeren:
-
-- API keys of nodige secrets
-- Logingegevens
-- Database configuraties
-- ...
