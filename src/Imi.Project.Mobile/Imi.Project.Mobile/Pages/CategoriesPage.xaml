@@ -6,18 +6,19 @@
 
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
-            <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource ColorPrimary}">
                 <Label Text="All categories" Style="{StaticResource Title}"/>
                 <CollectionView x:Name="cvCategories" ItemsSource="{Binding Categories}" SelectionMode="Single" SelectionChanged="cvCategories_SelectionChanged">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Margin="5" BackgroundColor="WhiteSmoke">
-                                <Frame Grid.Row="1"  Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="250" WidthRequest="250">
-                                    <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-                                </Frame>
-                                <Label Grid.Row="2" Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
-
-                            </StackLayout>
+                            <Frame>
+                                <StackLayout BackgroundColor="{StaticResource ColorSecundary}" Margin="10" Padding="10">
+                                    <Frame Grid.Row="1"  Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="250" WidthRequest="250">
+                                        <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                    </Frame>
+                                    <Label Grid.Row="2" Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
+                                </StackLayout>
+                            </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

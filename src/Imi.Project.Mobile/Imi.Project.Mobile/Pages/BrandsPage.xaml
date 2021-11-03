@@ -9,12 +9,12 @@
 
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
-            <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource ColorPrimary}">
                 <Label Text="All brands" Style="{StaticResource Title}"/>
                 <CollectionView x:Name="cvBrands" ItemsSource="{Binding Brands}" SelectionMode="Single" SelectionChanged="cvBrands_SelectionChanged">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
+                            <StackLayout BackgroundColor="{StaticResource ColorSecundary}" Margin="10" Padding="10">
                                 <Frame Grid.Row="1"  Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="120" WidthRequest="200">
                                     <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                 </Frame>
