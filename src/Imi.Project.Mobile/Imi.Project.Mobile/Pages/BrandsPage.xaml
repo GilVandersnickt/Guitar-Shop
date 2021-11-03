@@ -4,7 +4,6 @@
              x:Class="Imi.Project.Mobile.Pages.BrandsPage"
              x:Name="page"
              Title="Brands"
-             xmlns:bhv="clr-namespace:Imi.Project.Mobile.Behaviors" 
              Style="{StaticResource BasePageStyle}">
 
     <ContentPage.Content>
