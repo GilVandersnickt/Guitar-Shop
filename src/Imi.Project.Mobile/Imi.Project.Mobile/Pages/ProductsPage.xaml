@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource BasePageStyle}"
              x:Class="Imi.Project.Mobile.Pages.ProductsPage">
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
-            <StackLayout Padding="10">
+            <StackLayout BackgroundColor="{StaticResource ColorPrimary}" Padding="10" Margin="10">
                 <Label Text="Products" Style="{StaticResource Title}"/>
-                <CollectionView x:Name="cvProducts" ItemsSource="{Binding Products}" SelectionMode="Single" SelectionChanged="cvProducts_SelectionChanged">
+                <CollectionView x:Name="cvProducts" ItemsSource="{Binding Products}" SelectionMode="Single" SelectionChanged="cvProducts_SelectionChanged" Margin="10">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+                        <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout BackgroundColor="WhiteSmoke" >
+                            <StackLayout BackgroundColor="{StaticResource ColorSecundary}" Margin="10" Padding="10" >
                                 <Frame Padding="5" Margin="5" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="250" WidthRequest="250" BorderColor="Black">
                                     <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                 </Frame>

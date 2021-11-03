@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.CRUDCategoryUpdatePage"
+             Style="{StaticResource BasePageStyle}"
              Title="Edit">
     <ContentPage.Content>
         <StackLayout>
@@ -11,11 +12,11 @@
                     <Label Text="Edit category" Style="{StaticResource Title}"/>
 
                     <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
-                        <Image/>
+                        <Image x:Name="imgPhoto"/>
                     </Frame>
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                        <Button Text="Take Photo" VerticalOptions="Center"/>
-                        <Button Text="Upload Photo" VerticalOptions="Center" />
+                        <Button x:Name="btnTakePhoto" Text="Take Photo" VerticalOptions="Center" Clicked="btnTakePhoto_Clicked"/>
+                        <Button x:Name="btnUploadPhoto" Text="Upload Photo" VerticalOptions="Center" Clicked="btnUploadPhoto_Clicked"/>
                     </StackLayout>
 
                     <Label Text="Category" />
