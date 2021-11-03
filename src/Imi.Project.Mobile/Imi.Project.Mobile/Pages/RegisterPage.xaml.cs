@@ -16,5 +16,11 @@ namespace Imi.Project.Mobile.Pages
         {
             InitializeComponent();
         }
+
+        private async void Register_Clicked(object sender, EventArgs e)
+        {
+            var mainPage = new MainPage();
+            await Navigation.PushAsync(mainPage, true);
+        }
     }
 }
