@@ -1,5 +1,8 @@
-﻿using Imi.Project.Api.Entities;
+﻿using Imi.Project.Api.Core.Entities;
+using Imi.Project.Api.Entities;
 using Imi.Project.Api.Infrastructure.Data.Seeding;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +10,7 @@ using System.Text;
 
 namespace Imi.Project.Api.Infrastructure.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
@@ -67,6 +70,7 @@ namespace Imi.Project.Api.Infrastructure.Data
             SubcategorySeeder.Seed(modelBuilder);
             BrandCategorySeeder.Seed(modelBuilder);
             BrandSubcategorySeeder.Seed(modelBuilder);
+            UserSeeder.Seed(modelBuilder);
         }
     }
 }
