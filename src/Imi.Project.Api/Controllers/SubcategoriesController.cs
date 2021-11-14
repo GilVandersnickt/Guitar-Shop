@@ -1,5 +1,6 @@
 using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(brandResponseDtos);
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post(SubcategoryRequestDto subcategoryRequestDto)
         {
@@ -67,6 +68,7 @@ namespace Imi.Project.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = subcategoryResponseDto.Id }, subcategoryResponseDto);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Put(SubcategoryRequestDto subcategoryRequestDto)
         {
@@ -78,6 +80,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(subcategoryResponseDto);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

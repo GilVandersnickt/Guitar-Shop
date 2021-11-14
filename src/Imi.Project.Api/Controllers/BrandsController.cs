@@ -1,5 +1,6 @@
 using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -64,6 +65,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(subcategoryResponseDtos);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Post(BrandRequestDto brandRequestDto)
         {
@@ -76,6 +78,7 @@ namespace Imi.Project.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = brandResponseDto.Id }, brandResponseDto);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Put(BrandRequestDto brandRequestDto)
         {
@@ -87,6 +90,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(brandResponseDto);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -99,6 +103,7 @@ namespace Imi.Project.Api.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPost("{id}/image"), HttpPut("{id}/image")]
         public async Task<IActionResult> Image([FromRoute] Guid id, IFormFile image)
         {
