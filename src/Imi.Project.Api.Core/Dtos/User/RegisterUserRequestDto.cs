@@ -25,7 +25,12 @@ namespace Imi.Project.Api.Core.Dtos.User
         public string EmailAddress { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
         public string Address { get; set; }
+        [DataType(DataType.PostalCode)]
         [Required]
         public int PostalCode { get; set; }
         [Required]

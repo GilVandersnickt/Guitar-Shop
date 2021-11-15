@@ -36,7 +36,7 @@ namespace Imi.Project.Api
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
 
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole<Guid>>(options =>
             // AddIdentity because UI package is not needed, if UI is needed then AddDefaultIdentity<ApplicationUser>
             {
                     options.SignIn.RequireConfirmedEmail = false;

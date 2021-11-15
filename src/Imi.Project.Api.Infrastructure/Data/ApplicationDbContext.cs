@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Imi.Project.Api.Infrastructure.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }

@@ -47,6 +47,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     UserName = user.UserName,
                     Email = user.Email,
+                    BirthDate = user.BirthDate,
                     Address = user.Address,
                     PostalCode = user.PostalCode,
                     City = user.City,                   
@@ -97,6 +98,7 @@ namespace Imi.Project.Api.Core.Services
             User user = new User
             {
                 UserName = registerRequestDto.UserName,
+                BirthDate = registerRequestDto.BirthDate,
                 Address = registerRequestDto.Address,
                 PostalCode = registerRequestDto.PostalCode,
                 City = registerRequestDto.City,
@@ -159,7 +161,7 @@ namespace Imi.Project.Api.Core.Services
         {
             var claims = await _userManager.GetClaimsAsync(user);
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
-            claims.Add(new Claim(JwtRegisteredClaimNames.NameId, user.Id));
+            claims.Add(new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()));
 
             foreach (var role in await _userManager.GetRolesAsync(user))
             {
