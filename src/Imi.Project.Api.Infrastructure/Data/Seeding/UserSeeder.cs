@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Entities;
+﻿using Imi.Project.Api.Core.Constants;
+using Imi.Project.Api.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -96,6 +97,22 @@ namespace Imi.Project.Api.Infrastructure.Data.Seeding
                 {
                     RoleId = SuperAdminRoleId,
                     UserId = SuperAdminUserId
+                });
+
+            modelBuilder.Entity<IdentityUserClaim<string>>().HasData(
+                new IdentityUserClaim<string>
+                {
+                    Id = 1,
+                    UserId = SuperAdminUserId.ToString(),
+                    ClaimType = OtherClaimTypes.RoleClaimType,
+                    ClaimValue = "SuperAdmin"
+                },
+                new IdentityUserClaim<string>
+                {
+                    Id = 2,
+                    UserId = AdminUserId.ToString(),
+                    ClaimType = OtherClaimTypes.RoleClaimType,
+                    ClaimValue = "Admin"
                 });
 
         }
