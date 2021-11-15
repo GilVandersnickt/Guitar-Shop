@@ -38,7 +38,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(product);
         }
 
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost]
         public async Task<IActionResult> Post(ProductRequestDto productRequestDto)
         {
@@ -51,7 +51,7 @@ namespace Imi.Project.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = productResponseDto.Id }, productResponseDto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPut]
         public async Task<IActionResult> Put(ProductRequestDto productRequestDto)
         {
@@ -63,7 +63,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(productResponseDto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -76,7 +76,7 @@ namespace Imi.Project.Api.Controllers
             return Ok();
         }
 
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost("{id}/image"), HttpPut("{id}/image")] 
         public async Task<IActionResult> Image([FromRoute] Guid id, IFormFile image) 
         {

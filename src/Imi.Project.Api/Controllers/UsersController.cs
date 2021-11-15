@@ -69,5 +69,18 @@ namespace Imi.Project.Api.Controllers
             }
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _userService.DeleteAsync(id);
+            if (result.Succeeded)
+            {
+                return BadRequest(result.ErrorMessages);
+            }
+            return Ok("User was deleted successfully");
+        }
+
+
     }
 }

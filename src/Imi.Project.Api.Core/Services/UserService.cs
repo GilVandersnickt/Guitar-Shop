@@ -26,7 +26,7 @@ namespace Imi.Project.Api.Core.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _configuration;
 
-        public UserService(SignInManager<User> signInManager, UserManager<User> userManager,IHttpContextAccessor httpContextAccessor,IConfiguration configuration)
+        public UserService(SignInManager<User> signInManager, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -50,7 +50,7 @@ namespace Imi.Project.Api.Core.Services
                     BirthDate = user.BirthDate,
                     Address = user.Address,
                     PostalCode = user.PostalCode,
-                    City = user.City,                   
+                    City = user.City,
                 };
                 return userProfile;
             }
@@ -85,7 +85,7 @@ namespace Imi.Project.Api.Core.Services
                 {
                     Succeeded = false,
                     ErrorMessages = new List<string> {
-                        "Something went wrong, please try again"
+                        "Logging in went wrong, please try again"
                     },
                     JwtToken = null
                 };
@@ -124,6 +124,31 @@ namespace Imi.Project.Api.Core.Services
             else
             {
                 return GetRegisterResultWithErrorMessages(resultCreateUser);
+            }
+        }
+
+        public async Task<DeleteResult> DeleteAsync(Guid id)
+        {
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user != null)
+            {
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return new DeleteResult { Succeeded = true };
+                }
+                else
+                {
+                    return new DeleteResult {
+                        Succeeded = false, ErrorMessages = new List<string>{$"Failed to delete user with id {id.ToString()}"}
+                    };
+                }
+            }
+            else
+            {
+                return new DeleteResult {
+                    Succeeded = false, ErrorMessages = new List<string>{$"Failed to find user with id {id.ToString()}"}
+                };
             }
         }
 

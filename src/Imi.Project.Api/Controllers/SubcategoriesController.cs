@@ -55,7 +55,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(brandResponseDtos);
         }
 
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost]
         public async Task<IActionResult> Post(SubcategoryRequestDto subcategoryRequestDto)
         {
@@ -68,7 +68,7 @@ namespace Imi.Project.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = subcategoryResponseDto.Id }, subcategoryResponseDto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPut]
         public async Task<IActionResult> Put(SubcategoryRequestDto subcategoryRequestDto)
         {
@@ -80,7 +80,7 @@ namespace Imi.Project.Api.Controllers
             return Ok(subcategoryResponseDto);
         }
 
-        [Authorize]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
