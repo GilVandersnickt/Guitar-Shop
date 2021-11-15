@@ -38,7 +38,7 @@ namespace Imi.Project.Api.Core.Services
         {
             var currentHttpContextUser = _httpContextAccessor.HttpContext.User.Identities.FirstOrDefault();
 
-            if (currentHttpContextUser != null)
+            if (currentHttpContextUser.IsAuthenticated)
             {
                 var currentUserId = currentHttpContextUser.FindFirst(ClaimTypes.NameIdentifier).Value;
                 var user = await _userManager.FindByIdAsync(currentUserId);
@@ -55,7 +55,6 @@ namespace Imi.Project.Api.Core.Services
                 return userProfile;
             }
             return null;
-
         }
 
         public async Task<LoginResult> LoginAsync(LoginRequestDto loginRequestDto)
