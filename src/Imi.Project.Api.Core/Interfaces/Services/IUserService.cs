@@ -12,6 +12,7 @@ namespace Imi.Project.Api.Core.Interfaces.Services
         Task<LoginResult> LoginAsync(LoginRequestDto loginCredentials);
         Task<RegisterResult> RegisterAsync(RegisterUserRequestDto registerModel);
         Task<UserProfileDto> GetCurrentUserProfileAsync();
+        Task<DeleteResult> DeleteAsync(Guid id);
 
     }
 }
