@@ -21,14 +21,18 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -95,8 +99,31 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "10000000-0000-0000-0000-000000000001",
+                            Id = new Guid("10000000-0000-0000-0000-000000000001"),
                             AccessFailedCount = 0,
+                            Address = "Rijselstraat 5",
+                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            City = "Brugge",
+                            ConcurrencyStamp = "c8554266-b401-4519-9aeb-a9283053fc59",
+                            Email = "superAdmin@guitarshop.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SUPERADMIN@GUITARSHOP.COM",
+                            NormalizedUserName = "SUPERADMIN@GUITARSHOP.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAlcOQelnKOuN1F/cq6B9wKxmvbZfuSJMoJ8EnGG+qfHHDDlPKWJ8Ci/ZeOtLkulIw==",
+                            PhoneNumber = "0490876543",
+                            PhoneNumberConfirmed = false,
+                            PostalCode = 8000,
+                            SecurityStamp = "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINB",
+                            TwoFactorEnabled = false,
+                            UserName = "superAdmin@guitarshop.com"
+                        },
+                        new
+                        {
+                            Id = new Guid("10000000-0000-0000-0000-000000000002"),
+                            AccessFailedCount = 0,
+                            Address = "Rijselstraat 5",
+                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             City = "Brugge",
                             ConcurrencyStamp = "c8554266-b401-4519-9aeb-a9283053fc58",
                             Email = "admin@guitarshop.com",
@@ -104,9 +131,10 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GUITARSHOP.COM",
                             NormalizedUserName = "ADMIN@GUITARSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDUEZhWDfyhUcHVgIq0uosmb0ZcSrQ0c2JiUpVULEUl84YfEoFEO2kuU/sww/kRXAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEvhOID+U2y8CgjBY722kUZvPZmAO07He4lQnzCdOAd501POOGhLt3j+BX/o+wTh1Q==",
+                            PhoneNumber = "0499876543",
                             PhoneNumberConfirmed = false,
-                            PostalCode = 0,
+                            PostalCode = 8000,
                             SecurityStamp = "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINA",
                             TwoFactorEnabled = false,
                             UserName = "admin@guitarshop.com"
@@ -2227,10 +2255,11 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -2256,14 +2285,21 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "10000000-0000-0000-0000-000000000001",
-                            ConcurrencyStamp = "57fa1d09-cb4f-46b2-bc06-f9ef6d1b72ef",
+                            Id = new Guid("00000001-0000-0000-0000-000000000002"),
+                            ConcurrencyStamp = "c7ba269e-71c5-4db9-9f83-fae778d9643b",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = new Guid("00000001-0000-0000-0000-000000000001"),
+                            ConcurrencyStamp = "9780a11b-0a17-42a3-b69f-e83e146ce759",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2276,9 +2312,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -2287,7 +2322,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2300,9 +2335,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -2311,7 +2345,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -2322,9 +2356,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -2333,13 +2366,13 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -2350,15 +2383,20 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "10000000-0000-0000-0000-000000000001",
-                            RoleId = "10000000-0000-0000-0000-000000000001"
+                            UserId = new Guid("10000000-0000-0000-0000-000000000002"),
+                            RoleId = new Guid("00000001-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            UserId = new Guid("10000000-0000-0000-0000-000000000001"),
+                            RoleId = new Guid("00000001-0000-0000-0000-000000000001")
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -2433,16 +2471,16 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", null)
                         .WithMany()
@@ -2451,7 +2489,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", null)
                         .WithMany()
@@ -2460,9 +2498,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2475,7 +2513,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("Imi.Project.Api.Core.Entities.User", null)
                         .WithMany()
