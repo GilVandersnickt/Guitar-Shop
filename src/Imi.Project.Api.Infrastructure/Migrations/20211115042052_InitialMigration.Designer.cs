@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211115020651_InitialMigration")]
+    [Migration("20211115042052_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GUITARSHOP.COM",
                             NormalizedUserName = "SUPERADMIN@GUITARSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAlcOQelnKOuN1F/cq6B9wKxmvbZfuSJMoJ8EnGG+qfHHDDlPKWJ8Ci/ZeOtLkulIw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELy40zEC4J+ieJSDE0IbHn7Vhu4IeqX3eR14+tEyHVKopYT4jNn1HEnatFn+GscXyw==",
                             PhoneNumber = "0490876543",
                             PhoneNumberConfirmed = false,
                             PostalCode = 8000,
@@ -133,7 +133,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GUITARSHOP.COM",
                             NormalizedUserName = "ADMIN@GUITARSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEvhOID+U2y8CgjBY722kUZvPZmAO07He4lQnzCdOAd501POOGhLt3j+BX/o+wTh1Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGEZ4otcjDoCO/v1jj+AiO24v5snYNjb/XAVCrU4azYLrL3cymy1merRaisHZUHyvQ==",
                             PhoneNumber = "0499876543",
                             PhoneNumberConfirmed = false,
                             PostalCode = 8000,
@@ -2288,14 +2288,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000001-0000-0000-0000-000000000002"),
-                            ConcurrencyStamp = "c7ba269e-71c5-4db9-9f83-fae778d9643b",
+                            ConcurrencyStamp = "b8bea41a-906b-47a2-aa48-0808cadfb01c",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("00000001-0000-0000-0000-000000000001"),
-                            ConcurrencyStamp = "9780a11b-0a17-42a3-b69f-e83e146ce759",
+                            ConcurrencyStamp = "28c35862-f424-4370-8cff-0842eae2f62e",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });
@@ -2345,6 +2345,43 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IdentityUserClaim<string>");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClaimType = "role",
+                            ClaimValue = "SuperAdmin",
+                            UserId = "10000000-0000-0000-0000-000000000001"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ClaimType = "role",
+                            ClaimValue = "Admin",
+                            UserId = "10000000-0000-0000-0000-000000000002"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
