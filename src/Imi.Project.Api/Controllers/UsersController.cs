@@ -24,6 +24,16 @@ namespace Imi.Project.Api.Controllers
             _userService = userService;
         }
 
+        [HttpGet("profile")]
+        public async Task<IActionResult> Profile()
+        {
+                var profile = await _userService.GetCurrentUserProfileAsync();
+                if(profile != null)
+                    return Ok(profile);
+                else
+                    return BadRequest("Please log in before getting the current user profile");
+        }
+
         [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserRequestDto registerRequestDto)
@@ -32,12 +42,12 @@ namespace Imi.Project.Api.Controllers
             {
                 var result = await _userService.RegisterAsync(registerRequestDto);
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                     return Ok("Thank you for your registration, you can now login");
                 else
                     return BadRequest(result.ErrorMessages);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError(ex.Source, ex.Message);
                 return BadRequest(ModelState);
