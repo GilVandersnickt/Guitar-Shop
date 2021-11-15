@@ -65,8 +65,9 @@ namespace Imi.Project.Api.Controllers
             return Ok(subcategoryResponseDtos);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Post(BrandRequestDto brandRequestDto)
         {
             if (!ModelState.IsValid)
@@ -78,8 +79,9 @@ namespace Imi.Project.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = brandResponseDto.Id }, brandResponseDto);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPut]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Put(BrandRequestDto brandRequestDto)
         {
             if (!ModelState.IsValid)
@@ -90,8 +92,9 @@ namespace Imi.Project.Api.Controllers
             return Ok(brandResponseDto);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpDelete("{id}")]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var artist = await _brandService.GetByIdAsync(id);
@@ -103,8 +106,9 @@ namespace Imi.Project.Api.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost("{id}/image"), HttpPut("{id}/image")]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Image([FromRoute] Guid id, IFormFile image)
         {
             var brand = await _brandService.AddOrUpdateImageAsync(id, image);

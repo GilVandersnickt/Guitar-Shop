@@ -55,8 +55,9 @@ namespace Imi.Project.Api.Controllers
             return Ok(brandResponseDtos);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Post(SubcategoryRequestDto subcategoryRequestDto)
         {
             if (!ModelState.IsValid)
@@ -68,8 +69,9 @@ namespace Imi.Project.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = subcategoryResponseDto.Id }, subcategoryResponseDto);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPut]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Put(SubcategoryRequestDto subcategoryRequestDto)
         {
             if (!ModelState.IsValid)
@@ -80,8 +82,9 @@ namespace Imi.Project.Api.Controllers
             return Ok(subcategoryResponseDto);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpDelete("{id}")]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var subcategory = await _subcategoryService.GetByIdAsync(id);

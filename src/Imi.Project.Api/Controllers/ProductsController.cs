@@ -38,8 +38,9 @@ namespace Imi.Project.Api.Controllers
             return Ok(product);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Post(ProductRequestDto productRequestDto)
         {
             if (!ModelState.IsValid)
@@ -51,8 +52,9 @@ namespace Imi.Project.Api.Controllers
             return CreatedAtAction(nameof(Get), new { id = productResponseDto.Id }, productResponseDto);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPut]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Put(ProductRequestDto productRequestDto)
         {
             if (!ModelState.IsValid)
@@ -63,8 +65,9 @@ namespace Imi.Project.Api.Controllers
             return Ok(productResponseDto);
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpDelete("{id}")]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var product = await _productService.GetByIdAsync(id);
@@ -76,8 +79,9 @@ namespace Imi.Project.Api.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "SuperAdmin, Admin")]
-        [HttpPost("{id}/image"), HttpPut("{id}/image")] 
+        [HttpPost("{id}/image"), HttpPut("{id}/image")]
+        [Authorize(Policy = "SuperAdmin")]
+        [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Image([FromRoute] Guid id, IFormFile image) 
         {
             var product = await _productService.AddOrUpdateImageAsync(id, image); 

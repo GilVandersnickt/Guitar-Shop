@@ -81,6 +81,21 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IdentityUserClaim<string>",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserClaim<string>", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -297,8 +312,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("00000001-0000-0000-0000-000000000001"), "9780a11b-0a17-42a3-b69f-e83e146ce759", "SuperAdmin", "SUPERADMIN" },
-                    { new Guid("00000001-0000-0000-0000-000000000002"), "c7ba269e-71c5-4db9-9f83-fae778d9643b", "Admin", "ADMIN" }
+                    { new Guid("00000001-0000-0000-0000-000000000001"), "28c35862-f424-4370-8cff-0842eae2f62e", "SuperAdmin", "SUPERADMIN" },
+                    { new Guid("00000001-0000-0000-0000-000000000002"), "b8bea41a-906b-47a2-aa48-0808cadfb01c", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -306,8 +321,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BirthDate", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PostalCode", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("10000000-0000-0000-0000-000000000001"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc59", "superAdmin@guitarshop.com", true, false, null, "SUPERADMIN@GUITARSHOP.COM", "SUPERADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAEAlcOQelnKOuN1F/cq6B9wKxmvbZfuSJMoJ8EnGG+qfHHDDlPKWJ8Ci/ZeOtLkulIw==", "0490876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINB", false, "superAdmin@guitarshop.com" },
-                    { new Guid("10000000-0000-0000-0000-000000000002"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc58", "admin@guitarshop.com", true, false, null, "ADMIN@GUITARSHOP.COM", "ADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAEEvhOID+U2y8CgjBY722kUZvPZmAO07He4lQnzCdOAd501POOGhLt3j+BX/o+wTh1Q==", "0499876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINA", false, "admin@guitarshop.com" }
+                    { new Guid("10000000-0000-0000-0000-000000000001"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc59", "superAdmin@guitarshop.com", true, false, null, "SUPERADMIN@GUITARSHOP.COM", "SUPERADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAELy40zEC4J+ieJSDE0IbHn7Vhu4IeqX3eR14+tEyHVKopYT4jNn1HEnatFn+GscXyw==", "0490876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINB", false, "superAdmin@guitarshop.com" },
+                    { new Guid("10000000-0000-0000-0000-000000000002"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc58", "admin@guitarshop.com", true, false, null, "ADMIN@GUITARSHOP.COM", "ADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAEGEZ4otcjDoCO/v1jj+AiO24v5snYNjb/XAVCrU4azYLrL3cymy1merRaisHZUHyvQ==", "0499876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINA", false, "admin@guitarshop.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -315,21 +330,21 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedOn", "Image", "LastEditedOn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0001-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/NfyW4skP/Gibson.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gibson" },
-                    { new Guid("00000000-0000-0000-0001-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/vBQJL50W/Fender.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fender" },
+                    { new Guid("00000000-0000-0000-0001-000000000014"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/d0mMy5js/Elixir.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Elixir" },
                     { new Guid("00000000-0000-0000-0001-000000000013"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/LX90c2Kf/Strymon.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Strymon" },
                     { new Guid("00000000-0000-0000-0001-000000000012"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/W46HYtKT/Kemper.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Kemper" },
                     { new Guid("00000000-0000-0000-0001-000000000011"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/rmfYc3MH/Vox.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Vox" },
                     { new Guid("00000000-0000-0000-0001-000000000010"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/CMr3kBkq/Marshall.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Marshall" },
-                    { new Guid("00000000-0000-0000-0001-000000000015"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/mrGfkvMp/Boss.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Boss" },
-                    { new Guid("00000000-0000-0000-0001-000000000008"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/DzKNc1xx/EVH.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Evh" },
                     { new Guid("00000000-0000-0000-0001-000000000009"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/g28QCg5V/Roland.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Roland" },
-                    { new Guid("00000000-0000-0000-0001-000000000003"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/1tJLW4db/Gretsch.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gretsch" },
-                    { new Guid("00000000-0000-0000-0001-000000000004"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/8ccxxNQc/Ibanez.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ibanez" },
-                    { new Guid("00000000-0000-0000-0001-000000000014"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/d0mMy5js/Elixir.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Elixir" },
-                    { new Guid("00000000-0000-0000-0001-000000000006"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/cH9bR2gS/Taylor.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Taylor" },
+                    { new Guid("00000000-0000-0000-0001-000000000015"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/mrGfkvMp/Boss.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Boss" },
                     { new Guid("00000000-0000-0000-0001-000000000007"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/SK43kWFw/Martin.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Martin" },
-                    { new Guid("00000000-0000-0000-0001-000000000005"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/L5J0NDLZ/Yamaha.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Yamaha" }
+                    { new Guid("00000000-0000-0000-0001-000000000006"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/cH9bR2gS/Taylor.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Taylor" },
+                    { new Guid("00000000-0000-0000-0001-000000000005"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/L5J0NDLZ/Yamaha.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Yamaha" },
+                    { new Guid("00000000-0000-0000-0001-000000000004"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/8ccxxNQc/Ibanez.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ibanez" },
+                    { new Guid("00000000-0000-0000-0001-000000000003"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/1tJLW4db/Gretsch.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gretsch" },
+                    { new Guid("00000000-0000-0000-0001-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/vBQJL50W/Fender.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Fender" },
+                    { new Guid("00000000-0000-0000-0001-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/NfyW4skP/Gibson.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Gibson" },
+                    { new Guid("00000000-0000-0000-0001-000000000008"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/DzKNc1xx/EVH.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Evh" }
                 });
 
             migrationBuilder.InsertData(
@@ -337,18 +352,27 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "CreatedOn", "Image", "LastEditedOn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0002-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/8CHNz2QB/Electric-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Electric guitars" },
-                    { new Guid("00000000-0000-0000-0002-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/3NWK6nqj/Amps.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amps" },
-                    { new Guid("00000000-0000-0000-0002-000000000003"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/HLhHMQnV/Bass-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bass guitars" },
+                    { new Guid("00000000-0000-0000-0002-000000000012"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/66d3kmTc/Ukuleles.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ukuleles" },
+                    { new Guid("00000000-0000-0000-0002-000000000011"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/rwhL6SSQ/Western-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acoustic guitars" },
+                    { new Guid("00000000-0000-0000-0002-000000000010"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/zXrNTDzS/Strings.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Strings" },
+                    { new Guid("00000000-0000-0000-0002-000000000009"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/jd4bcVCV/Pickups.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pickups" },
+                    { new Guid("00000000-0000-0000-0002-000000000008"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/7P7DCJkZ/Miscellaneous-Instruments.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miscellaneous instruments" },
                     { new Guid("00000000-0000-0000-0002-000000000005"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/Kz3bDR3Q/Cables.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Cables" },
                     { new Guid("00000000-0000-0000-0002-000000000006"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/vTRsqbWy/Capodasters.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Capodasters" },
-                    { new Guid("00000000-0000-0000-0002-000000000007"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/mgZG6dFP/Effects.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Effects" },
-                    { new Guid("00000000-0000-0000-0002-000000000008"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/7P7DCJkZ/Miscellaneous-Instruments.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Miscellaneous instruments" },
-                    { new Guid("00000000-0000-0000-0002-000000000009"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/jd4bcVCV/Pickups.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pickups" },
-                    { new Guid("00000000-0000-0000-0002-000000000010"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/zXrNTDzS/Strings.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Strings" },
-                    { new Guid("00000000-0000-0000-0002-000000000011"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/rwhL6SSQ/Western-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Acoustic guitars" },
-                    { new Guid("00000000-0000-0000-0002-000000000012"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/66d3kmTc/Ukuleles.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ukuleles" },
-                    { new Guid("00000000-0000-0000-0002-000000000004"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/prDt34ZF/Classical-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Classical guitars" }
+                    { new Guid("00000000-0000-0000-0002-000000000004"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/prDt34ZF/Classical-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Classical guitars" },
+                    { new Guid("00000000-0000-0000-0002-000000000003"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/HLhHMQnV/Bass-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Bass guitars" },
+                    { new Guid("00000000-0000-0000-0002-000000000002"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/3NWK6nqj/Amps.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Amps" },
+                    { new Guid("00000000-0000-0000-0002-000000000001"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/8CHNz2QB/Electric-Guitars.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Electric guitars" },
+                    { new Guid("00000000-0000-0000-0002-000000000007"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://i.postimg.cc/mgZG6dFP/Effects.png", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Effects" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "IdentityUserClaim<string>",
+                columns: new[] { "Id", "ClaimType", "ClaimValue", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "role", "SuperAdmin", "10000000-0000-0000-0000-000000000001" },
+                    { 2, "role", "Admin", "10000000-0000-0000-0000-000000000002" }
                 });
 
             migrationBuilder.InsertData(
@@ -701,6 +725,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "BrandSubcategory");
+
+            migrationBuilder.DropTable(
+                name: "IdentityUserClaim<string>");
 
             migrationBuilder.DropTable(
                 name: "Products");
