@@ -111,6 +111,19 @@ namespace Imi.Project.Api
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWTConfiguration:SigningKey"]))
                     };
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("SuperAdmin", policy =>
+                {
+                    policy.RequireRole("SuperAdmin");
+                });
+                
+                options.AddPolicy("Admin", policy =>
+                {
+                    policy.RequireRole("Admin");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
