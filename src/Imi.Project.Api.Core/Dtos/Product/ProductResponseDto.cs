@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Api.Core.Dtos.Default;
+using System;
 
 namespace Imi.Project.Api.Core.Dtos
 {
@@ -7,8 +8,8 @@ namespace Imi.Project.Api.Core.Dtos
         public string Name { get; set; }
         public decimal Price { get; set; }
         public Uri Image { get; set; }
-        public string Brand { get; set; }
-        public string Category { get; set; }
-        public string Subcategory { get; set; }
+        public DefaultWithImageResponseDto Brand { get; set; }
+        public DefaultWithImageResponseDto Category { get; set; }
+        public DefaultResponseDto Subcategory { get; set; }
     }
 }

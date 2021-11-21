@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Imi.Project.Api.Core.Dtos;
-using Imi.Project.Api.Core.Dtos.Partials;
+using Imi.Project.Api.Core.Dtos.Default;
 using Imi.Project.Api.Entities;
 using System.Linq;
 
@@ -29,9 +29,9 @@ namespace Imi.Project.Api.Core.Mapper
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name));
 
             CreateMap<Product, ProductResponseDto>()
-                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand.Name))
-                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
-                .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => src.Subcategory.Name));
+                .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => new DefaultWithImageResponseDto { Id = src.Brand.Id, Name = src.Brand.Name, Image = src.Brand.Image }))
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => new DefaultWithImageResponseDto { Id = src.Category.Id, Name = src.Category.Name, Image = src.Category.Image }))
+                .ForMember(dest => dest.Subcategory, opt => opt.MapFrom(src => new DefaultResponseDto { Id = src.Subcategory.Id, Name = src.Subcategory.Name }));
 
             CreateMap<BrandRequestDto, Brand>();
             CreateMap<CategoryRequestDto, Category>();

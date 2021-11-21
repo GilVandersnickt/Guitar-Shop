@@ -278,7 +278,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     LastEditedOn = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Image = table.Column<string>(nullable: true),
                     BrandId = table.Column<Guid>(nullable: false),
                     CategoryId = table.Column<Guid>(nullable: false),
@@ -312,8 +312,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("00000001-0000-0000-0000-000000000001"), "28c35862-f424-4370-8cff-0842eae2f62e", "SuperAdmin", "SUPERADMIN" },
-                    { new Guid("00000001-0000-0000-0000-000000000002"), "b8bea41a-906b-47a2-aa48-0808cadfb01c", "Admin", "ADMIN" }
+                    { new Guid("00000001-0000-0000-0000-000000000001"), "d198cd62-53be-4098-97f9-3a2275fa12f8", "SuperAdmin", "SUPERADMIN" },
+                    { new Guid("00000001-0000-0000-0000-000000000002"), "b770aa62-9cc5-4b0c-893e-55754dbf7adf", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -321,8 +321,8 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BirthDate", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PostalCode", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("10000000-0000-0000-0000-000000000001"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc59", "superAdmin@guitarshop.com", true, false, null, "SUPERADMIN@GUITARSHOP.COM", "SUPERADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAELy40zEC4J+ieJSDE0IbHn7Vhu4IeqX3eR14+tEyHVKopYT4jNn1HEnatFn+GscXyw==", "0490876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINB", false, "superAdmin@guitarshop.com" },
-                    { new Guid("10000000-0000-0000-0000-000000000002"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc58", "admin@guitarshop.com", true, false, null, "ADMIN@GUITARSHOP.COM", "ADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAEGEZ4otcjDoCO/v1jj+AiO24v5snYNjb/XAVCrU4azYLrL3cymy1merRaisHZUHyvQ==", "0499876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINA", false, "admin@guitarshop.com" }
+                    { new Guid("10000000-0000-0000-0000-000000000001"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc59", "superAdmin@guitarshop.com", true, false, null, "SUPERADMIN@GUITARSHOP.COM", "SUPERADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAEAMxFE+Ze0XY78fsGeuLDUq3o4cMR4BLER6DPh6RFuNSGI2T3+jpDHh95wln2NQ5gg==", "0490876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINB", false, "superAdmin@guitarshop.com" },
+                    { new Guid("10000000-0000-0000-0000-000000000002"), 0, "Rijselstraat 5", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Brugge", "c8554266-b401-4519-9aeb-a9283053fc58", "admin@guitarshop.com", true, false, null, "ADMIN@GUITARSHOP.COM", "ADMIN@GUITARSHOP.COM", "AQAAAAEAACcQAAAAEOUBsTi5DxNS4TkyJ74++2QjfolGRu7Ak6R3benpljtIeKbz6CAN8eIR9r2pDLWKWw==", "0499876543", false, 8000, "VVPCRDAS3MJWQD5CSW2GWPRADBXEZINA", false, "admin@guitarshop.com" }
                 });
 
             migrationBuilder.InsertData(

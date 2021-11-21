@@ -1,9 +1,7 @@
 using Imi.Project.Api.Core.Entities;
-using Imi.Project.Api.Core.Interfaces;
 using Imi.Project.Api.Core.Interfaces.Repositories;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Imi.Project.Api.Core.Services;
-using Imi.Project.Api.Entities;
 using Imi.Project.Api.Infrastructure.Data;
 using Imi.Project.Api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -39,8 +37,8 @@ namespace Imi.Project.Api
             services.AddIdentity<User, IdentityRole<Guid>>(options =>
             // AddIdentity because UI package is not needed, if UI is needed then AddDefaultIdentity<ApplicationUser>
             {
-                    options.SignIn.RequireConfirmedEmail = false;
-                })
+                options.SignIn.RequireConfirmedEmail = false;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddCors();
@@ -69,8 +67,6 @@ namespace Imi.Project.Api
                 {
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey,
-                    //Scheme = "Bearer",
-                    //BearerFormat = "JWT",
                     In = ParameterLocation.Header,
                     Description = "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
                 });
@@ -118,10 +114,22 @@ namespace Imi.Project.Api
                 {
                     policy.RequireRole("SuperAdmin");
                 });
-                
+
                 options.AddPolicy("Admin", policy =>
                 {
-                    policy.RequireRole("Admin");
+                    policy.RequireAssertion(context =>
+                    {
+                        if (context.User.IsInRole("SuperAdmin"))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return context.User.IsInRole("Admin");
+                        }
+                    }
+
+                    );
                 });
             });
         }

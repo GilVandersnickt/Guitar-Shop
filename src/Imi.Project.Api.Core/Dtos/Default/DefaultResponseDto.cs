@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Imi.Project.Api.Core.Dtos.Partials
+namespace Imi.Project.Api.Core.Dtos.Default
 {
     public class DefaultResponseDto : DtoBase
     {
