@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class UsersController : ControllerBase
     {
