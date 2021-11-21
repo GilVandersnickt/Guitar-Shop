@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211115042052_InitialMigration")]
+    [Migration("20211121163332_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@GUITARSHOP.COM",
                             NormalizedUserName = "SUPERADMIN@GUITARSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELy40zEC4J+ieJSDE0IbHn7Vhu4IeqX3eR14+tEyHVKopYT4jNn1HEnatFn+GscXyw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAMxFE+Ze0XY78fsGeuLDUq3o4cMR4BLER6DPh6RFuNSGI2T3+jpDHh95wln2NQ5gg==",
                             PhoneNumber = "0490876543",
                             PhoneNumberConfirmed = false,
                             PostalCode = 8000,
@@ -133,7 +133,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GUITARSHOP.COM",
                             NormalizedUserName = "ADMIN@GUITARSHOP.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGEZ4otcjDoCO/v1jj+AiO24v5snYNjb/XAVCrU4azYLrL3cymy1merRaisHZUHyvQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOUBsTi5DxNS4TkyJ74++2QjfolGRu7Ak6R3benpljtIeKbz6CAN8eIR9r2pDLWKWw==",
                             PhoneNumber = "0499876543",
                             PhoneNumberConfirmed = false,
                             PostalCode = 8000,
@@ -991,7 +991,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,4)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid>("SubcategoryId")
                         .HasColumnType("uniqueidentifier");
@@ -2288,14 +2288,14 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("00000001-0000-0000-0000-000000000002"),
-                            ConcurrencyStamp = "b8bea41a-906b-47a2-aa48-0808cadfb01c",
+                            ConcurrencyStamp = "b770aa62-9cc5-4b0c-893e-55754dbf7adf",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("00000001-0000-0000-0000-000000000001"),
-                            ConcurrencyStamp = "28c35862-f424-4370-8cff-0842eae2f62e",
+                            ConcurrencyStamp = "d198cd62-53be-4098-97f9-3a2275fa12f8",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });
