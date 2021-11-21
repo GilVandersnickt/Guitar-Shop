@@ -56,7 +56,6 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "SuperAdmin")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Post(SubcategoryRequestDto subcategoryRequestDto)
         {
@@ -70,7 +69,6 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPut]
-        [Authorize(Policy = "SuperAdmin")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Put(SubcategoryRequestDto subcategoryRequestDto)
         {
@@ -83,7 +81,6 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Policy = "SuperAdmin")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {

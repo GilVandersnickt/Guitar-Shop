@@ -63,7 +63,6 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "SuperAdmin")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Post(CategoryRequestDto categoryRequestDto)
         {
@@ -77,7 +76,6 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPut]
-        [Authorize(Policy = "SuperAdmin")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Put(CategoryRequestDto categoryRequestDto)
         {
@@ -90,7 +88,6 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Policy = "SuperAdmin")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -104,7 +101,6 @@ namespace Imi.Project.Api.Controllers
         }
 
         [HttpPost("{id}/image"), HttpPut("{id}/image")]
-        [Authorize(Policy = "SuperAdmin")]
         [Authorize(Policy = "Admin")]
         public async Task<IActionResult> Image([FromRoute] Guid id, IFormFile image)
         {

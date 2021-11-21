@@ -1,15 +1,8 @@
 ﻿using Imi.Project.Api.Core.Dtos.User;
-using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Controllers
@@ -27,11 +20,11 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("profile")]
         public async Task<IActionResult> Profile()
         {
-                var profile = await _userService.GetCurrentUserProfileAsync();
-                if(profile != null)
-                    return Ok(profile);
-                else
-                    return BadRequest("Please log in before getting the current user profile");
+            var profile = await _userService.GetCurrentUserProfileAsync();
+            if (profile != null)
+                return Ok(profile);
+            else
+                return BadRequest("Please log in before getting the current user profile");
         }
 
         [AllowAnonymous]
