@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Partials;
+﻿using Imi.Project.Api.Core.Dtos.Default;
 using System.Collections.Generic;
 
 namespace Imi.Project.Api.Core.Dtos
