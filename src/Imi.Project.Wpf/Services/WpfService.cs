@@ -1,4 +1,5 @@
-﻿using Imi.Project.Wpf.ApiModels.Brand;
+﻿using Imi.Project.Wpf.ApiModels.Base;
+using Imi.Project.Wpf.ApiModels.Brand;
 using Imi.Project.Wpf.ApiModels.Category;
 using Imi.Project.Wpf.ApiModels.Subcategory;
 using System.Windows.Controls;
@@ -7,32 +8,12 @@ namespace Imi.Project.Wpf.Services
 {
     public class WpfService
     {
-        public BrandApiResponse GetBrandFromComboBox(BrandApiResponse response, ComboBox comboBox)
+        public T GetFromComboBox<T>(T response, ComboBox comboBox) where T : BaseApiResponse
         {
-            foreach (BrandApiResponse brand in comboBox.Items)
+            foreach (T entity in comboBox.Items)
             {
-                if (response.Id == brand.Id)
-                    return brand;
-            }
-            return null;
-        }
-
-        public CategoryApiResponse GetCategoryFromComboBox(CategoryApiResponse response, ComboBox comboBox)
-        {
-            foreach (CategoryApiResponse category in comboBox.Items)
-            {
-                if (response.Id == category.Id)
-                    return category;
-            }
-            return null;
-        }
-
-        public SubcategoryApiResponse GetSubcategoryFromComboBox(SubcategoryApiResponse response, ComboBox comboBox)
-        {
-            foreach (SubcategoryApiResponse subcategory in comboBox.Items)
-            {
-                if (response.Id == subcategory.Id)
-                    return subcategory;
+                if (response.Id == entity.Id)
+                    return entity;
             }
             return null;
         }

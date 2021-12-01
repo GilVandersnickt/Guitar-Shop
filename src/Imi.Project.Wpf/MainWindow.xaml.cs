@@ -50,7 +50,7 @@ namespace Imi.Project.Wpf
             var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
             try
             {
-                var response = await _httpClient.PostAsync("users/login", content).ConfigureAwait(false);
+                var response = await _httpClient.PostAsync("auth/login", content).ConfigureAwait(false);
                 if (response.IsSuccessStatusCode)
                 {
                     using var responseStream = await response.Content.ReadAsStreamAsync();
@@ -301,9 +301,9 @@ namespace Imi.Project.Wpf
                 txtNameEdit.Text = product.Name;
                 txtImageEdit.Text = product.Image.ToString();
                 txtPriceEdit.Text = product.Price.ToString();
-                cmbBrandUpdate.SelectedItem = wpfService.GetBrandFromComboBox(product.Brand, cmbBrandUpdate);
-                cmbCategoryUpdate.SelectedItem = wpfService.GetCategoryFromComboBox(product.Category, cmbCategoryUpdate);
-                cmbSubcategoryUpdate.SelectedItem = wpfService.GetSubcategoryFromComboBox(product.Subcategory, cmbSubcategoryUpdate);
+                cmbBrandUpdate.SelectedItem = wpfService.GetFromComboBox<BrandApiResponse>(product.Brand, cmbBrandUpdate);
+                cmbCategoryUpdate.SelectedItem = wpfService.GetFromComboBox<CategoryApiResponse>(product.Category, cmbCategoryUpdate);
+                cmbSubcategoryUpdate.SelectedItem = wpfService.GetFromComboBox<SubcategoryApiResponse>(product.Subcategory, cmbSubcategoryUpdate);
             }
         }
         #endregion
