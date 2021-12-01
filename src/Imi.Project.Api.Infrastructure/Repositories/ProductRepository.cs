@@ -25,7 +25,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public async override Task<IEnumerable<Product>> ListAllAsync()
         {
-            var products = await GetAllAsync().ToListAsync();
+            var products = await GetAllAsync().OrderBy(p => p.Name).ToListAsync();
             return products;
         }
 
