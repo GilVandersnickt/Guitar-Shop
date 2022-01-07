@@ -10,14 +10,12 @@
                         AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Delete category" Style="{StaticResource Title}"/>
-
                     <Label Text="Category" />
-                    <Picker x:Name="pkrCategory"
-                            Title="--Select--" 
+                    <Picker Title="--Select--" 
                             ItemsSource="{Binding Categories}" 
-                            ItemDisplayBinding="{Binding Name}"/>
-
-                    <Button x:Name="btnDelete" Text="Delete category" Clicked="btnDelete_Clicked"/>
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding CategoryToDelete}"/>
+                    <Button Command="{Binding DeleteCategory}" Text="Delete category"/>
                 </StackLayout>
             </ScrollView>
 
