@@ -8,10 +8,9 @@
             <ScrollView>
                 <StackLayout Spacing="10" VerticalOptions="Center" Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Add, edit or delete" Style="{StaticResource Title}"/>
-
-                    <Button x:Name="btnProducts" Text="Products" Clicked="btnProducts_Clicked"/>
-                    <Button x:Name="btnBrands" Text="Brands" Clicked="btnBrands_Clicked"/>
-                    <Button x:Name="btnCategories" Text="Categories" Clicked="btnCategories_Clicked"/>
+                    <Button Text="Products" Command="{Binding OpenCrudProductPage}"/>
+                    <Button Text="Brands" Command="{Binding OpenCrudBrandPage}"/>
+                    <Button Text="Categories" Command="{Binding OpenCrudCategoryPage}"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

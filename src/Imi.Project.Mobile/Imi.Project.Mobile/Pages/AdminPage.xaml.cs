@@ -16,20 +16,5 @@ namespace Imi.Project.Mobile.Pages
         {
             InitializeComponent();
         }
-
-        private async void btnProducts_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CRUDProductPage());
-        }
-
-        private async void btnBrands_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CRUDBrandPage());
-        }
-
-        private async void btnCategories_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new CRUDCategoryPage());
-        }
     }
 }
