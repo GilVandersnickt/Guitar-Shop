@@ -10,26 +10,22 @@
                         AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Add category" Style="{StaticResource Title}"/>
-
                     <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
-                        <Image x:Name="imgPhoto"/>
+                        <Image Source="{Binding CategoryImageSource}"/>
                     </Frame>
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                        <Button x:Name="btnTakePhoto" Text="Take Photo" VerticalOptions="Center" Clicked="btnTakePhoto_Clicked"/>
-                        <Button x:Name="btnUploadPhoto" Text="Upload Photo" VerticalOptions="Center" Clicked="btnUploadPhoto_Clicked"/>
+                        <Button Command="{Binding TakePhoto}" Text="Take Photo" VerticalOptions="Center" />
+                        <Button Command="{Binding UploadPhoto}" Text="Upload Photo" VerticalOptions="Center"/>
                     </StackLayout>
 
                     <Label Text="Category name" />
-                    <Entry x:Name="txtCategoryName" Placeholder="Name the category here" />
+                    <Entry Text="{Binding CategoryName}" Placeholder="Name the category here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
-
-                    <Button x:Name="btnSave" Text="Save category" Clicked="btnSave_Clicked"/>
+                    <Button Text="Save category" Command="{Binding SaveCategory}"/>
                 </StackLayout>
             </ScrollView>
-
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

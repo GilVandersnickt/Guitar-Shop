@@ -1,7 +1,6 @@
-﻿using Imi.Project.Mobile.Pages;
-using System;
+﻿using FreshMvvm;
+using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Imi.Project.Mobile
 {
@@ -11,7 +10,7 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage( new HomePage());
+            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<HomeViewModel>());
         }
 
         protected override void OnStart()

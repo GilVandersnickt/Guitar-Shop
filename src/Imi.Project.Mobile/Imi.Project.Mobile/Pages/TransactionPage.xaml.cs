@@ -16,10 +16,5 @@ namespace Imi.Project.Mobile.Pages
         {
             InitializeComponent();
         }
-
-        private async void btnBackToMain_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopToRootAsync();
-        }
     }
 }

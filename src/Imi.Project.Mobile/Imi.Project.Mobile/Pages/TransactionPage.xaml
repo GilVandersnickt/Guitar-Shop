@@ -9,7 +9,7 @@
                 <StackLayout>
                     <Label Text="Transaction completed" HorizontalOptions="Center" VerticalOptions="Center"/>
                 </StackLayout>
-                <Button x:Name="btnBackToMain" Text="Return to home page" Style="{StaticResource PrimaryButton}" Clicked="btnBackToMain_Clicked"/>
+                <Button Text="Return to home page" Style="{StaticResource PrimaryButton}" Command="{Binding BackToMainPage}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

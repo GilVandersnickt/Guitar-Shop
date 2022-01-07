@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Imi.Project.Mobile.Pages.LoginPage"
              Style="{StaticResource BasePageStyle}">
-
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Style="{StaticResource SlDefaultStyle}">
@@ -14,7 +13,7 @@
                 <Entry  Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20"/>
                 <Entry  Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Button Text="Forgot your password?" HorizontalOptions="Center" BackgroundColor="Transparent" BorderWidth="0" FontSize="Micro" />
-                <Button Text="Login" Style="{StaticResource PrimaryButton}" Clicked="Login_Clicked"/>
+                <Button Text="Login" Style="{StaticResource PrimaryButton}" Command="{Binding OpenMainPageCommand}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bhv="clr-namespace:Imi.Project.Mobile.Behaviors"
              x:Class="Imi.Project.Mobile.Pages.CategoriesPage"
              Style="{StaticResource BasePageStyle}">
 
@@ -8,7 +9,14 @@
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
             <StackLayout BackgroundColor="{StaticResource ColorPrimary}" Style="{StaticResource SlDefaultStyle}">
                 <Label Text="All categories" Style="{StaticResource Title}"/>
-                <CollectionView x:Name="cvCategories" ItemsSource="{Binding Categories}" SelectionMode="Single" SelectionChanged="cvCategories_SelectionChanged">
+                <CollectionView ItemsSource="{Binding Categories}" SelectionMode="Single" >
+                    <CollectionView.Behaviors>
+                        <bhv:EventToCommandBehavior
+                                EventName="SelectionChanged"
+                                Command="{Binding OpenCategoryProductsPageCommand}"
+                                EventArgsConverter="{StaticResource ItemTappedEventArgsConv}">
+                        </bhv:EventToCommandBehavior>
+                    </CollectionView.Behaviors>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame>
@@ -22,7 +30,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

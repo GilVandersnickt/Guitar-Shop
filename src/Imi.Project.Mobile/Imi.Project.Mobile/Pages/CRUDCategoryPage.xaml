@@ -5,7 +5,6 @@
              x:Class="Imi.Project.Mobile.Pages.CRUDCategoryPage"
             Style="{StaticResource BasePageStyle}"
              Title="Category">
-
     <TabbedPage.Children>
         <local:CRUDCategoryAddPage/>
         <local:CRUDCategoryUpdatePage/>

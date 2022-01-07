@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.HomePage"
+             x:Class="Imi.Project.Mobile.Pages.HomePage"
              Style="{StaticResource BasePageStyle}">
     <ContentPage.Content>
         <ScrollView>
@@ -10,9 +10,9 @@
                 <Frame HorizontalOptions="FillAndExpand" >
                     <Image Source="guitar.jpg"  HorizontalOptions="Fill" Aspect="AspectFit" />
                 </Frame>
-                <Button Text="Login"  Style="{StaticResource PrimaryButton}" Clicked="Login_Clicked" />
-                <Button Text="Register"  Style="{StaticResource PrimaryButton}" Clicked="Register_Clicked"/>
-                <Button Text="Login as admin"  Style="{StaticResource PrimaryButton}" Clicked="LoginAdmin_Clicked"/>
+                <Button Text="Login" Style="{StaticResource PrimaryButton}" Command="{Binding OpenLoginPageCommand}" />
+                <Button Text="Register" Style="{StaticResource PrimaryButton}" Command="{Binding OpenRegisterPageCommand}"/>
+                <Button Text="Login as admin" Style="{StaticResource PrimaryButton}" Command="{Binding OpenAdminPageCommand}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

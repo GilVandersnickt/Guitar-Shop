@@ -16,7 +16,7 @@
                 <Entry  Placeholder="Last name" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="Address" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="City" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Button Text="Register" Style="{StaticResource PrimaryButton}" Clicked="Register_Clicked"/>
+                <Button Text="Register" Style="{StaticResource PrimaryButton}" Command="{Binding OpenMainPageCommand}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

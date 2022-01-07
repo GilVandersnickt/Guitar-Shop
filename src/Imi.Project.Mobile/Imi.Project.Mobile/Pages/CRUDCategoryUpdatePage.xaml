@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bhv="clr-namespace:Imi.Project.Mobile.Behaviors"
              x:Class="Imi.Project.Mobile.Pages.CRUDCategoryUpdatePage"
              Style="{StaticResource BasePageStyle}"
              Title="Edit">
@@ -10,29 +11,31 @@
                         AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout Style="{StaticResource SlDefaultStyle}">
                     <Label Text="Edit category" Style="{StaticResource Title}"/>
-
                     <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
-                        <Image x:Name="imgPhoto"/>
+                        <Image Source="{Binding CategoryImageSource}"/>
                     </Frame>
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                        <Button x:Name="btnTakePhoto" Text="Take Photo" VerticalOptions="Center" Clicked="btnTakePhoto_Clicked"/>
-                        <Button x:Name="btnUploadPhoto" Text="Upload Photo" VerticalOptions="Center" Clicked="btnUploadPhoto_Clicked"/>
+                        <Button Command="{Binding TakePhoto}" Text="Take Photo" VerticalOptions="Center" />
+                        <Button Command="{Binding UploadPhoto}" Text="Upload Photo" VerticalOptions="Center" />
                     </StackLayout>
-
                     <Label Text="Category" />
-                    <Picker x:Name="pkrCategory"
-                            Title="--Select--" 
+                    <Picker Title="--Select--" 
                             ItemsSource="{Binding Categories}" 
                             ItemDisplayBinding="{Binding Name}"
-                            SelectedIndexChanged="pkrCategory_SelectedIndexChanged"/>
-
+                            SelectedItem="{Binding CategoryToEdit}">
+                        <Picker.Behaviors>
+                            <bhv:EventToCommandBehavior
+                                EventName="SelectedIndexChanged"
+                                Command="{Binding LoadCategory}">
+                            </bhv:EventToCommandBehavior>
+                        </Picker.Behaviors>
+                    </Picker>
                     <Label Text="Category name" />
-                    <Entry x:Name="txtCategoryName" Placeholder="Name the category here" />
+                    <Entry Text="{Binding CategoryName}" Placeholder="Name the category here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
-
-                    <Button x:Name="btnSave" Text="Save category" Clicked="btnSave_Clicked"/>
+                    <Button Command="{Binding SaveCategory}" Text="Save category"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
