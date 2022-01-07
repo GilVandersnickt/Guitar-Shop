@@ -16,15 +16,5 @@ namespace Imi.Project.Mobile.Pages
         {
             InitializeComponent();
         }
-
-        private async void btnProceed_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new TransactionPage());
-        }
-
-        private async void btnContinue_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PopAsync();
-        }
     }
 }
