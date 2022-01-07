@@ -1,10 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -13,10 +10,10 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDBrandAddViewModel : FreshBasePageModel
     {
-        private readonly IBrandService brandService;
-        public CRUDBrandAddViewModel()
+        private readonly IBrandService _brandService;
+        public CRUDBrandAddViewModel(IBrandService brandService)
         {
-            brandService = new BrandService();
+            _brandService = brandService;
         }
         #region Properties
         private Brand brandToAdd;
@@ -67,7 +64,7 @@ namespace Imi.Project.Mobile.ViewModels
                     else
                         newBrand.Image = "";
 
-                    await brandService.Add(newBrand);
+                    await _brandService.Add(newBrand);
                     await CoreMethods.PopModalNavigationService();
                 }
             }

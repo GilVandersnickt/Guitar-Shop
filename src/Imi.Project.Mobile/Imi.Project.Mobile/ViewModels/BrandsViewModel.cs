@@ -10,11 +10,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class BrandsViewModel : FreshBasePageModel
     {
-        private readonly IBrandService brandService;
+        private readonly IBrandService _brandService;
 
-        public BrandsViewModel()
+        public BrandsViewModel(IBrandService brandService)
         {
-            brandService = new BrandService();
+            _brandService = brandService;
         }
         #region Properties
         private Brand selectedFilter;
@@ -50,7 +50,7 @@ namespace Imi.Project.Mobile.ViewModels
         public async override void Init(object initData)
         {
             base.Init(initData);
-            Brands = new ObservableCollection<Brand>(await brandService.Get());
+            Brands = new ObservableCollection<Brand>(await _brandService.Get());
         }
 
     }

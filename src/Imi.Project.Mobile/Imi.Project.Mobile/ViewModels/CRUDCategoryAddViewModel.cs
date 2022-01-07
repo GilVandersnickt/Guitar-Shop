@@ -1,10 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -13,11 +10,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDCategoryAddViewModel : FreshBasePageModel
     {
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CRUDCategoryAddViewModel()
+        public CRUDCategoryAddViewModel(ICategoryService categoryService)
         {
-            categoryService = new CategoryService();
+            _categoryService = categoryService;
         }
         #region Properties
         private Category categoryToAdd;
@@ -66,7 +63,7 @@ namespace Imi.Project.Mobile.ViewModels
                     else
                         newCategory.Image = "";
 
-                    await categoryService.Add(newCategory);
+                    await _categoryService.Add(newCategory);
                     await CoreMethods.PopModalNavigationService();
                 }
             }

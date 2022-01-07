@@ -1,10 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,15 +8,15 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class ProductDetailsViewModel : FreshBasePageModel
     {
-        private readonly IProductService productService;
-        private readonly IBrandService brandService;
-        private readonly ICategoryService categoryService;
+        private readonly IProductService _productService;
+        private readonly IBrandService _brandService;
+        private readonly ICategoryService _categoryService;
 
-        public ProductDetailsViewModel()
+        public ProductDetailsViewModel(IProductService productService, IBrandService brandService, ICategoryService categoryService)
         {
-            productService = new ProductService();
-            brandService = new BrandService();
-            categoryService = new CategoryService();
+            _productService = productService;
+            _brandService = brandService;
+            _categoryService = categoryService;
         }
         #region Properties
         private Product selectedProduct;
@@ -69,9 +65,9 @@ namespace Imi.Project.Mobile.ViewModels
         {
             base.Init(initData);
 
-            SelectedProduct = await productService.Get((initData as Product).Id);
-            Brand = await brandService.Get((initData as Product).BrandId);
-            Category = await categoryService.Get((initData as Product).CategoryId);
+            SelectedProduct = await _productService.Get((initData as Product).Id);
+            Brand = await _brandService.Get((initData as Product).BrandId);
+            Category = await _categoryService.Get((initData as Product).CategoryId);
         }
 
     }

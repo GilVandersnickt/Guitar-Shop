@@ -1,12 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -16,11 +11,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDBrandUpdateViewModel : FreshBasePageModel
     {
-        private readonly IBrandService brandService;
+        private readonly IBrandService _brandService;
 
-        public CRUDBrandUpdateViewModel()
+        public CRUDBrandUpdateViewModel(IBrandService brandService)
         {
-            brandService = new BrandService();
+            _brandService = brandService;
         }
         #region Properties
         private Brand brandToEdit;
@@ -64,12 +59,11 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
         #endregion
-
         #region Commands
         public ICommand LoadBrand => new Command(
             () =>
             {
-                if(BrandToEdit != null)
+                if (BrandToEdit != null)
                 {
                     BrandImageSource = BrandToEdit.Image;
                     BrandName = BrandToEdit.Name;
@@ -90,9 +84,9 @@ namespace Imi.Project.Mobile.ViewModels
                         newBrand.Image = "";
 
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this brand?", "Yes", "No");
-                    if(confirmed)
+                    if (confirmed)
                     {
-                        await brandService.Update(newBrand);
+                        await _brandService.Update(newBrand);
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -132,7 +126,7 @@ namespace Imi.Project.Mobile.ViewModels
         }
         private async Task RefreshBrandList()
         {
-            var brands = await brandService.Get();
+            var brands = await _brandService.Get();
             Brands = new ObservableCollection<Brand>(brands);
 
             if (BrandToEdit == null)

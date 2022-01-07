@@ -1,6 +1,5 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -12,11 +11,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDCategoryUpdateViewModel : FreshBasePageModel
     {
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CRUDCategoryUpdateViewModel()
+        public CRUDCategoryUpdateViewModel(ICategoryService categoryService)
         {
-            categoryService = new CategoryService();
+            _categoryService = categoryService;
         }
         #region Properties
         private Category categoryToEdit;
@@ -60,7 +59,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
         #endregion
-
         #region Commands
         public ICommand LoadCategory => new Command(
             () =>
@@ -88,7 +86,7 @@ namespace Imi.Project.Mobile.ViewModels
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this category?", "Yes", "No");
                     if (confirmed)
                     {
-                        await categoryService.Update(newCategory);
+                        await _categoryService.Update(newCategory);
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -128,7 +126,7 @@ namespace Imi.Project.Mobile.ViewModels
         }
         private async Task RefreshCategoriesList()
         {
-            var categories = await categoryService.Get();
+            var categories = await _categoryService.Get();
             Categories = new ObservableCollection<Category>(categories);
 
             if (CategoryToEdit == null)

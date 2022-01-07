@@ -1,11 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,13 +10,13 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class MainViewModel : FreshBasePageModel
     {
-        private readonly ICategoryService categoryService;
-        private readonly IBrandService brandService;
+        private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
 
-        public MainViewModel()
+        public MainViewModel(ICategoryService categoryService, IBrandService brandService)
         {
-            categoryService = new CategoryService();
-            brandService = new BrandService();
+            _categoryService = categoryService;
+            _brandService = brandService;
         }
 
         #region Properties
@@ -35,7 +31,7 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
         private ObservableCollection<Category> categories;
-        public ObservableCollection<Category> Categories 
+        public ObservableCollection<Category> Categories
         {
             get { return categories; }
             set
@@ -94,8 +90,8 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task LoadMainPage()
         {
-            Categories = new ObservableCollection<Category>(await categoryService.Get());
-            Brands = new ObservableCollection<Brand>(await brandService.Get());
+            Categories = new ObservableCollection<Category>(await _categoryService.Get());
+            Brands = new ObservableCollection<Brand>(await _brandService.Get());
         }
 
 
