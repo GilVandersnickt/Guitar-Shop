@@ -118,9 +118,10 @@ namespace Imi.Project.Mobile.ViewModels
                         newProduct.Id = Guid.NewGuid();
                         newProduct.Name = ProductName;
                         newProduct.Price = decimal.Parse(ProductPrice);
-                        newProduct.BrandId = ProductBrand.Id;
-                        newProduct.CategoryId = ProductCategory.Id;
-
+                        if(ProductBrand != null)
+                            newProduct.BrandId = ProductBrand.Id;
+                        if(ProductCategory != null)
+                            newProduct.CategoryId = ProductCategory.Id;
                         if (ProductImageSource != null)
                             newProduct.Image = ProductImageSource.ToString();
                         else

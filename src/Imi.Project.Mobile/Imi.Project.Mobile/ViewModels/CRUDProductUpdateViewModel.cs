@@ -132,7 +132,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SaveProduct => new Command(
             async () =>
             {
-                if (ProductName != null)
+                if (ProductName != null || productName != "")
                 {
                     decimal newPrice;
                     if (decimal.TryParse(ProductPrice, out newPrice))
@@ -140,8 +140,10 @@ namespace Imi.Project.Mobile.ViewModels
                         Product newProduct = ProductToEdit;
                         newProduct.Name = ProductName;
                         newProduct.Price = newPrice;
-                        newProduct.BrandId = ProductBrand.Id;
-                        newProduct.CategoryId = ProductCategory.Id;
+                        if(ProductBrand != null)
+                            newProduct.BrandId = ProductBrand.Id;
+                        if(ProductCategory != null)
+                            newProduct.CategoryId = ProductCategory.Id;
                         if (ProductImageSource != null)
                             newProduct.Image = ProductImageSource.ToString();
                         else
