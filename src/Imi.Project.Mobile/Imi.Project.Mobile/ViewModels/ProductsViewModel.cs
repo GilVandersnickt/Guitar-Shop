@@ -1,11 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -13,11 +9,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class ProductsViewModel : FreshBasePageModel
     {
-        private readonly IProductService productService;
+        private readonly IProductService _productService;
 
-        public ProductsViewModel()
+        public ProductsViewModel(IProductService productService)
         {
-            productService = new ProductService();
+            _productService = productService;
         }
 
         #region Properties
@@ -58,10 +54,10 @@ namespace Imi.Project.Mobile.ViewModels
         public async override void Init(object initData)
         {
             base.Init(initData);
-            if(initData.GetType().Equals(typeof(Category)))
-                Products = new ObservableCollection<Product>(await productService.GetProductsByCategory(initData as Category));
-            if(initData.GetType().Equals(typeof(Brand)))
-                Products = new ObservableCollection<Product>(await productService.GetProductsByBrand(initData as Brand));
+            if (initData.GetType().Equals(typeof(Category)))
+                Products = new ObservableCollection<Product>(await _productService.GetProductsByCategory(initData as Category));
+            if (initData.GetType().Equals(typeof(Brand)))
+                Products = new ObservableCollection<Product>(await _productService.GetProductsByBrand(initData as Brand));
 
         }
 

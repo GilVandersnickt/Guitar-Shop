@@ -14,7 +14,7 @@
                     <Picker Title="--Select--" 
                             ItemsSource="{Binding Products}" 
                             ItemDisplayBinding="{Binding Name}"
-                            SelectedItem="{Binding ProductToEdit}">
+                            SelectedItem="{Binding ProductToDelete}">
                     </Picker>
                     <Button Text="Delete product" Command="{Binding DeleteProduct}"/>
                 </StackLayout>

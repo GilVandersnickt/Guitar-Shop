@@ -1,6 +1,5 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -11,11 +10,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDProductDeleteViewModel : FreshBasePageModel
     {
-        private readonly IProductService productService;
+        private readonly IProductService _productService;
 
-        public CRUDProductDeleteViewModel()
+        public CRUDProductDeleteViewModel(IProductService productService)
         {
-            productService = new ProductService();
+            _productService = productService;
         }
         #region Properties
         private Product productToDelete;
@@ -48,7 +47,7 @@ namespace Imi.Project.Mobile.ViewModels
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Delete", "Are you sure you want to delete this product?", "Yes", "No");
                     if (confirmed)
                     {
-                        await productService.Delete(ProductToDelete.Id);
+                        await _productService.Delete(ProductToDelete.Id);
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -63,7 +62,7 @@ namespace Imi.Project.Mobile.ViewModels
         }
         private async Task RefreshLists()
         {
-            var products = await productService.Get();
+            var products = await _productService.Get();
             Products = new ObservableCollection<Product>(products);
         }
 

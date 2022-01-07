@@ -1,11 +1,8 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -15,15 +12,15 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDProductAddViewModel : FreshBasePageModel
     {
-        private readonly IProductService productService;
-        private readonly IBrandService brandService;
-        private readonly ICategoryService categoryService;
+        private readonly IProductService _productService;
+        private readonly IBrandService _brandService;
+        private readonly ICategoryService _categoryService;
 
-        public CRUDProductAddViewModel()
+        public CRUDProductAddViewModel(IProductService productService, IBrandService brandService, ICategoryService categoryService)
         {
-            productService = new ProductService();
-            brandService = new BrandService();
-            categoryService = new CategoryService();
+            _productService = productService;
+            _brandService = brandService;
+            _categoryService = categoryService;
         }
         #region Properties
         private Product productToAdd;
@@ -121,15 +118,16 @@ namespace Imi.Project.Mobile.ViewModels
                         newProduct.Id = Guid.NewGuid();
                         newProduct.Name = ProductName;
                         newProduct.Price = decimal.Parse(ProductPrice);
-                        newProduct.BrandId = ProductBrand.Id;
-                        newProduct.CategoryId = ProductCategory.Id;
-
+                        if(ProductBrand != null)
+                            newProduct.BrandId = ProductBrand.Id;
+                        if(ProductCategory != null)
+                            newProduct.CategoryId = ProductCategory.Id;
                         if (ProductImageSource != null)
                             newProduct.Image = ProductImageSource.ToString();
                         else
                             newProduct.Image = "";
 
-                        await productService.Add(newProduct);
+                        await _productService.Add(newProduct);
                         await CoreMethods.PopModalNavigationService();
                     }
                     else
@@ -173,8 +171,8 @@ namespace Imi.Project.Mobile.ViewModels
         }
         private async Task RefreshLists()
         {
-            var brands = await brandService.Get();
-            var categories = await categoryService.Get();
+            var brands = await _brandService.Get();
+            var categories = await _categoryService.Get();
             Brands = new ObservableCollection<Brand>(brands);
             Categories = new ObservableCollection<Category>(categories);
         }

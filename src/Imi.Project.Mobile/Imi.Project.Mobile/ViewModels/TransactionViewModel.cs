@@ -1,10 +1,6 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,10 +8,10 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class TransactionViewModel : FreshBasePageModel
     {
-        private readonly IProductService productService;
-        public TransactionViewModel()
+        private readonly IProductService _productService;
+        public TransactionViewModel(IProductService productService)
         {
-            productService = new ProductService();
+            _productService = productService;
         }
         #region Properties
         private Product selectedProduct;
@@ -39,7 +35,7 @@ namespace Imi.Project.Mobile.ViewModels
         public async override void Init(object initData)
         {
             base.Init(initData);
-            SelectedProduct = await productService.Get((initData as Product).Id);
+            SelectedProduct = await _productService.Get((initData as Product).Id);
 
         }
 

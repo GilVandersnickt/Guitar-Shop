@@ -1,6 +1,5 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,15 +12,15 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDProductUpdateViewModel : FreshBasePageModel
     {
-        private readonly IProductService productService;
-        private readonly IBrandService brandService;
-        private readonly ICategoryService categoryService;
+        private readonly IProductService _productService;
+        private readonly IBrandService _brandService;
+        private readonly ICategoryService _categoryService;
 
-        public CRUDProductUpdateViewModel()
+        public CRUDProductUpdateViewModel(IProductService productService, IBrandService brandService, ICategoryService categoryService)
         {
-            productService = new ProductService();
-            brandService = new BrandService();
-            categoryService = new CategoryService();
+            _productService = productService;
+            _brandService = brandService;
+            _categoryService = categoryService;
         }
         #region Properties
         private Product productToEdit;
@@ -133,7 +132,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SaveProduct => new Command(
             async () =>
             {
-                if (ProductName != null)
+                if (ProductName != null || productName != "")
                 {
                     decimal newPrice;
                     if (decimal.TryParse(ProductPrice, out newPrice))
@@ -141,8 +140,10 @@ namespace Imi.Project.Mobile.ViewModels
                         Product newProduct = ProductToEdit;
                         newProduct.Name = ProductName;
                         newProduct.Price = newPrice;
-                        newProduct.BrandId = ProductBrand.Id;
-                        newProduct.CategoryId = ProductCategory.Id;
+                        if(ProductBrand != null)
+                            newProduct.BrandId = ProductBrand.Id;
+                        if(ProductCategory != null)
+                            newProduct.CategoryId = ProductCategory.Id;
                         if (ProductImageSource != null)
                             newProduct.Image = ProductImageSource.ToString();
                         else
@@ -151,7 +152,7 @@ namespace Imi.Project.Mobile.ViewModels
                         var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this product?", "Yes", "No");
                         if (confirmed)
                         {
-                            await productService.Add(newProduct);
+                            await _productService.Update(newProduct);
                             await CoreMethods.PopModalNavigationService();
                         }
                     }
@@ -196,9 +197,9 @@ namespace Imi.Project.Mobile.ViewModels
         }
         private async Task RefreshLists()
         {
-            var products = await productService.Get();
-            var brands = await brandService.Get();
-            var categories = await categoryService.Get();
+            var products = await _productService.Get();
+            var brands = await _brandService.Get();
+            var categories = await _categoryService.Get();
             Products = new ObservableCollection<Product>(products);
             Brands = new ObservableCollection<Brand>(brands);
             Categories = new ObservableCollection<Category>(categories);

@@ -1,6 +1,5 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -10,11 +9,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CategoriesViewModel : FreshBasePageModel
     {
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CategoriesViewModel()
+        public CategoriesViewModel(ICategoryService categoryService)
         {
-            categoryService = new CategoryService();
+            _categoryService = categoryService;
         }
         #region Properties
         private Category selectedFilter;
@@ -50,7 +49,7 @@ namespace Imi.Project.Mobile.ViewModels
         public async override void Init(object initData)
         {
             base.Init(initData);
-            Categories = new ObservableCollection<Category>(await categoryService.Get());
+            Categories = new ObservableCollection<Category>(await _categoryService.Get());
         }
 
     }

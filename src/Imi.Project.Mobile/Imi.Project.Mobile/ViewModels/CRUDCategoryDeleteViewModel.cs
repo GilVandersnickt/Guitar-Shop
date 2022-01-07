@@ -1,6 +1,5 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -11,11 +10,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDCategoryDeleteViewModel : FreshBasePageModel
     {
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryService _categoryService;
 
-        public CRUDCategoryDeleteViewModel()
+        public CRUDCategoryDeleteViewModel(ICategoryService categoryService)
         {
-            categoryService = new CategoryService();
+            _categoryService = categoryService;
         }
         #region Properties
         private Category categoryToDelete;
@@ -49,7 +48,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
         #endregion
-
         #region Commands
         public ICommand DeleteCategory => new Command(
             async () =>
@@ -59,7 +57,7 @@ namespace Imi.Project.Mobile.ViewModels
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Delete", "Are you sure you want to delete this category?", "Yes", "No");
                     if (confirmed)
                     {
-                        await categoryService.Delete(CategoryToDelete.Id);
+                        await _categoryService.Delete(CategoryToDelete.Id);
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -74,7 +72,7 @@ namespace Imi.Project.Mobile.ViewModels
         }
         private async Task RefreshCategoriesList()
         {
-            var categories = await categoryService.Get();
+            var categories = await _categoryService.Get();
             Categories = new ObservableCollection<Category>(categories);
         }
     }

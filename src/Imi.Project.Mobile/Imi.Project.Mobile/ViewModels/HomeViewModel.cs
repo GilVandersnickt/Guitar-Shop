@@ -10,7 +10,7 @@ namespace Imi.Project.Mobile.ViewModels
         {
 
         }
-
+        #region Commands
         public ICommand OpenLoginPageCommand => new Command(
            async () =>
            {
@@ -29,6 +29,6 @@ namespace Imi.Project.Mobile.ViewModels
                await CoreMethods.PushPageModel<AdminViewModel>(true);
            }
         );
-
+        #endregion
     }
 }

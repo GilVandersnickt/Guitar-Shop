@@ -1,11 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Services;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -14,11 +10,11 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class CRUDBrandDeleteViewModel : FreshBasePageModel
     {
-        private readonly IBrandService brandService;
+        private readonly IBrandService _brandService;
 
-        public CRUDBrandDeleteViewModel()
+        public CRUDBrandDeleteViewModel(IBrandService brandService)
         {
-            brandService = new BrandService();
+            _brandService = brandService;
         }
 
         #region Properties
@@ -60,9 +56,9 @@ namespace Imi.Project.Mobile.ViewModels
                 if (BrandToDelete.Id != null)
                 {
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Delete", "Are you sure you want to delete this brand?", "Yes", "No");
-                    if(confirmed)
+                    if (confirmed)
                     {
-                        await brandService.Delete(BrandToDelete.Id);
+                        await _brandService.Delete(BrandToDelete.Id);
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -78,7 +74,7 @@ namespace Imi.Project.Mobile.ViewModels
         }
         private async Task RefreshBrandList()
         {
-            var brands = await brandService.Get();
+            var brands = await _brandService.Get();
             Brands = new ObservableCollection<Brand>(brands);
         }
 
