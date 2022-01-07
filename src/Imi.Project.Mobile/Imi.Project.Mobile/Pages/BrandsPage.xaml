@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bhv="clr-namespace:Imi.Project.Mobile.Behaviors"
              x:Class="Imi.Project.Mobile.Pages.BrandsPage"
              x:Name="page"
              Title="Brands"
@@ -10,7 +11,14 @@
         <ScrollView Orientation="Vertical" VerticalOptions="Start" VerticalScrollBarVisibility="Never" HorizontalScrollBarVisibility="Never">
             <StackLayout BackgroundColor="{StaticResource ColorPrimary}" Style="{StaticResource SlDefaultStyle}">
                 <Label Text="All brands" Style="{StaticResource Title}"/>
-                <CollectionView x:Name="cvBrands" ItemsSource="{Binding Brands}" SelectionMode="Single" SelectionChanged="cvBrands_SelectionChanged">
+                <CollectionView ItemsSource="{Binding Brands}" SelectionMode="Single">
+                    <CollectionView.Behaviors>
+                        <bhv:EventToCommandBehavior
+                                EventName="SelectionChanged"
+                                Command="{Binding OpenBrandProductsPageCommand}"
+                                EventArgsConverter="{StaticResource ItemTappedEventArgsConv}">
+                        </bhv:EventToCommandBehavior>
+                    </CollectionView.Behaviors>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout BackgroundColor="{StaticResource ColorSecundary}" Margin="10" Padding="10">
@@ -18,7 +26,6 @@
                                     <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                 </Frame>
                                 <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
-
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
