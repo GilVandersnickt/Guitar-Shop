@@ -180,5 +180,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\gibsonlespaulstudiosmokehouseburstGIT0049498000.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Placeholder.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
