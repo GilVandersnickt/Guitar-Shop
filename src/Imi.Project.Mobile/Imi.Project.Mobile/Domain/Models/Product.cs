@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Mobile.Domain.Models.Default;
+using System;
 
 namespace Imi.Project.Mobile.Domain.Models
 {
@@ -8,9 +9,8 @@ namespace Imi.Project.Mobile.Domain.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Image { get; set; }
-        public Guid BrandId { get; set; }
-        public Guid CategoryId { get; set; }
-        public Guid SubcategoryId { get; set; }
-
+        public DefaultModelWithImage Brand { get; set; }
+        public DefaultModelWithImage Category { get; set; }
+        public DefaultModel Subcategory { get; set; }
     }
 }

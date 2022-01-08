@@ -51,7 +51,7 @@ namespace Imi.Project.Mobile.ViewModels
         }
         #endregion
         #region Commands
-        public ICommand OpenShoppingCartPage => new Command(
+        public ICommand OpenShoppingCartPageCommand => new Command(
             async () =>
             {
                 if (SelectedProduct != null)
@@ -59,15 +59,24 @@ namespace Imi.Project.Mobile.ViewModels
                 else
                     await CoreMethods.DisplayAlert("Error", "No product selected ", "Ok");
             });
-
+        public ICommand OpenBrandProductsPageCommand => new Command(
+           async () =>
+           {
+               if(Brand != null)
+               {
+                   await CoreMethods.PopPageModel(false, false);
+                   await CoreMethods.PushPageModel<ProductsViewModel>(Brand, false, true);
+               }
+           }
+        );
         #endregion
         public async override void Init(object initData)
         {
             base.Init(initData);
 
             SelectedProduct = await _productService.Get((initData as Product).Id);
-            Brand = await _brandService.Get((initData as Product).BrandId);
-            Category = await _categoryService.Get((initData as Product).CategoryId);
+            Brand = await _brandService.Get((initData as Product).Brand.Id);
+            Category = await _categoryService.Get((initData as Product).Category.Id);
         }
 
     }

@@ -1,4 +1,6 @@
 ﻿using Imi.Project.Mobile.Domain.Models;
+using Imi.Project.Mobile.Domain.Models.Api;
+using Imi.Project.Mobile.Domain.Models.Default;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,9 +22,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Fender american ultra stratocaster ultraburst",
                     Price = 1000M,
                     Image = "fenderamericanultrastratocasterhssmnultraburstGIT0050645000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000001"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000001"),
+                            Name = "Fender",
+                            Image = "Fender.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000001"),
+                            Name = "Electric guitars",
+                            Image = "Electric_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -30,9 +42,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Fender eric clapton stratocaster almond green",
                     Price = 1000M,
                     Image = "fenderericclaptonstratocastermnalmondgreenmasterbuilttoddkrausecz552554GIT0057454000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000001"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000001"),
+                            Name = "Fender",
+                            Image = "Fender.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000001"),
+                            Name = "Electric guitars",
+                            Image = "Electric_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -40,9 +62,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Gibson les paul studio smokehouse burst",
                     Price = 1000M,
                     Image = "gibsonlespaulstudiosmokehouseburstGIT0049498000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000002"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000003"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000002"),
+                            Name = "Gibson",
+                            Image = "Gibson.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000001"),
+                            Name = "Electric guitars",
+                            Image = "Electric_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -50,9 +82,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Gibson les paul tribute satin tobacco sunburst",
                     Price = 1000M,
                     Image = "gibsonlespaultributesatintobaccosunburstGIT0049503000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000002"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000003"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000002"),
+                            Name = "Gibson",
+                            Image = "Gibson.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000001"),
+                            Name = "Electric guitars",
+                            Image = "Electric_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
 
                 new Product
@@ -61,9 +103,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Gretsch g5230t electromatic jet ft single cut bigsby airline silver",
                     Price = 1000M,
                     Image = "gretschg5230telectromaticjetftsinglecutbigsbyairlinesilverGIT0047791000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000003"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000003"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000003"),
+                            Name = "Gretsch",
+                            Image = "Gretsch.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000001"),
+                            Name = "Electric guitars",
+                            Image = "Electric_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -71,9 +123,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Gretsch g6128t players edition jet ft bigsby roundup orange",
                     Price = 1000M,
                     Image = "gretschg6128tplayerseditionjetftbigsbyrounduporangeGIT0051980000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000003"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000003"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000003"),
+                            Name = "Gretsch",
+                            Image = "Gretsch.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000001"),
+                            Name = "Electric guitars",
+                            Image = "Electric_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
 
                 new Product
@@ -82,9 +144,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Fender 64 custom deluxe reverb",
                     Price = 1000M,
                     Image = "fender64customdeluxereverbGIT0042604000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000006"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000001"),
+                            Name = "Fender",
+                            Image = "Fender.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000002"),
+                            Name = "Amps",
+                            Image= "Amps.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -92,9 +164,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Yamaha thr30ii wireless",
                     Price = 1000M,
                     Image = "yamahathr30iiwirelessGIT0051343000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000005"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000008"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000005"),
+                            Name = "Yamaha",
+                            Image = "Yamaha.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000002"),
+                            Name = "Amps",
+                            Image= "Amps.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -102,9 +184,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Fender american original 60s precision bass rw surf green",
                     Price = 1000M,
                     Image = "fenderamericanoriginal60sprecisionbassrwsurfgreenBAS0010757000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000012"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000001"),
+                            Name = "Fender",
+                            Image = "Fender.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000003"),
+                            Name = "Bass guitars",
+                            Image= "Bass_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -112,9 +204,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Ibanez standard sr600e ast antique brown stained burst",
                     Price = 1000M,
                     Image = "ibanezstandardsr600eastantiquebrownstainedburstBAS0011488000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000004"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000003"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000012"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000004"),
+                            Name = "Ibanez",
+                            Image = "Ibanez.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000003"),
+                            Name = "Bass guitars",
+                            Image= "Bass_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -122,10 +224,20 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Yamaha cs 40 nt 3/4 natural",
                     Price = 1000M,
                     Image = "yamahacs40nt34naturalGIT0000644000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000005"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000004"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000016"),
-                },
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000005"),
+                            Name = "Yamaha",
+                            Image = "Yamaha.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000004"),
+                            Name = "Classical guitars",
+                            Image= "Classical_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
+                        },
                 // 4/4 classical
                 new Product
                 {
@@ -133,9 +245,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Yamaha c 40 m",
                     Price = 1000M,
                     Image = "yamahac40mmatGIT0019253000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000005"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000004"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000017"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000005"),
+                            Name = "Yamaha",
+                            Image = "Yamaha.PNG"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000004"),
+                            Name = "Classical guitars",
+                            Image= "Classical_Guitars.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -143,9 +265,19 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Roland ric g10a gold series 6m",
                     Price = 1000M,
                     Image = "rolandricg10agoldseriesACC0007014000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000009"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000005"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000019"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000009"),
+                            Name = "Roland",
+                            Image = "Roland.png"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000005"),
+                            Name = "Cables",
+                            Image= "Cables.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
                 new Product
                 {
@@ -153,17 +285,37 @@ namespace Imi.Project.Mobile.Domain.Services
                     Name = "Roland ric bpc patchcable 0,15m",
                     Price = 1000M,
                     Image = "rolandricbpcpatchkabel015mACC0007020000.png",
-                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000009"),
-                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000005"),
-                    SubcategoryId = Guid.Parse("00000000-0000-0000-0003-000000000021"),
+                    Brand = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0001-000000000009"),
+                            Name = "Roland",
+                            Image = "Roland.png"
+                        },
+                    Category = new DefaultModelWithImage
+                        {
+                            Id = Guid.Parse("00000000-0000-0000-0002-000000000005"),
+                            Name = "Cables",
+                            Image= "Cables.PNG"
+                        },
+                    Subcategory = new DefaultModel{}
                 },
 
 #endregion
         };
 
-        public async Task<Product> Add(Product product)
+        public async Task<ProductRequest> Add(ProductRequest product)
         {
-            products.Add(product);
+            Product newProduct = new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = product.Name,
+                Price = decimal.Parse(product.Price),
+                Image = product.Image.ToString(),
+                Brand = new DefaultModelWithImage { Id = product.BrandId },
+                Category = new DefaultModelWithImage { Id = product.CategoryId },
+                Subcategory = new DefaultModel { }
+            }; 
+            products.Add(newProduct);
             return await Task.FromResult(product);
         }
 
@@ -180,13 +332,13 @@ namespace Imi.Project.Mobile.Domain.Services
         }
         public async Task<List<Product>> GetProductsByBrand(Brand brand)
         {
-            var productsByBrand = products.Where(p => p.BrandId == brand.Id).ToList();
+            var productsByBrand = products.Where(p => p.Brand.Id == brand.Id).ToList();
             return await Task.FromResult(productsByBrand);
         }
 
         public async Task<List<Product>> GetProductsByCategory(Category category)
         {
-            var productsByBrand = products.Where(p => p.CategoryId == category.Id).ToList();
+            var productsByBrand = products.Where(p => p.Category.Id == category.Id).ToList();
             return await Task.FromResult(productsByBrand);
         }
 
@@ -196,13 +348,22 @@ namespace Imi.Project.Mobile.Domain.Services
             return await Task.FromResult(product);
         }
 
-        public async Task<Product> Update(Product product)
+        public async Task<ProductRequest> Update(ProductRequest product)
         {
-            var oldBucketList = products.FirstOrDefault(e => e.Id == product.Id);
-            products.Remove(oldBucketList);
-            products.Add(product);
+            var oldProduct = products.FirstOrDefault(e => e.Id == product.Id);
+            Product newProduct = new Product()
+            {
+                Id = Guid.NewGuid(),
+                Name = product.Name,
+                Price = decimal.Parse(product.Price),
+                Image = product.Image.ToString(),
+                Brand = new DefaultModelWithImage { Id = product.BrandId },
+                Category = new DefaultModelWithImage { Id = product.CategoryId },
+                Subcategory = new DefaultModel { }
+            };
+            products.Remove(oldProduct);
+            products.Add(newProduct);
             return await Task.FromResult(product);
         }
-
     }
 }

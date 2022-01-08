@@ -8,15 +8,15 @@
         <ScrollView>
             <StackLayout Style="{StaticResource SlDefaultStyle}">
                 <Label Text="Register" Style="{StaticResource Title}"/>
-                <Entry  Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry  Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding UserName}" Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding PassWord}" Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="Confirm password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="Email address" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="First name" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="Last name" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="Address" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Entry  Placeholder="City" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Button Text="Register" Style="{StaticResource PrimaryButton}" Command="{Binding OpenMainPageCommand}"/>
+                <Button Text="Register" Style="{StaticResource PrimaryButton}" Command="{Binding Register}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -10,10 +10,11 @@
                 <Frame HorizontalOptions="FillAndExpand" >
                     <Image Source="guitar.jpg"  HorizontalOptions="Fill" Aspect="AspectFit" />
                 </Frame>
-                <Entry  Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20"/>
-                <Entry  Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Button Text="Forgot your password?" HorizontalOptions="Center" BackgroundColor="Transparent" BorderWidth="0" FontSize="Micro" />
-                <Button Text="Login" Style="{StaticResource PrimaryButton}" Command="{Binding OpenMainPageCommand}" />
+                <Label Text="Log in for access to admin page"/>
+                <Entry Text="{Binding UserName}" Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20"/>
+                <Entry Text="{Binding Password}" Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Button Text="Forgot your password?" Command="{Binding ForgotPassword}" HorizontalOptions="Center" BackgroundColor="Transparent" BorderWidth="0" FontSize="Micro" />
+                <Button Text="Log in" Style="{StaticResource PrimaryButton}" Command="{Binding Login}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

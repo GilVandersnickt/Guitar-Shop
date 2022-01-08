@@ -16,7 +16,7 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
                     <Button Text="Continue to checkout" Style="{StaticResource SecondaryButton}" BackgroundColor="SlateGray" TextColor="{StaticResource ColorPrimary}" Command="{Binding OpenTransactionPage}"/>
-                    <Button Text="Continue shopping" Style="{StaticResource SecondaryButton}" BackgroundColor="SlateGray" TextColor="{StaticResource ColorPrimary}" Command="{Binding BackToMainPage}"/>
+                    <Button Text="Back to home page" Style="{StaticResource SecondaryButton}" BackgroundColor="SlateGray" TextColor="{StaticResource ColorPrimary}" Command="{Binding GoBack}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

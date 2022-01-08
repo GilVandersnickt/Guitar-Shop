@@ -23,10 +23,10 @@ namespace Imi.Project.Mobile.ViewModels
                await CoreMethods.PushPageModel<RegisterViewModel>(true);
            }
         );
-        public ICommand OpenAdminPageCommand => new Command(
+        public ICommand OpenMainPageCommand => new Command(
            async () =>
            {
-               await CoreMethods.PushPageModel<AdminViewModel>(true);
+               await CoreMethods.PushPageModel<MainViewModel>(true);
            }
         );
         #endregion

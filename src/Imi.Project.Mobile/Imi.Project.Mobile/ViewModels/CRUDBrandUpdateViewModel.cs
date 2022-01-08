@@ -81,7 +81,7 @@ namespace Imi.Project.Mobile.ViewModels
                     if (BrandImageSource != null)
                         newBrand.Image = BrandImageSource.ToString();
                     else
-                        newBrand.Image = "";
+                        newBrand.Image = "Placeholder.png";
 
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this brand?", "Yes", "No");
                     if (confirmed)

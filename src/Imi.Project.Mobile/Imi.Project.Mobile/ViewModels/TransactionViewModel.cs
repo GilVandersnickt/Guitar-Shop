@@ -26,10 +26,10 @@ namespace Imi.Project.Mobile.ViewModels
         }
         #endregion
         #region Commands
-        public ICommand BackToMainPage => new Command(
+        public ICommand BackToHomePage => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<MainViewModel>();
+                await CoreMethods.PopToRoot(true);
             });
         #endregion
         public async override void Init(object initData)

@@ -33,10 +33,10 @@ namespace Imi.Project.Mobile.ViewModels
                 if (SelectedProduct != null)
                     await CoreMethods.PushPageModel<TransactionViewModel>(SelectedProduct);
             });
-        public ICommand BackToMainPage => new Command(
+        public ICommand GoBack => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<MainViewModel>();
+                await CoreMethods.PopToRoot(true);
             });
         #endregion
 

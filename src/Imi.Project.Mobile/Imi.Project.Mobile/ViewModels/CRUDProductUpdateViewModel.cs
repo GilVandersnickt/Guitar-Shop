@@ -1,6 +1,10 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Domain.Models;
+using Imi.Project.Mobile.Domain.Models.Api;
+using Imi.Project.Mobile.Domain.Models.Default;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -63,8 +67,8 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(ProductPrice));
             }
         }
-        private Brand productBrand;
-        public Brand ProductBrand
+        private DefaultModelWithImage productBrand;
+        public DefaultModelWithImage ProductBrand
         {
             get { return productBrand; }
             set
@@ -73,8 +77,8 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(ProductBrand));
             }
         }
-        private ObservableCollection<Brand> brands;
-        public ObservableCollection<Brand> Brands
+        private ObservableCollection<DefaultModelWithImage> brands;
+        public ObservableCollection<DefaultModelWithImage> Brands
         {
             get { return brands; }
             set
@@ -83,8 +87,8 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(Brands));
             }
         }
-        private Category productCategory;
-        public Category ProductCategory
+        private DefaultModelWithImage productCategory;
+        public DefaultModelWithImage ProductCategory
         {
             get { return productCategory; }
             set
@@ -93,8 +97,8 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(ProductCategory));
             }
         }
-        private ObservableCollection<Category> categories;
-        public ObservableCollection<Category> Categories
+        private ObservableCollection<DefaultModelWithImage> categories;
+        public ObservableCollection<DefaultModelWithImage> Categories
         {
             get { return categories; }
             set
@@ -123,8 +127,8 @@ namespace Imi.Project.Mobile.ViewModels
                     ProductImageSource = ProductToEdit.Image;
                     ProductName = ProductToEdit.Name;
                     ProductPrice = ProductToEdit.Price.ToString();
-                    ProductBrand = Brands.FirstOrDefault(p => p.Id.Equals(ProductToEdit.BrandId));
-                    ProductCategory = Categories.FirstOrDefault(p => p.Id.Equals(ProductToEdit.CategoryId));
+                    ProductBrand = Brands.FirstOrDefault(p => p.Id.Equals(ProductToEdit.Brand.Id));
+                    ProductCategory = Categories.FirstOrDefault(p => p.Id.Equals(ProductToEdit.Category.Id));
                 }
             }
         );
@@ -137,17 +141,17 @@ namespace Imi.Project.Mobile.ViewModels
                     decimal newPrice;
                     if (decimal.TryParse(ProductPrice, out newPrice))
                     {
-                        Product newProduct = ProductToEdit;
+                        ProductRequest newProduct = new ProductRequest();
                         newProduct.Name = ProductName;
-                        newProduct.Price = newPrice;
-                        if(ProductBrand != null)
+                        newProduct.Price = newPrice.ToString();
+                        if (ProductBrand != null)
                             newProduct.BrandId = ProductBrand.Id;
-                        if(ProductCategory != null)
+                        if (ProductCategory != null)
                             newProduct.CategoryId = ProductCategory.Id;
                         if (ProductImageSource != null)
                             newProduct.Image = ProductImageSource.ToString();
                         else
-                            newProduct.Image = "";
+                            newProduct.Image = "Placeholder.png";
 
                         var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this product?", "Yes", "No");
                         if (confirmed)
@@ -200,10 +204,19 @@ namespace Imi.Project.Mobile.ViewModels
             var products = await _productService.Get();
             var brands = await _brandService.Get();
             var categories = await _categoryService.Get();
-            Products = new ObservableCollection<Product>(products);
-            Brands = new ObservableCollection<Brand>(brands);
-            Categories = new ObservableCollection<Category>(categories);
-        }
 
+            var convertedBrands = new List<DefaultModelWithImage>();
+            var convertedCategories = new List<DefaultModelWithImage>();
+
+            foreach (var brand in brands)            
+                convertedBrands.Add(new DefaultModelWithImage { Id = brand.Id, Name = brand.Name, Image = brand.Image });
+            
+            foreach (var category in categories)            
+                convertedCategories.Add(new DefaultModelWithImage { Id = category.Id, Name = category.Name, Image = category.Image });
+            
+            Products = new ObservableCollection<Product>(products);
+            Brands = new ObservableCollection<DefaultModelWithImage>(convertedBrands);
+            Categories = new ObservableCollection<DefaultModelWithImage>(convertedCategories);
+        }
     }
 }

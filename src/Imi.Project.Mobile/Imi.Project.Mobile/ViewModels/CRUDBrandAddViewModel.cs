@@ -62,10 +62,14 @@ namespace Imi.Project.Mobile.ViewModels
                     if (BrandImageSource != null)
                         newBrand.Image = BrandImageSource.ToString();
                     else
-                        newBrand.Image = "";
+                        newBrand.Image = "Placeholder.png";
 
-                    await _brandService.Add(newBrand);
-                    await CoreMethods.PopModalNavigationService();
+                    var confirmed = await CoreMethods.DisplayAlert("Confirm Add", "Are you sure you want to add this brand?", "Yes", "No");
+                    if (confirmed)
+                    {
+                        await _brandService.Add(newBrand);
+                        await CoreMethods.PopModalNavigationService();
+                    }
                 }
             }
         );
