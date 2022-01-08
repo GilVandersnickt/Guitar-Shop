@@ -10,9 +10,9 @@
                 <Frame HorizontalOptions="FillAndExpand" >
                     <Image Source="guitar.jpg"  HorizontalOptions="Fill" Aspect="AspectFit" />
                 </Frame>
-                <Button Text="Login" Style="{StaticResource PrimaryButton}" Command="{Binding OpenLoginPageCommand}" />
+                <Button Text="Log in" Style="{StaticResource PrimaryButton}" Command="{Binding OpenLoginPageCommand}" />
                 <Button Text="Register" Style="{StaticResource PrimaryButton}" Command="{Binding OpenRegisterPageCommand}"/>
-                <Button Text="Login as admin" Style="{StaticResource PrimaryButton}" Command="{Binding OpenAdminPageCommand}" />
+                <Button Text="Continue without logging in" Style="{StaticResource PrimaryButton}" Command="{Binding OpenMainPageCommand}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

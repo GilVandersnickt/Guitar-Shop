@@ -7,23 +7,25 @@
         <ScrollView>
             <StackLayout Style="{StaticResource SlDefaultStyle}">
                 <Label Text="Product details"/>
-
                 <StackLayout BackgroundColor="White" Padding="10">
                     <StackLayout>
                         <Frame Padding="5" Margin="5" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="250" WidthRequest="250" BorderColor="Black">
                             <Image Source="{Binding SelectedProduct.Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                         </Frame>
-                        <Label Text="Details" FontAttributes="Bold" TextColor="Silver"/>
-                        <Label Text="{Binding SelectedProduct.Name}" FontSize="30" FontAttributes="Bold"/>
-                        <Label Text="{Binding SelectedProduct.Price, StringFormat='€{0:F2}'}" FontSize="25" Padding="0,15" TextColor="#49a657" FontAttributes="Bold"/>
-                        <Label Text="{Binding Brand.Name}" TextColor="Silver"/>
-                        <Label Text="{Binding Category.Name}" TextColor="Silver"/>
-                        <Button Text="Add to Cart" CornerRadius="20" BackgroundColor="White" Margin="20" FontAttributes="Bold" HeightRequest="55" TextColor="Black" VerticalOptions="CenterAndExpand" Command="{Binding OpenShoppingCartPage}" />
+                        <Label Text="Name" TextColor="Silver" FontSize="20" HorizontalOptions="Center" />
+                        <Label Text="{Binding SelectedProduct.Name}" FontSize="30" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Category" TextColor="Silver" FontSize="20" HorizontalOptions="Center" />
+                        <Label Text="{Binding Category.Name}" FontSize="30" HorizontalOptions="Center" />
+                        <Label Text="Brand" TextColor="Silver" FontSize="20" HorizontalOptions="Center"/>
+                        <Frame Padding="5" HasShadow="False"  HeightRequest="60" WidthRequest="100" HorizontalOptions="Center">
+                            <ImageButton Source="{Binding Brand.Image}" Command="{Binding OpenBrandProductsPageCommand}"/>
+                        </Frame>
+                        <Label Text="Price" TextColor="Silver" FontSize="20" HorizontalOptions="Center"/>
+                        <Label Text="{Binding SelectedProduct.Price, StringFormat='€{0:F2}'}" FontSize="25" Padding="0,15" TextColor="#49a657" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Button Text="Add to Cart"  Command="{Binding OpenShoppingCartPageCommand}" CornerRadius="20" BackgroundColor="White" Margin="20" FontAttributes="Bold" HeightRequest="55" TextColor="Black" VerticalOptions="CenterAndExpand" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-
-
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
