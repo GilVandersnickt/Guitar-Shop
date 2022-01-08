@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Domain.Services.Api
 {
-    public class ApiBrandService : IBrandService
+    public class ApiBrandsService : IBrandService
     {
-        public ApiBrandService()
+        public ApiBrandsService()
         {
 
         }
@@ -37,7 +37,7 @@ namespace Imi.Project.Mobile.Domain.Services.Api
 
         public async Task<Brand> Update(Brand brand)
         {
-            return await WebApiClient.PutCallApi<Brand, Brand>($"{ApiSettings.BaseUri}brands/{brand.Id}", brand);
+            return await WebApiClient.PutCallApi<Brand, Brand>($"{ApiSettings.BaseUri}brands", brand);
         }
     }
 }
