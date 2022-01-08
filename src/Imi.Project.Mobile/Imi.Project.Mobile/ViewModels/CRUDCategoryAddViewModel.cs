@@ -61,10 +61,14 @@ namespace Imi.Project.Mobile.ViewModels
                     if (CategoryImageSource != null)
                         newCategory.Image = CategoryImageSource.ToString();
                     else
-                        newCategory.Image = "";
+                        newCategory.Image = "Placeholder.png";
 
-                    await _categoryService.Add(newCategory);
-                    await CoreMethods.PopModalNavigationService();
+                    var confirmed = await CoreMethods.DisplayAlert("Confirm Add", "Are you sure you want to add this category?", "Yes", "No");
+                    if (confirmed)
+                    {
+                        await _categoryService.Add(newCategory);
+                        await CoreMethods.PopModalNavigationService();
+                    }
                 }
             }
         );

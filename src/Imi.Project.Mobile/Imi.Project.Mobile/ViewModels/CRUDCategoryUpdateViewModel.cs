@@ -81,7 +81,7 @@ namespace Imi.Project.Mobile.ViewModels
                     if (CategoryImageSource != null)
                         newCategory.Image = CategoryImageSource.ToString();
                     else
-                        newCategory.Image = "";
+                        newCategory.Image = "Placeholder.png";
 
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this category?", "Yes", "No");
                     if (confirmed)
