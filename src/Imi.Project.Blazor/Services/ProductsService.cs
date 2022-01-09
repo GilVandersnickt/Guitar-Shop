@@ -94,7 +94,7 @@ namespace Imi.Project.Blazor.Services
                 Name = x.Name,
                 Price = x.Price,
                 Image = x.Image,
-                Brand = categoriesService.GetSelectList().Result
+                Brand = brandsService.GetSelectList().Result
                     .Where(y => y.Value == x.CategoryId.ToString())
                     .Select(y => y.Label)
                     .SingleOrDefault(),
@@ -116,6 +116,7 @@ namespace Imi.Project.Blazor.Services
         public Task<ProductItem> Get(Guid id)
         {
             var product = products.SingleOrDefault(x => x.Id == id);
+            product.Brands = brandsService.GetSelectList().Result;
             product.Categories = categoriesService.GetSelectList().Result;
             return Task.FromResult(product);
         }
