@@ -56,7 +56,8 @@ namespace Imi.Project.Blazor.Services
                 brands.Select(x => new BrandListItem()
                 {
                     Id = x.Id,
-                    Name = x.Name
+                    Name = x.Name,
+                    Image = x.Image
                 }).ToArray()
             );
         }
