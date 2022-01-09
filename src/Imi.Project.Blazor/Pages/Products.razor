@@ -60,7 +60,7 @@
     {
         try
         {
-            if (currentProduct.Id == 0)
+            if (currentProduct.Id == Guid.Empty)
             {
                 await service.Create(currentProduct);
             }
