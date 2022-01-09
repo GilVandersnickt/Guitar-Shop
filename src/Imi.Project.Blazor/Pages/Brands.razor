@@ -1,0 +1,89 @@
+﻿@using Imi.Project.Blazor.Services
+@using Imi.Project.Blazor.Models
+@using Imi.Project.Blazor.Components
+
+@page "/brands"
+@inject ICRUDService<BrandListItem, BrandItem> service;
+
+<h2>Product Brands</h2>
+<div class="mt-3">
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <div class="alert alert-danger">
+            @error
+        </div>
+    }
+
+    @if (currentBrand == null)
+    {
+        <BrandsList BrandListItems="brandListItems"
+                    OnAddClick="AddBrand"
+                    OnDeleteClick="EditBrand"
+                    OnEditClick="DeleteBrand">
+        </BrandsList>
+    }
+    else
+    {
+        <Brand ProductBrand="currentBrand"
+               OnSaveClick="SaveBrand"
+               OnCancelClick="ShowList">
+        </Brand>
+    }
+</div>
+
+
+@code {
+    private BrandListItem[] brandListItems = new BrandListItem[0];
+    private BrandItem currentBrand;
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ShowList();
+    }
+
+    public async Task ShowList()
+    {
+        brandListItems = await service.GetList();
+        this.currentBrand = null;
+    }
+    public async Task AddBrand()
+    {
+        this.currentBrand = await service.GetNew();
+    }
+    public async Task EditBrand(BrandListItem item)
+    {
+        this.currentBrand = await service.Get(item.Id);
+    }
+    public async Task SaveBrand(BrandItem item)
+    {
+        try
+        {
+            if (currentBrand.Id == Guid.Empty)
+            {
+                await service.Create(currentBrand);
+            }
+            else
+            {
+                await service.Update(currentBrand);
+            }
+            await this.ShowList();
+        }
+        catch (Exception ex)
+        {
+            this.error = ex.Message;
+        }
+    }
+    public async Task DeleteBrand(BrandListItem item)
+    {
+        try
+        {
+            await service.Delete(item.Id);
+            await this.ShowList();
+        }
+        catch (Exception ex)
+        {
+            this.error = ex.Message;
+        }
+    }
+}
