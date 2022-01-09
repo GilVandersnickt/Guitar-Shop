@@ -7,10 +7,9 @@ namespace Imi.Project.Blazor.Models
 {
     public class MemoryGameCard
     {
-        public int number { get; set; }
-        public string color { get; set; }
-        public string image { get { return flipped ? "Guitar" + number.ToString() + ".PNG" : string.Empty; } }
-        public bool flipped { get; set; }
-
+        public int Number { get; set; }
+        public string Color { get; set; }
+        public string Image { get { return Flipped ? "Guitar" + Number.ToString() + ".PNG" : string.Empty; } }
+        public bool Flipped { get; set; }
     }
 }
