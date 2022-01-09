@@ -10,11 +10,47 @@ namespace Imi.Project.Blazor.Services
     {
         static List<CategoryItem> categories = new List<CategoryItem>
         {
-            new CategoryItem() {Id = 1, Name = "Electric guitars", Description = "All types of electric guitars"},
-            new CategoryItem() {Id = 2, Name = "Acoustic guitars", Description = "All types of acoustic guitars"},
-            new CategoryItem() {Id = 3, Name = "Classical guitars", Description = "All types of classical guitars"},
-            new CategoryItem() {Id = 4, Name = "Bass guitars", Description = "All types of bass guitars"}
+            #region Seeding
+                new CategoryItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0002-000000000001"),
+                    Name = "Electric guitars",
+                    Image = "Electric_Guitars.PNG"
+                },
+                new CategoryItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0002-000000000002"),
+                    Name = "Amps",
+                    Image= "Amps.PNG"
+                },
+                new CategoryItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0002-000000000003"),
+                    Name = "Bass guitars",
+                    Image= "Bass_Guitars.PNG"
+                },
+                new CategoryItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0002-000000000004"),
+                    Name = "Classical guitars",
+                    Image= "Classical_Guitars.PNG"
+                },
+                new CategoryItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0002-000000000005"),
+                    Name = "Cables",
+                    Image= "Cables.PNG"
+                },
+            #endregion
         };
+        static InputSelectItem[] categoriesSelectList = new InputSelectItem[]
+            {
+                new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0002-000000000001").ToString(), Label = "Electric guitars" },
+                new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0002-000000000002").ToString(), Label = "Amps" },
+                new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0002-000000000003").ToString(), Label = "Acoustic guitars" },
+                new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0002-000000000004").ToString(), Label = "Classical guitars" },
+                new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0002-000000000005").ToString(), Label = "Bass guitars" }
+            };
 
         public Task<CategoryListItem[]> GetList()
         {
@@ -26,17 +62,27 @@ namespace Imi.Project.Blazor.Services
                 }).ToArray()
             );
         }
+        public Task<InputSelectItem[]> GetSelectList()
+        {
+            return Task.FromResult(
+                categories.Select(x => new InputSelectItem()
+                {
+                    Value = x.Image,
+                    Label = x.Name
+                }).ToArray()
+            );
+        }
         public Task<CategoryItem> GetNew()
         {
             return Task.FromResult(new CategoryItem());
         }
-        public Task<CategoryItem> Get(int id)
+        public Task<CategoryItem> Get(Guid id)
         {
             return Task.FromResult(categories.SingleOrDefault(x => x.Id == id));
         }
         public Task Create(CategoryItem item)
         {
-            item.Id = categories.Count() > 0 ? categories.Max(x => x.Id) + 1 : 1;
+            item.Id = Guid.NewGuid();
             categories.Add(item);
             return Task.CompletedTask;
         }
@@ -45,10 +91,10 @@ namespace Imi.Project.Blazor.Services
             var category = categories.SingleOrDefault(x => x.Id == item.Id);
             if (category == null) throw new ArgumentException("Category not found!");
             category.Name = item.Name;
-            category.Description = item.Description;
+            category.Image = item.Image;
             return Task.CompletedTask;
         }
-        public Task Delete(int id)
+        public Task Delete(Guid id)
         {
             var category = categories.SingleOrDefault(x => x.Id == id);
             if (category == null) throw new ArgumentException("Category not found!");
