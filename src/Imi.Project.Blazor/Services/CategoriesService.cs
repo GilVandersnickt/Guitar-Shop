@@ -57,7 +57,7 @@ namespace Imi.Project.Blazor.Services
             return Task.FromResult(
                 categories.Select(x => new CategoryListItem()
                 {
-                    Id = x.Id,
+                    Id = x.Id.ToString(),
                     Name = x.Name,
                     Image = x.Image
                 }).ToArray()
@@ -68,7 +68,7 @@ namespace Imi.Project.Blazor.Services
             return Task.FromResult(
                 categories.Select(x => new InputSelectItem()
                 {
-                    Value = x.Image,
+                    Value = x.Id.ToString(),
                     Label = x.Name
                 }).ToArray()
             );
