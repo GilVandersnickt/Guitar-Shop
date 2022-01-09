@@ -8,30 +8,96 @@ namespace Imi.Project.Blazor.Services
 {
     public class ProductsService : ICRUDService<ProductListItem, ProductItem>
     {
-
-        static InputSelectItem[] categories = new InputSelectItem[]
-        {
-            new InputSelectItem() { Value = "1", Label = "Electric guitars" },
-            new InputSelectItem() { Value = "2", Label = "Acoustic guitars" },
-            new InputSelectItem() { Value = "3", Label = "Classical guitars" },
-            new InputSelectItem() { Value = "4", Label = "Bass guitars" }
-        };
+        private readonly CategoriesService categoriesService;
         static List<ProductItem> products = new List<ProductItem>
         {
-            new ProductItem() { Id = 1, Title = "Fender Stratocaster ultra burst", CategoryId = "1", Price = "1500,00" },
-            new ProductItem() { Id = 2, Title = "Taylor 314ce V-Class", CategoryId = "2", Price = "500,00" },
-            new ProductItem() { Id = 3, Title = "Yamaha NCX1C Natural", CategoryId = "3", Price = "300,00" },
-            new ProductItem() { Id = 4, Title = "Fender Player jazz bass", CategoryId = "4", Price = "750,00" },
+            #region Seeding
+            
+                new ProductItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                    Name = "Fender eric clapton stratocaster almond green",
+                    Price = 1000M,
+                    Image = "fenderericclaptonstratocastermnalmondgreenmasterbuilttoddkrausecz552554GIT0057454000.png",
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001")
+                },
+                new ProductItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                    Name = "Gibson les paul studio smokehouse burst",
+                    Price = 1000M,
+                    Image = "gibsonlespaulstudiosmokehouseburstGIT0049498000.png",
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000002"),
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001")
+                },
+                new ProductItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                    Name = "Gretsch g5230t electromatic jet ft single cut bigsby airline silver",
+                    Price = 1000M,
+                    Image = "gretschg5230telectromaticjetftsinglecutbigsbyairlinesilverGIT0047791000.png",
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000003"),
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000001")
+                },
+                new ProductItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000015"),
+                    Name = "Fender 64 custom deluxe reverb",
+                    Price = 1000M,
+                    Image = "fender64customdeluxereverbGIT0042604000.png",
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000002")
+                },
+                new ProductItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000030"),
+                    Name = "Fender american original 60s precision bass rw surf green",
+                    Price = 1000M,
+                    Image = "fenderamericanoriginal60sprecisionbassrwsurfgreenBAS0010757000.png",
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000001"),
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000003")
+                },
+                new ProductItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000037"),
+                    Name = "Yamaha c 40 m",
+                    Price = 1000M,
+                    Image = "yamahac40mmatGIT0019253000.png",
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000005"),
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000004")
+                },
+                new ProductItem
+                {
+                    Id = Guid.Parse("00000000-0000-0000-0000-000000000039"),
+                    Name = "Roland ric bpc patchcable 0,15m",
+                    Price = 1000M,
+                    Image = "rolandricbpcpatchkabel015mACC0007020000.png",
+                    BrandId = Guid.Parse("00000000-0000-0000-0001-000000000009"),
+                    CategoryId = Guid.Parse("00000000-0000-0000-0002-000000000005")
+                },
+
+            #endregion
         };
+
+        public ProductsService()
+        {
+            categoriesService = new CategoriesService();
+        }
         public Task<ProductListItem[]> GetList()
         {
             return Task.FromResult(products.Select(x => new ProductListItem()
             {
                 Id = x.Id,
-                Title = x.Title,
+                Name = x.Name,
                 Price = x.Price,
-                Category = categories
-                    .Where(y => y.Value == x.CategoryId)
+                Image = x.Image,
+                Brand = categoriesService.GetSelectList().Result
+                    .Where(y => y.Value == x.CategoryId.ToString())
+                    .Select(y => y.Label)
+                    .SingleOrDefault(),
+                Category = categoriesService.GetSelectList().Result
+                    .Where(y => y.Value == x.CategoryId.ToString())
                     .Select(y => y.Label)
                     .SingleOrDefault()
             }).ToArray());
@@ -39,19 +105,19 @@ namespace Imi.Project.Blazor.Services
         public Task<ProductItem> GetNew()
         {
             var product = new ProductItem();
-            product.Categories = categories;
-            product.CategoryId = categories.First().Value;
+            product.Categories = categoriesService.GetSelectList().Result;
+            product.CategoryId = Guid.Parse(categoriesService.GetSelectList().Result.First().Value);
             return Task.FromResult(product);
         }
-        public Task<ProductItem> Get(int id)
+        public Task<ProductItem> Get(Guid id)
         {
             var product = products.SingleOrDefault(x => x.Id == id);
-            product.Categories = categories;
+            product.Categories = categoriesService.GetSelectList().Result;
             return Task.FromResult(product);
         }
         public Task Create(ProductItem item)
         {
-            item.Id = products.Count() > 0 ? products.Max(x => x.Id) + 1 : 1;
+            item.Id = Guid.NewGuid();
             products.Add(item);
             return Task.CompletedTask;
         }
@@ -59,12 +125,14 @@ namespace Imi.Project.Blazor.Services
         {
             var product = products.SingleOrDefault(x => x.Id == item.Id);
             if (product == null) throw new ArgumentException("product not found!");
-            product.Title = item.Title;
-            product.CategoryId = item.CategoryId;
+            product.Name = item.Name;
             product.Price = item.Price;
+            product.Image = item.Image;
+            product.CategoryId = item.CategoryId;
+            product.BrandId = item.BrandId;
             return Task.CompletedTask;
         }
-        public Task Delete(int id)
+        public Task Delete(Guid id)
         {
             var product = products.SingleOrDefault(x => x.Id == id);
             if (product == null) throw new ArgumentException("product not found!");
