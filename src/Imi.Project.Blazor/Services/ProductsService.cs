@@ -9,6 +9,7 @@ namespace Imi.Project.Blazor.Services
     public class ProductsService : ICRUDService<ProductListItem, ProductItem>
     {
         private readonly CategoriesService categoriesService;
+        private readonly BrandsService brandsService;
         static List<ProductItem> products = new List<ProductItem>
         {
             #region Seeding
@@ -83,6 +84,7 @@ namespace Imi.Project.Blazor.Services
         public ProductsService()
         {
             categoriesService = new CategoriesService();
+            brandsService = new BrandsService();
         }
         public Task<ProductListItem[]> GetList()
         {
@@ -105,6 +107,8 @@ namespace Imi.Project.Blazor.Services
         public Task<ProductItem> GetNew()
         {
             var product = new ProductItem();
+            product.Brands = brandsService.GetSelectList().Result;
+            product.BrandId = Guid.Parse(brandsService.GetSelectList().Result.First().Value);
             product.Categories = categoriesService.GetSelectList().Result;
             product.CategoryId = Guid.Parse(categoriesService.GetSelectList().Result.First().Value);
             return Task.FromResult(product);
