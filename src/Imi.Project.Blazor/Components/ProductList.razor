@@ -6,9 +6,11 @@
         <tr>
             <th></th>
             <th>Id</th>
-            <th>Title</th>
+            <th>Name</th>
+            <th>Image</th>
             <th>Price</th>
             <th>Category</th>
+            <th>Brand</th>
             <th></th>
         </tr>
     </thead>
@@ -18,9 +20,11 @@
             <tr>
                 <td><button class="btn btn-warning" @onclick="e => OnEditClick.InvokeAsync(item)">Edit</button></td>
                 <td>@item.Id</td>
-                <td>@item.Title</td>
+                <td>@item.Name</td>
+                <td>@item.Image</td>
                 <td>@item.Price</td>
                 <td>@item.Category</td>
+                <td>@item.Brand</td>
                 <td><button class="btn btn-danger" @onclick="e => OnDeleteClick.InvokeAsync(item)">Delete</button></td>
             </tr>
 
