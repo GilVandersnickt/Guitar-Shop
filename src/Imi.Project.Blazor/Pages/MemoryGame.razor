@@ -6,14 +6,15 @@
 @inject MemoryGameService service;
 
 <div>
-    <h2>Memory Game @(wins == 0 ? "" : " - " + wins + (wins == 1 ? " win!" : " wins!"))</h2>
+    <h2>Memory Game</h2>
     <button class="btn btn-warning" style="margin:5px;" @onclick="Restart">Restart</button>
-    
+
     <MemoryGameCards OnFlipClick="Flip"
                      Cards="cards">
     </MemoryGameCards>
 
     <h2>Failed attempts: @failedAttempts</h2>
+    <h2>Succeeded attempts: @(wins == 0 ? "No wins yet!" : wins + (wins == 1 ? " win!" : " wins!"))</h2>
 </div>
 
 @code {
