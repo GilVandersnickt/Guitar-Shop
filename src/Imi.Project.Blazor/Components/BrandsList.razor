@@ -1,27 +1,27 @@
 ﻿@using Imi.Project.Blazor.Models
 
 <button class="btn btn-primary" @onclick="OnAddClick">Add Brand</button>
-<table class="table mt-3">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Id</th>
-            <th>Name</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in BrandListItems)
-        {
-            <tr>
-                <td><button class="btn btn-warning" @onclick="e => OnEditClick.InvokeAsync(item)">Edit</button></td>
-                <td>@item.Id</td>
-                <td>@item.Name</td>
-                <td><button class="btn btn-danger" @onclick="e => OnDeleteClick.InvokeAsync(item)">Delete</button></td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div>
+    @foreach (var brand in BrandListItems)
+    {
+        <article class="list-group-item">
+            <a>
+                <div class="card-body">
+                    <h5 class="card-title">@brand.Name</h5>
+                </div>
+                <figure class="card-image-top text-center">
+                    <img src="/images/@brand.Image" width="100" />
+                </figure>
+            </a>
+            <dl>
+                <dd>
+                    <button class="btn btn-warning" @onclick="e => OnDeleteClick.InvokeAsync(brand)">Edit</button>
+                    <button class="btn btn-danger" @onclick="e => OnEditClick.InvokeAsync(brand)">Delete</button>
+                </dd>
+            </dl>
+        </article>
+    }
+</div>
 
 @code {
 
