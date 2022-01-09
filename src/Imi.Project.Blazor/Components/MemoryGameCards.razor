@@ -6,10 +6,10 @@
     {
         @foreach (MemoryGameCard card in cardRow)
         {
-            <div class="flip-card" style=@(!card.flipped ? "transform: rotateY(180deg);" : "")>
-                <div class="flip-card-inner" style=@(!card.flipped ? "transform: rotateY(180deg);" : "")>
-                    <div class="flip-card-front" style="background-color: @(card.flipped ? card.color : Color.grey.ToString());">
-                        <img src="images/memorygame/@card.image" />
+            <div class="flip-card" style=@(!card.Flipped ? "transform: rotateY(180deg);" : "")>
+                <div class="flip-card-inner" style=@(!card.Flipped ? "transform: rotateY(180deg);" : "")>
+                    <div class="flip-card-front" style="background-color: @(card.Flipped ? card.Color : Color.grey.ToString());">
+                        <img src="images/memorygame/@card.Image" />
                     </div>
                     <div class="flip-card-back" @onclick="e => OnFlipClick.InvokeAsync(card)">
                     </div>
