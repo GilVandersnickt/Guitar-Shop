@@ -20,28 +20,8 @@ namespace Imi.Project.Blazor.Services
 
         public void StartGame()
         {
-            var uniqueCards = new List<MemoryGameCard>();
-            uniqueCards.Add(new MemoryGameCard() { number = 1, color = Color.red.ToString() });
-            uniqueCards.Add(new MemoryGameCard() { number = 2, color = Color.green.ToString() });
-            uniqueCards.Add(new MemoryGameCard() { number = 3, color = Color.blue.ToString() });
-            uniqueCards.Add(new MemoryGameCard() { number = 4, color = Color.yellow.ToString() });
-            uniqueCards.Add(new MemoryGameCard() { number = 5, color = Color.cyan.ToString() });
-            uniqueCards.Add(new MemoryGameCard() { number = 6, color = Color.orange.ToString() });
-            uniqueCards.Add(new MemoryGameCard() { number = 7, color = Color.pink.ToString() });
-            uniqueCards.Add(new MemoryGameCard() { number = 8, color = Color.lightblue.ToString() });
-            uniqueCards.AddRange(uniqueCards.Select(c => new MemoryGameCard() { number = c.number, color = c.color }).ToList());
-            var cardPairs = uniqueCards.OrderBy(x => Guid.NewGuid()).ToList();
-
-
-            Cards = new List<List<MemoryGameCard>>();
-            for (int i = 0; i < 16; i++)
-            {
-                if (i % 4 == 0)
-                {
-                    Cards.Add(new List<MemoryGameCard>());
-                }
-                Cards[i / 4].Add(cardPairs[i]);
-            }
+            var cardPairs = GetCardPairs();
+            Cards = GetCardsList(cardPairs);
         }
         public void ResetGame()
         {
@@ -54,7 +34,7 @@ namespace Imi.Project.Blazor.Services
             if (flipping) return;
 
             flipping = true;
-            card.flipped = true;
+            card.Flipped = true;
 
             await Task.Delay(100);
             FlippedCards.Add(card);
@@ -65,12 +45,12 @@ namespace Imi.Project.Blazor.Services
                 var last = lastTwo.Last();
                 var secondLast = lastTwo.First();
 
-                if (last.number != secondLast.number)
+                if (last.Number != secondLast.Number)
                 {
                     await Task.Delay(600);
                     FailedAttempts++;
-                    last.flipped = false;
-                    secondLast.flipped = false;
+                    last.Flipped = false;
+                    secondLast.Flipped = false;
                     FlippedCards.Remove(last);
                     FlippedCards.Remove(secondLast);
                 }
@@ -84,5 +64,38 @@ namespace Imi.Project.Blazor.Services
             }
             flipping = false;
         }
+        private Color[] GetRandomColorList()
+        {
+            Random rnd = new Random();
+            var colors = (Color[])Enum.GetValues(typeof(Color));
+            return colors.OrderBy(x => rnd.Next()).ToArray();
+        }
+        private List<MemoryGameCard> GetCardPairs()
+        {
+            var uniqueCards = new List<MemoryGameCard>();
+            var colors = GetRandomColorList();
+
+            for (int i = 1; i < 9; i++)
+            {
+                uniqueCards.Add(new MemoryGameCard() { Number = i, Color = colors[i].ToString() });
+            }
+            uniqueCards.AddRange(uniqueCards.Select(c => new MemoryGameCard() { Number = c.Number, Color = c.Color }).ToList());
+
+            return uniqueCards.OrderBy(x => Guid.NewGuid()).ToList();
+        }
+        private List<List<MemoryGameCard>> GetCardsList(List<MemoryGameCard> cardPairs)
+        {
+            var cards = new List<List<MemoryGameCard>>();
+            for (int i = 0; i < 16; i++)
+            {
+                if (i % 4 == 0)
+                {
+                    cards.Add(new List<MemoryGameCard>());
+                }
+                cards[i / 4].Add(cardPairs[i]);
+            }
+            return cards;
+        }
+
     }
 }
