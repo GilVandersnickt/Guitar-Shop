@@ -25,22 +25,26 @@ namespace Imi.Project.Wpf
     public partial class MainWindow : Window
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ProductsService productsService;
+        private readonly WpfService wpfService;
         private HttpClient _httpClient;
-        WpfService wpfService = new WpfService();
         private string token;
 
         public MainWindow(IHttpClientFactory httpClientFactory)
         {
             InitializeComponent();
+            productsService = new ProductsService();
+            wpfService = new WpfService();
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:5001/api/");
+            _httpClient.BaseAddress = new Uri(ApiSettings.BaseUri);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
         }
+        #region Methods
         private async void Login()
         {
             string username = txtUsername.Text;
@@ -128,6 +132,8 @@ namespace Imi.Project.Wpf
                 ShowFeedback(responseSubcategories.ReasonPhrase);
             }
         }
+        #endregion
+        #region Feedback
         private void ShowFeedback(string message)
         {
             MessageBox.Show(message);
@@ -141,6 +147,7 @@ namespace Imi.Project.Wpf
             tabUpdate.IsEnabled = true;
             tabDelete.IsEnabled = true;
         }
+        #endregion
         #region Buttons
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -148,17 +155,13 @@ namespace Imi.Project.Wpf
         }
         private void btnShowAdminCredentials_Click(object sender, RoutedEventArgs e)
         {
-            if (lblAdminUsername.Content == null)
+            if (txtUsername.Text != ApiSettings.AdminUsername)
             {
-                lblAdminUsername.Content = $"Admin username: {AdminCredentials.Username}";
-                lblAdminPassword.Content = $"Admin password: {AdminCredentials.Password}";
-                txtUsername.Text = AdminCredentials.Username;
-                txtPassword.Password = AdminCredentials.Password;
+                txtUsername.Text = ApiSettings.AdminUsername;
+                txtPassword.Password = ApiSettings.AdminPassword;
             }
             else
             {
-                lblAdminUsername.Content = null;
-                lblAdminPassword.Content = null;
                 txtUsername.Text = null;
                 txtPassword.Password = null;
             }
@@ -167,29 +170,21 @@ namespace Imi.Project.Wpf
         {
             if(!string.IsNullOrEmpty(txtNameCreate.Text) && !string.IsNullOrEmpty(txtPriceCreate.Text) && !string.IsNullOrEmpty(txtImageCreate.Text) && cmbBrandCreate != null && cmbCategoryCreate != null && cmbSubcategoryCreate != null)
             {
+                var name = txtNameCreate.Text.ToString();
+                var price = txtPriceCreate.Text.ToString();
                 var brand = (BrandApiResponse)cmbBrandCreate.SelectedItem;
                 var category = (CategoryApiResponse)cmbCategoryCreate.SelectedItem;
                 var subcategory = (SubcategoryApiResponse)cmbSubcategoryCreate.SelectedItem;
-
                 Uri imageUri = Uri.IsWellFormedUriString(txtImageCreate.Text, UriKind.Absolute) ? new Uri(txtImageCreate.Text) : new Uri("https://" + txtImageCreate.Text);             
 
-                var request = new ProductApiRequest
-                {
-                    Name = txtNameCreate.Text.ToString(),
-                    Image = imageUri, 
-                    Price = txtPriceCreate.Text.ToString(),
-                    BrandId = brand.Id,
-                    CategoryId = category.Id,
-                    SubcategoryId = subcategory.Id
-                };
-                var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+                var request = productsService.GetProductRequest(name, imageUri, price, brand.Id, category.Id, subcategory.Id);
 
                 try
                 {
-                    var response = await _httpClient.PostAsync("Products", content);
+                    var response = await _httpClient.PostAsync("Products", request);
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show($"Product {request.Name} was created successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"Product {name} was created successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                         GetDataFromApi();
                     }
                     else
@@ -211,31 +206,22 @@ namespace Imi.Project.Wpf
         {
             if(cmbProductsUpdate.SelectedItem != null)
             {
+                var name = txtNameEdit.Text.ToString();
+                var price = txtPriceEdit.Text.ToString();
                 var product = (ProductApiResponse)cmbProductsUpdate.SelectedItem;
                 var brand = (BrandApiResponse)cmbBrandUpdate.SelectedItem;
                 var category = (CategoryApiResponse)cmbCategoryUpdate.SelectedItem;
                 var subcategory = (SubcategoryApiResponse)cmbSubcategoryUpdate.SelectedItem;
-
                 Uri imageUri = Uri.IsWellFormedUriString(txtImageEdit.Text, UriKind.Absolute) ? new Uri(txtImageEdit.Text) : new Uri("https://" + txtImageEdit.Text);
 
-                var request = new ProductApiRequest
-                {
-                    Id = product.Id,
-                    Name = txtNameEdit.Text,
-                    Image = imageUri,
-                    Price = txtPriceEdit.Text.ToString(),
-                    BrandId = brand.Id,
-                    CategoryId = category.Id,
-                    SubcategoryId = subcategory.Id
-                };
-                var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+                var request = productsService.GetProductRequest(product.Id, name, imageUri, price, brand.Id, category.Id, subcategory.Id);
 
                 try
                 {
-                    var response = await _httpClient.PutAsync("Products", content);
+                    var response = await _httpClient.PutAsync("Products", request);
                     if (response.IsSuccessStatusCode)
                     {
-                        MessageBox.Show($"Product {request.Name} was edited successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show($"Product {name} was edited successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                         GetDataFromApi();
                     }
                     else
