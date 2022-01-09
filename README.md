@@ -20,6 +20,12 @@ project te kunnen uitvoeren:
 - Een **administrator** zou producten, merken, categorieën, subcategorieën en gebruikers kunnen toevoegen, editeren en verwijderen.
 - Een **gebruiker** heeft toegang tot het bekijken van alle producten, categorieën en merken. Een gebruiker kan zich registreren of inloggen.
 
+## Database structuur
+
+### ERD schema
+
+![Imgur](https://i.imgur.com/ozbgFju.png)
+
 ## Api Endpoints
 ### Brands
 Methode | Endpoint | Beschrijving | Request | Response
@@ -70,9 +76,3 @@ DEL | /api/Subcategories/{id} | Verwijder een subcategorie | Niets | Niets
 GET | /api/Subcategories/{id}/products | Geef een lijst van producten van een subcategorie | Niets | Collectie van subcategories
 GET | /api/Subcategories/{id}/brands | Geef een lijst van merken van een subcategorie | Niets | Collectie van brands
 GET | /api/Subcategorie/search | Subcategorie op basis van zoekterm | Niets | Collectie van subcategories met opgegeven zoekterm
-
-## Database structuur
-
-### ERD schema
-
-![Imgur](https://i.imgur.com/ozbgFju.png)
