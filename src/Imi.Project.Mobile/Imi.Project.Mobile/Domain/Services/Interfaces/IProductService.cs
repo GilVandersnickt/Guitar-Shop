@@ -10,9 +10,9 @@ namespace Imi.Project.Mobile.Domain.Services.Interfaces
     {
         Task<Product> Get(Guid id);
         Task<List<Product>> Get();
-        Task<ProductRequest> Update(ProductRequest entity);
+        Task<Product> Update(ProductRequest entity);
         Task<Product> Delete(Guid id);
-        Task<ProductRequest> Add(ProductRequest entity);
+        Task<Product> Add(ProductRequest entity);
         Task<List<Product>> GetProductsByBrand(Brand brand);
         Task<List<Product>> GetProductsByCategory(Category category);
     }

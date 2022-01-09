@@ -26,8 +26,8 @@ namespace Imi.Project.Mobile.ViewModels
             _categoryService = categoryService;
         }
         #region Properties
-        private DefaultModelWithImage productToAdd;
-        public DefaultModelWithImage ProductToAdd
+        private Product productToAdd;
+        public Product ProductToAdd
         {
             get { return productToAdd; }
             set
@@ -113,10 +113,14 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 if (ProductName != null)
                 {
+                    if (ProductImageSource == null) ProductImageSource = "Placeholder.png";
+                    Uri imageUri = Uri.IsWellFormedUriString(ProductImageSource.ToString(), UriKind.Absolute) ? new Uri(ProductImageSource.ToString()) : new Uri("https://" + ProductImageSource.ToString());
+
                     ProductRequest newProduct = new ProductRequest();
                     newProduct.Id = Guid.NewGuid();
                     newProduct.Name = ProductName;
                     newProduct.Price = ProductPrice;
+                    newProduct.Image = imageUri.ToString();
                     if (ProductBrand != null)
                         newProduct.BrandId = ProductBrand.Id;
                     else
@@ -126,20 +130,11 @@ namespace Imi.Project.Mobile.ViewModels
                     else
                         newProduct.CategoryId = Guid.Empty;
                     newProduct.SubCategoryId = Guid.Parse("00000000-0000-0000-0002-000000000008");
-                    if (ProductImageSource != null)
-                        newProduct.Image = ProductImageSource.ToString();
-                    else
-                        newProduct.Image = "Placeholder.png";
-
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Add", "Are you sure you want to add this product?", "Yes", "No");
                     if (confirmed)
                     {
                         await _productService.Add(newProduct);
                         await CoreMethods.PopModalNavigationService();
-                    }
-                    else
-                    {
-                        await CoreMethods.DisplayAlert("Invalid price", "Enter a valid price", "Ok");
                     }
                 }
             }

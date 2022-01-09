@@ -141,17 +141,18 @@ namespace Imi.Project.Mobile.ViewModels
                     decimal newPrice;
                     if (decimal.TryParse(ProductPrice, out newPrice))
                     {
+                        if (ProductImageSource == null) ProductImageSource = "Placeholder.png";
+                        Uri imageUri = Uri.IsWellFormedUriString(ProductImageSource.ToString(), UriKind.Absolute) ? new Uri(ProductImageSource.ToString()) : new Uri("https://" + ProductImageSource.ToString());
+
                         ProductRequest newProduct = new ProductRequest();
                         newProduct.Name = ProductName;
                         newProduct.Price = newPrice.ToString();
+                        newProduct.Image = imageUri.ToString();
+
                         if (ProductBrand != null)
                             newProduct.BrandId = ProductBrand.Id;
                         if (ProductCategory != null)
                             newProduct.CategoryId = ProductCategory.Id;
-                        if (ProductImageSource != null)
-                            newProduct.Image = ProductImageSource.ToString();
-                        else
-                            newProduct.Image = "Placeholder.png";
 
                         var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this product?", "Yes", "No");
                         if (confirmed)
