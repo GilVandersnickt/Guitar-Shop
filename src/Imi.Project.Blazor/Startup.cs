@@ -23,6 +23,7 @@ namespace Imi.Project.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddTransient<ICRUDService<BrandListItem, BrandItem>, BrandsService>();
             services.AddTransient<ICRUDService<CategoryListItem, CategoryItem>, CategoriesService>();
             services.AddTransient<ICRUDService<ProductListItem, ProductItem>, ProductsService>();
             services.AddTransient<MemoryGameService>();
