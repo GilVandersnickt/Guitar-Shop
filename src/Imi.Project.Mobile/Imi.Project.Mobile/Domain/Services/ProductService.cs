@@ -303,7 +303,7 @@ namespace Imi.Project.Mobile.Domain.Services
 #endregion
         };
 
-        public async Task<ProductRequest> Add(ProductRequest product)
+        public async Task<Product> Add(ProductRequest product)
         {
             Product newProduct = new Product()
             {
@@ -316,7 +316,7 @@ namespace Imi.Project.Mobile.Domain.Services
                 Subcategory = new DefaultModel { }
             }; 
             products.Add(newProduct);
-            return await Task.FromResult(product);
+            return await Task.FromResult(newProduct);
         }
 
         public async Task<Product> Delete(Guid id)
@@ -348,7 +348,7 @@ namespace Imi.Project.Mobile.Domain.Services
             return await Task.FromResult(product);
         }
 
-        public async Task<ProductRequest> Update(ProductRequest product)
+        public async Task<Product> Update(ProductRequest product)
         {
             var oldProduct = products.FirstOrDefault(e => e.Id == product.Id);
             Product newProduct = new Product()
@@ -363,7 +363,7 @@ namespace Imi.Project.Mobile.Domain.Services
             };
             products.Remove(oldProduct);
             products.Add(newProduct);
-            return await Task.FromResult(product);
+            return await Task.FromResult(newProduct);
         }
     }
 }
