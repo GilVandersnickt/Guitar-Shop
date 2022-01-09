@@ -50,17 +50,6 @@ namespace Imi.Project.Blazor.Services
                 },
 #endregion
         };
-        public InputSelectItem[] brandsSelectList = new InputSelectItem[]
-        {
-
-            new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0003-000000000001").ToString(), Label = "Fender" },
-            new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0003-000000000002").ToString(), Label = "Gibson" },
-            new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0003-000000000003").ToString(), Label = "Gretsch" },
-            new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0003-000000000004").ToString(), Label = "IBanez" },
-            new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0003-000000000005").ToString(), Label = "Yamaha" },
-            new InputSelectItem() { Value = Guid.Parse("00000000-0000-0000-0003-000000000006").ToString(), Label = "Roland" }
-        };
-
         public Task<BrandListItem[]> GetList()
         {
             return Task.FromResult(
