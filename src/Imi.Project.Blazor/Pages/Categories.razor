@@ -59,7 +59,7 @@
     {
         try
         {
-            if (currentCategory.Id == 0)
+            if (currentCategory.Id == Guid.Empty)
             {
                 await service.Create(currentCategory);
             }

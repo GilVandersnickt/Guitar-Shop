@@ -1,33 +1,24 @@
 ﻿@using Imi.Project.Blazor.Models
 
-<button class="btn btn-primary" @onclick="OnAddClick">Add Product</button>
+<button class="btn btn-primary" @onclick="OnAddClick">Add Brand</button>
 <table class="table mt-3">
     <thead>
         <tr>
             <th></th>
             <th>Id</th>
             <th>Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Brand</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ProductListItems)
+        @foreach (var item in BrandListItems)
         {
             <tr>
                 <td><button class="btn btn-warning" @onclick="e => OnEditClick.InvokeAsync(item)">Edit</button></td>
                 <td>@item.Id</td>
                 <td>@item.Name</td>
-                <td>@item.Image</td>
-                <td>@item.Price</td>
-                <td>@item.Category</td>
-                <td>@item.Brand</td>
                 <td><button class="btn btn-danger" @onclick="e => OnDeleteClick.InvokeAsync(item)">Delete</button></td>
             </tr>
-
         }
     </tbody>
 </table>
@@ -35,14 +26,14 @@
 @code {
 
     [Parameter]
-    public ProductListItem[] ProductListItems { get; set; }
+    public BrandListItem[] BrandListItems { get; set; }
 
     [Parameter]
     public EventCallback OnAddClick { get; set; }
 
     [Parameter]
-    public EventCallback<ProductListItem> OnEditClick { get; set; }
+    public EventCallback<BrandListItem> OnEditClick { get; set; }
 
     [Parameter]
-    public EventCallback<ProductListItem> OnDeleteClick { get; set; }
+    public EventCallback<BrandListItem> OnDeleteClick { get; set; }
 }

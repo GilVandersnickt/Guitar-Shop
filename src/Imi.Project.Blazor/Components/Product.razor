@@ -14,18 +14,19 @@
         </InputSelect>
         <ValidationMessage For="@(() => Item.CategoryId)" />
     </div>
-
+    <div>
+        <label for="image">Image:</label>
+        <InputText id="image" @bind-Value="Item.Image" class="form-control" />
+    </div>
     <div class="form-group">
         <label for="name">Title: </label>
-        <InputText id="name" @bind-Value="Item.Title" class="form-control" />
-        <ValidationMessage For="@(() => Item.Title)" />
+        <InputText id="name" @bind-Value="Item.Name" class="form-control" />
+        <ValidationMessage For="@(() => Item.Name)" />
     </div>
-
     <div class="form-group">
-        <label for="content">Price: </label>
-        <InputTextArea id="price" @bind-Value="Item.Price" class="form-control" />
+        <label for="price">Price: </label>b
+        <InputNumber type="number" id="price" @bind-Value="Item.Price" class="form-control" />
     </div>
-
     <button type="submit" class="btn btn-primary">Save</button>
     <button type="button" class="btn btn-warning" @onclick="OnCancelClick">Cancel</button>
 </EditForm>
