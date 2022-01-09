@@ -58,7 +58,8 @@ namespace Imi.Project.Blazor.Services
                 categories.Select(x => new CategoryListItem()
                 {
                     Id = x.Id,
-                    Name = x.Name
+                    Name = x.Name,
+                    Image = x.Image
                 }).ToArray()
             );
         }
