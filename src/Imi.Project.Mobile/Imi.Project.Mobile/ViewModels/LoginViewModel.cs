@@ -1,7 +1,7 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Constants;
 using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Models.Login;
+using Imi.Project.Mobile.Domain.Models.Api.Login;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -42,18 +42,20 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand Login => new Command(
             async () =>
             {
-                if(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+                if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
                     await CoreMethods.DisplayAlert("Invalid input", "Enter username and password", "Ok");
                 else
                 {
                     LoginRequest request = new LoginRequest { UserName = this.UserName, Password = this.Password };
-                    var response = await  _userService.Login(request);
-                    if(response)
+                    var response = await _userService.Login(request);
+                    if (response && (request.UserName.Equals(ApiSettings.AdminUsername) || request.UserName.Equals(ApiSettings.SuperAdminUsername)))
                         await CoreMethods.PushPageModel<AdminViewModel>(true);
+                    else if (response)
+                        await CoreMethods.PushPageModel<MainViewModel>(true);
                     else
                     {
                         var proceed = await CoreMethods.DisplayAlert("Invalid login", "Continue without logging in?", "Yes", "No");
-                        if(proceed)
+                        if (proceed)
                             await CoreMethods.PushPageModel<MainViewModel>(true);
                     }
                 }
@@ -66,7 +68,7 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
         #endregion
-        public async override void Init(object initData)
+        public override void Init(object initData)
         {
             base.Init(initData);
 
