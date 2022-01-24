@@ -1,7 +1,9 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Constants;
 using Imi.Project.Mobile.Domain.Models;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
+using System.Net.Http;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -46,7 +48,16 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(BrandImageSource));
             }
         }
-
+        private FileResult brandImage;
+        public FileResult BrandImage
+        {
+            get { return brandImage; }
+            set
+            {
+                brandImage = value;
+                RaisePropertyChanged(nameof(BrandImage));
+            }
+        }
         #endregion
 
         #region Commands
@@ -55,19 +66,18 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 if (BrandName != null)
                 {
-                    Brand newBrand = new Brand();
-                    newBrand.Id = Guid.NewGuid();
-                    newBrand.Name = BrandName;
-
-                    if (BrandImageSource != null)
-                        newBrand.Image = BrandImageSource.ToString();
-                    else
-                        newBrand.Image = "Placeholder.png";
-
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Add", "Are you sure you want to add this brand?", "Yes", "No");
                     if (confirmed)
                     {
-                        await _brandService.Add(newBrand);
+                        Brand newBrand = new Brand();
+                        newBrand.Id = Guid.NewGuid();
+                        newBrand.Name = BrandName;
+                        newBrand.Image = ApiSettings.ImagePlaceHolder;
+
+                        var brand = await _brandService.Add(newBrand);
+                        if (brand != null && BrandImage != null)
+                            await _brandService.AddImage(brand.Id, await BrandImage.OpenReadAsync());
+
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -79,6 +89,7 @@ namespace Imi.Project.Mobile.ViewModels
                 var result = await MediaPicker.CapturePhotoAsync();
                 if (result != null)
                 {
+                    BrandImage = result;
                     var stream = await result.OpenReadAsync();
                     BrandImageSource = ImageSource.FromStream(() => stream);
                 }
@@ -93,6 +104,7 @@ namespace Imi.Project.Mobile.ViewModels
                 });
                 if (result != null)
                 {
+                    BrandImage = result;
                     var stream = await result.OpenReadAsync();
                     BrandImageSource = ImageSource.FromStream(() => stream);
                 }
