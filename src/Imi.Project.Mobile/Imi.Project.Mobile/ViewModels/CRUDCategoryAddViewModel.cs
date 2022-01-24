@@ -1,4 +1,5 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Constants;
 using Imi.Project.Mobile.Domain.Models;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
@@ -47,6 +48,17 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(CategoryImageSource));
             }
         }
+        private FileResult categoryImage;
+        public FileResult CategoryImage
+        {
+            get { return categoryImage; }
+            set
+            {
+                categoryImage = value;
+                RaisePropertyChanged(nameof(CategoryImage));
+            }
+        }
+
         #endregion
         #region Commands
         public ICommand SaveCategory => new Command(
@@ -54,19 +66,18 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 if (CategoryName != null)
                 {
-                    Category newCategory = new Category();
-                    newCategory.Id = Guid.NewGuid();
-                    newCategory.Name = CategoryName;
-
-                    if (CategoryImageSource != null)
-                        newCategory.Image = CategoryImageSource.ToString();
-                    else
-                        newCategory.Image = "Placeholder.png";
-
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Add", "Are you sure you want to add this category?", "Yes", "No");
                     if (confirmed)
                     {
-                        await _categoryService.Add(newCategory);
+                        Category newCategory = new Category();
+                        newCategory.Id = Guid.NewGuid();
+                        newCategory.Name = CategoryName;
+                        newCategory.Image = ApiSettings.ImagePlaceHolder;
+
+                        var category = await _categoryService.Add(newCategory);
+                        if (category != null && CategoryImage != null)
+                            await _categoryService.AddImage(category.Id, await CategoryImage.OpenReadAsync());
+
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -78,6 +89,7 @@ namespace Imi.Project.Mobile.ViewModels
                 var result = await MediaPicker.CapturePhotoAsync();
                 if (result != null)
                 {
+                    CategoryImage = result;
                     var stream = await result.OpenReadAsync();
                     CategoryImageSource = ImageSource.FromStream(() => stream);
                 }
@@ -92,6 +104,7 @@ namespace Imi.Project.Mobile.ViewModels
                 });
                 if (result != null)
                 {
+                    CategoryImage = result;
                     var stream = await result.OpenReadAsync();
                     CategoryImageSource = ImageSource.FromStream(() => stream);
                 }
