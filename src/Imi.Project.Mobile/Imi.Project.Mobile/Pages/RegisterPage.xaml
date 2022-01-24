@@ -9,13 +9,13 @@
             <StackLayout Style="{StaticResource SlDefaultStyle}">
                 <Label Text="Register" Style="{StaticResource Title}"/>
                 <Entry Text="{Binding UserName}" Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry Text="{Binding PassWord}" Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry  Placeholder="Confirm password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry  Placeholder="Email address" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry  Placeholder="First name" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry  Placeholder="Last name" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry  Placeholder="Address" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
-                <Entry  Placeholder="City" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding Password}" Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding PasswordConfirm}" Placeholder="Confirm password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding EmailAddress}" Placeholder="Email address" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <DatePicker Date="{Binding BirthDate}" MaximumDate="{Binding MaxDate}" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding Address}" Placeholder="Address" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding PostalCode}" Placeholder="Postal code" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Entry Text="{Binding City}" Placeholder="City" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Button Text="Register" Style="{StaticResource PrimaryButton}" Command="{Binding Register}"/>
             </StackLayout>
         </ScrollView>

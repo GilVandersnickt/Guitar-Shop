@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace Imi.Project.Mobile.Domain.Models
+namespace Imi.Project.Mobile.Domain.Models.Api.Login
 {
-    public class User
+    public class RegisterRequest
     {
-        public Guid Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string PasswordConfirm { get; set; }

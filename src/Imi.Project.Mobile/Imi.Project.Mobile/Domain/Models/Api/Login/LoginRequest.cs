@@ -1,4 +1,4 @@
-﻿namespace Imi.Project.Mobile.Domain.Models.Login
+﻿namespace Imi.Project.Mobile.Domain.Models.Api.Login
 {
     public class LoginRequest
     {

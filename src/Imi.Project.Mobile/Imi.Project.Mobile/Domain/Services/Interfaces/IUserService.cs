@@ -1,13 +1,12 @@
-﻿using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Models.Login;
+﻿using Imi.Project.Mobile.Domain.Models.Api.Login;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Domain.Services.Interfaces
 {
-    public interface IUserService : ICrudService<User>
+    public interface IUserService
     {
         Task<bool> Login(LoginRequest loginRequest);
-        Task Register(User user);
-        Task Logout();
+        Task<bool> Register(RegisterRequest registerRequest);
+        bool Logout();
     }
 }

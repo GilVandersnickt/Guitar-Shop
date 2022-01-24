@@ -1,12 +1,11 @@
 ﻿using Imi.Project.Mobile.Constants;
-using Imi.Project.Mobile.Domain.Models.Api;
-using Imi.Project.Mobile.Domain.Models.Login;
+using Imi.Project.Mobile.Domain.Models.Api.Login;
 using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -64,10 +63,7 @@ namespace Imi.Project.Mobile.Domain.Services.Api
                 HttpResponseMessage response;
                 if (httpMethod == HttpMethod.Post)
                 {
-                    var content = JsonConvert.SerializeObject(entity);
-                    var stringContent = new StringContent(content);
-                    stringContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
-                    response = await httpClient.PostAsync(uri, stringContent);
+                    response = await httpClient.PostAsync(uri, entity, GetJsonFormatter());
                 }
                 else if (httpMethod == HttpMethod.Put)
                 {
@@ -80,6 +76,23 @@ namespace Imi.Project.Mobile.Domain.Services.Api
                 result = await response.Content.ReadAsAsync<TOut>();
             }
             return result;
+        }
+        public static async Task<bool> UploadImage(Guid id, Stream stream, string apiEndpoint)
+        {
+            using (HttpClient httpClient = new HttpClient(ClientHandler()))
+            {
+                using (var content = new MultipartFormDataContent())
+                {
+                    content.Headers.ContentType.MediaType = "multipart/form-data";
+                    content.Add(new StreamContent(stream), "image", $"{id}.png");
+
+                    if (Application.Current.Properties["Token"] != null)
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Application.Current.Properties["Token"] as string);
+                    string baseUri = ApiSettings.GetLocalIPAddress();
+                    var response = await httpClient.PutAsync(apiEndpoint, content);
+                    return response.IsSuccessStatusCode;
+                }
+            }
         }
         public static async Task<bool> LoginCallApi(LoginRequest request)
         {
@@ -95,6 +108,19 @@ namespace Imi.Project.Mobile.Domain.Services.Api
                     var loginResponse = JsonConvert.DeserializeObject<LoginResponse>(responseString);
                     Application.Current.Properties["Token"] = loginResponse.jwtToken;
                 }
+                return response.IsSuccessStatusCode;
+            }
+        }
+        public static async Task<bool> RegisterCallApi(RegisterRequest request)
+        {
+            using (HttpClient httpClient = new HttpClient(ClientHandler()))
+            {
+                httpClient.BaseAddress = new Uri(ApiSettings.BaseUri);
+                HttpResponseMessage response;
+
+                response = await httpClient.PostAsync("auth/register", request, GetJsonFormatter());
+
+                var responseString = await response.Content.ReadAsStringAsync();
                 return response.IsSuccessStatusCode;
             }
         }

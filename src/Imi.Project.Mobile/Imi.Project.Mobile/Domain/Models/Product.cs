@@ -1,4 +1,4 @@
-﻿using Imi.Project.Mobile.Domain.Models.Default;
+﻿using Imi.Project.Mobile.Domain.Models.Api.Default;
 using System;
 
 namespace Imi.Project.Mobile.Domain.Models

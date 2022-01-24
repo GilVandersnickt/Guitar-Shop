@@ -3,6 +3,7 @@ using Imi.Project.Mobile.Domain.Models;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,6 +39,10 @@ namespace Imi.Project.Mobile.Domain.Services.Api
         public async Task<Brand> Update(Brand brand)
         {
             return await WebApiClient.PutCallApi<Brand, Brand>($"{ApiSettings.BaseUri}brands", brand);
+        }
+        public async Task<bool> AddImage(Guid id, Stream image)
+        {
+            return await WebApiClient.UploadImage(id, image, $"{ApiSettings.BaseUri}Brands/{id}/Image");
         }
     }
 }

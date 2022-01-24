@@ -3,6 +3,7 @@ using Imi.Project.Mobile.Domain.Models;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Domain.Services.Api
@@ -37,6 +38,9 @@ namespace Imi.Project.Mobile.Domain.Services.Api
         {
             return await WebApiClient.PutCallApi<Category, Category>($"{ApiSettings.BaseUri}Categories", category);
         }
-
+        public async Task<bool> AddImage(Guid id, Stream image)
+        {
+            return await WebApiClient.UploadImage(id, image, $"{ApiSettings.BaseUri}Categories/{id}/Image");
+        }
     }
 }

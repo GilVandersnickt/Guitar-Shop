@@ -1,14 +1,14 @@
 ﻿using Imi.Project.Mobile.Domain.Models;
 using Imi.Project.Mobile.Domain.Models.Api;
-using Imi.Project.Mobile.Domain.Models.Default;
+using Imi.Project.Mobile.Domain.Models.Api.Default;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Mobile.Domain.Services
+namespace Imi.Project.Mobile.Domain.Services.Local
 {
     public class ProductService : IProductService
     {
@@ -303,7 +303,7 @@ namespace Imi.Project.Mobile.Domain.Services
 #endregion
         };
 
-        public async Task<Product> Add(ProductRequest product)
+        public async Task<ProductResponse> Add(ProductRequest product)
         {
             Product newProduct = new Product()
             {
@@ -314,9 +314,11 @@ namespace Imi.Project.Mobile.Domain.Services
                 Brand = new DefaultModelWithImage { Id = product.BrandId },
                 Category = new DefaultModelWithImage { Id = product.CategoryId },
                 Subcategory = new DefaultModel { }
-            }; 
+            };
             products.Add(newProduct);
-            return await Task.FromResult(newProduct);
+            ProductResponse productResponse = new ProductResponse();
+            productResponse.Name = product.Name;
+            return await Task.FromResult(productResponse);
         }
 
         public async Task<Product> Delete(Guid id)
@@ -348,7 +350,7 @@ namespace Imi.Project.Mobile.Domain.Services
             return await Task.FromResult(product);
         }
 
-        public async Task<Product> Update(ProductRequest product)
+        public async Task<ProductResponse> Update(ProductRequest product)
         {
             var oldProduct = products.FirstOrDefault(e => e.Id == product.Id);
             Product newProduct = new Product()
@@ -363,7 +365,14 @@ namespace Imi.Project.Mobile.Domain.Services
             };
             products.Remove(oldProduct);
             products.Add(newProduct);
-            return await Task.FromResult(newProduct);
+            ProductResponse productResponse = new ProductResponse();
+            productResponse.Name = product.Name;
+            return await Task.FromResult(productResponse);
+        }
+
+        public Task<bool> AddImage(Guid id, Stream entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

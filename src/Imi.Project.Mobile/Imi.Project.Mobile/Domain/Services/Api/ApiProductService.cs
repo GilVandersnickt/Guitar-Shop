@@ -4,8 +4,8 @@ using Imi.Project.Mobile.Domain.Models.Api;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Domain.Services.Api
@@ -16,9 +16,9 @@ namespace Imi.Project.Mobile.Domain.Services.Api
         {
 
         }
-        public async Task<Product> Add(ProductRequest product)
+        public async Task<ProductResponse> Add(ProductRequest product)
         {
-            return await WebApiClient.PostCallApi<Product, ProductRequest>($"{ApiSettings.BaseUri}Products", product);
+            return await WebApiClient.PostCallApi<ProductResponse, ProductRequest>($"{ApiSettings.BaseUri}Products", product);
         }
 
         public async Task<Product> Delete(Guid id)
@@ -49,9 +49,14 @@ namespace Imi.Project.Mobile.Domain.Services.Api
             return products.ToList();
         }
 
-        public async Task<Product> Update(ProductRequest product)
+        public async Task<ProductResponse> Update(ProductRequest product)
         {
-            return await WebApiClient.PutCallApi<Product, ProductRequest>($"{ApiSettings.BaseUri}Products", product);
+            return await WebApiClient.PutCallApi<ProductResponse, ProductRequest>($"{ApiSettings.BaseUri}Products", product);
         }
+        public async Task<bool> AddImage(Guid id, Stream image)
+        {
+            return await WebApiClient.UploadImage(id, image, $"{ApiSettings.BaseUri}Products/{id}/Image");
+        }
+
     }
 }

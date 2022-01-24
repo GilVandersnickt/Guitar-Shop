@@ -1,9 +1,7 @@
-﻿using Imi.Project.Mobile.Domain.Models;
-using Imi.Project.Mobile.Domain.Models.Login;
+﻿using Imi.Project.Mobile.Domain.Models.Api.Login;
 using Imi.Project.Mobile.Domain.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.Domain.Services.Api
 {
@@ -13,40 +11,14 @@ namespace Imi.Project.Mobile.Domain.Services.Api
         {
             return await WebApiClient.LoginCallApi(loginRequest);
         }
-
-        public Task Logout()
+        public async Task<bool> Register(RegisterRequest registerRequest)
         {
-            throw new NotImplementedException();
+            return await WebApiClient.RegisterCallApi(registerRequest);
         }
-
-        public Task Register(User user)
+        public bool Logout()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<User>> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> Add(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> Update(User entity)
-        {
-            throw new NotImplementedException();
+            Application.Current.Properties["Token"] = "";
+            return true;
         }
     }
 }

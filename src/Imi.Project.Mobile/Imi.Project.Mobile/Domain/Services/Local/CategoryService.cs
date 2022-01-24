@@ -2,11 +2,11 @@
 using Imi.Project.Mobile.Domain.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Imi.Project.Mobile.Domain.Services
+namespace Imi.Project.Mobile.Domain.Services.Local
 {
     public class CategoryService : ICategoryService
     {
@@ -51,6 +51,11 @@ namespace Imi.Project.Mobile.Domain.Services
         {
             categories.Add(category);
             return await Task.FromResult(category);
+        }
+
+        public Task<bool> AddImage(Guid id, Stream entity)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Category> Delete(Guid id)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Imi.Project.Mobile.Domain.Models.Default
+namespace Imi.Project.Mobile.Domain.Models.Api.Default
 {
     public class DefaultModelWithImage
     {

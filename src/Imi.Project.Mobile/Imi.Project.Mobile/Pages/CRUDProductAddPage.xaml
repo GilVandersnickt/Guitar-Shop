@@ -23,7 +23,7 @@
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 
                            StyleClass="errormessage" />
-                    <Label Text="Product price" />
+                    <Label Text="Product price in €" />
                     <Entry Text="{Binding ProductPrice}" Placeholder="Set price for product here" />
                     <Label Text="{Binding ProductDescriptionError}" 
                            IsVisible="{Binding ProductDescriptionErrorVisible}" 

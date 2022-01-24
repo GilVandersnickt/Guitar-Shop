@@ -58,6 +58,16 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(CategoryImageSource));
             }
         }
+        private FileResult categoryImage;
+        public FileResult CategoryImage
+        {
+            get { return categoryImage; }
+            set
+            {
+                categoryImage = value;
+                RaisePropertyChanged(nameof(CategoryImage));
+            }
+        }
         #endregion
         #region Commands
         public ICommand LoadCategory => new Command(
@@ -75,18 +85,16 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 if (CategoryToEdit != null)
                 {
-                    Category newCategory = CategoryToEdit;
-                    newCategory.Name = CategoryName;
-
-                    if (CategoryImageSource != null)
-                        newCategory.Image = CategoryImageSource.ToString();
-                    else
-                        newCategory.Image = "Placeholder.png";
-
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this category?", "Yes", "No");
                     if (confirmed)
                     {
-                        await _categoryService.Update(newCategory);
+                        Category newCategory = CategoryToEdit;
+                        newCategory.Name = CategoryName;
+
+                        var category = await _categoryService.Update(newCategory);
+                        if (category != null && CategoryImage != null)
+                            await _categoryService.AddImage(CategoryToEdit.Id, await CategoryImage.OpenReadAsync());
+
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
@@ -98,6 +106,7 @@ namespace Imi.Project.Mobile.ViewModels
                 var result = await MediaPicker.CapturePhotoAsync();
                 if (result != null)
                 {
+                    CategoryImage = result;
                     var stream = await result.OpenReadAsync();
                     CategoryImageSource = ImageSource.FromStream(() => stream);
                 }
@@ -112,6 +121,7 @@ namespace Imi.Project.Mobile.ViewModels
                 });
                 if (result != null)
                 {
+                    CategoryImage = result;
                     var stream = await result.OpenReadAsync();
                     CategoryImageSource = ImageSource.FromStream(() => stream);
                 }

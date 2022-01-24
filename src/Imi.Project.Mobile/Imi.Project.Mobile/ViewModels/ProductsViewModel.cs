@@ -60,7 +60,5 @@ namespace Imi.Project.Mobile.ViewModels
                 Products = new ObservableCollection<Product>(await _productService.GetProductsByBrand(initData as Brand));
 
         }
-
-
     }
 }
