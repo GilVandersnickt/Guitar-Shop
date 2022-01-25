@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Api.Core.Services.Validation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Imi.Project.Api.Core.Dtos.User
         public string EmailAddress { get; set; }
 
         [Required]
+        [MinimumAge(0)]
         [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
