@@ -31,6 +31,10 @@ namespace Imi.Project.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserRequestDto registerRequestDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 var result = await _userService.RegisterAsync(registerRequestDto);
@@ -51,6 +55,10 @@ namespace Imi.Project.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginRequestDto requestDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 var result = await _userService.LoginAsync(requestDto);

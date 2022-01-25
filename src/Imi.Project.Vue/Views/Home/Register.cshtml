@@ -1,0 +1,114 @@
+﻿@using Imi.Project.Vue.Constants
+
+<div>
+    <h2>Register</h2>
+</div>
+
+<div id="app">
+    <p v-bind:title="message">{{message}}</p>
+    <div class="text-center">
+        <div v-if="!registrationSuccess" class="col-md-6">
+            <div class="form-group">
+                <h5>Username</h5>
+                <input type="text" v-model="registerForm.username" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>Password</h5>
+                <input type="password" v-model="registerForm.password" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>Confirm password</h5>
+                <input type="password" v-model="registerForm.passwordConfirm" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>Email-address</h5>
+                <input type="email" v-model="registerForm.emailAddress" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>Postal code</h5>
+                <input type="number" v-model="registerForm.postalCode" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>Address</h5>
+                <input type="text" v-model="registerForm.address" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>City</h5>
+                <input type="text" v-model="registerForm.city" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>Birthdate</h5>
+                <input type="date" max="2022-01-01" v-model="registerForm.birthDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <button v-on:click="registerUser" class="btn-dark">Register</button>
+            </div>
+        </div>
+        <div v-else>
+            <figure style="background-image:url('/images//Background/guitar.jpg');background-size:cover;background-repeat:no-repeat;background-attachment:fixed;width:auto;height:600px" />
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/lib/axios/axios.min.js"></script>
+
+    <script>
+        var apiBase = 'https://localhost:5001/api/';
+        var apiURL = apiBase + 'auth/register';
+        let jwtToken = '';
+        var lastPage = 0;
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello! Please register below',
+                registrationSuccess: false,
+                registerForm: {
+                    username: 'newTestUser@guitarshop.com',
+                    password: 'Test123?',
+                    passwordConfirm: 'Test123?',
+                    emailAddress: 'newTestUser@guitarshop.com',
+                    postalCode: 8000,
+                    address: 'Rijselstraat 1',
+                    city: 'Brugge',
+                    birthDate: '1992-12-04'
+                },
+            },
+            methods: {
+                registerUser: function () {
+                    var self = this;
+                    let hasError = false;
+                    var logRegister = function () {
+                        console.log(apiURL);
+                        console.log(self.registerForm);
+                        axios.post(apiURL, self.registerForm)
+                            .then(function (response) {
+                                console.log(response);
+                                alert(`User ${self.registerForm.username} registered successfully!`);
+                                self.message = `Hi, ${self.registerForm.username}!`;
+                                self.registerForm.username = "";
+                                self.registerForm.password = "";
+                                self.registerForm.passwordConfirm = "";
+                                self.registerForm.city = "";
+                                self.registerForm.postalCode = 0;
+                                self.registerForm.emailAddress = "";
+                                self.registerForm.address = "";
+                                self.registerForm.birthDate = '1992-12-04';
+                                self.registrationSuccess = true;
+                            })
+                            .catch(function (error) {
+                                if (error.response) {
+                                    console.log(error.response);
+                                    hasError = true;
+                                    alert(`Username already exists!`);
+                                }
+                            });
+                    }
+                    logRegister();
+
+                }
+            }
+        })
+    </script>
+}

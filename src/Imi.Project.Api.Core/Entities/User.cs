@@ -1,8 +1,5 @@
 ﻿using Imi.Project.Api.Core.Entities.Base;
-using Imi.Project.Api.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Imi.Project.Api.Core.Entities
 {

@@ -1,0 +1,195 @@
+﻿@{
+    ViewData["Title"] = "Subcategories Page";
+}
+
+<div>
+    <h2>Subcategories</h2>
+</div>
+
+<div id="app" class="row">
+    <div class="col-md-12">
+        <div class="alert alert-info" v-if="feedback">
+            {{feedback}}
+        </div>
+    </div>
+    <div class="col-md-12 flex-column">
+        <div>
+            <button class="btn btn-info" style="margin: 15px;" v-on:click.prevent="toEditMode(false)">Add</button>
+        </div>
+        <div class="col-md-6  float-left">
+            <ul class="list-group">
+                <li class="list-group-item text-center" style="margin-bottom:5px;" v-for="subcategory in subcategories" v-on:click="getSubcategoryDetails(subcategory)">
+                    <div>
+                        <h4>{{subcategory.name}}</h4>
+                    </div>
+                    <div>
+                        <h6>Category</h6>
+                        <label>{{subcategory.category}}</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-6 float-left">
+            <div v-if="currentSubcategory">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" v-model="currentSubcategory.name" v-bind:readonly="isReadOnly" />
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <input class="form-control" v-if="isReadOnly" v-model="currentSubcategory.category" v-bind:readonly="isReadOnly" />
+                    <select v-else class="form-control" v-model="currentSubcategory.category" v-bind:readonly="isReadOnly">
+                        <option v-for="category in categories" v-bind:value="category.name">{{category.name}}</option>
+                    </select>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-warning" v-if="isReadOnly" v-on:click.prevent="toEditMode(true)">Edit</button>
+                    <button class="btn btn-warning" v-if="!isReadOnly" v-on:click.prevent="saveSubcategory">Save</button>
+                    <button class="btn btn-primary" v-if="!isReadOnly" v-on:click.prevent="isReadOnly = true">Cancel</button>
+                    <button class="btn btn-danger" v-on:click.prevent="deleteSubcategory">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/lib/axios/axios.min.js"></script>
+
+    <script>
+        var apiBase = 'https://localhost:5001/api/';
+        var axiosConfig;
+        var token = localStorage.getItem('jwtToken');
+        if (token != null) {
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                subcategories: null,
+                categories: null,
+                currentSubcategory: null,
+                currentCategory: null,
+                isReadOnly: true,
+                feedback: '',
+                statuses: [{ name: 'Active' }, { name: 'Inactive' }],
+                isEditMode: false,
+                isDeleteMode: false,
+            },
+            created: function () {
+                var self = this;
+                self.fetchSubcategories();
+                self.fetchCategories();
+            },
+            methods: {
+                fetchSubcategories: function () {
+                    var self = this;
+                    axios.get(apiBase + 'Subcategories')
+                        .then(function (response) {
+                            console.log(response.data);
+                            self.subcategories = response.data;
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                },
+                fetchCategories: function () {
+                    var self = this;
+                    axios.get(apiBase + 'Categories')
+                        .then(function (response) {
+                            console.log(response.data);
+                            self.categories = response.data;
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                },
+                toEditMode: function (isEditMode) {
+                    var self = this;
+                    self.isReadOnly = false;
+                    self.isEditMode = isEditMode;
+
+                    if (!self.isEditMode) {
+                        self.currentSubcategory = {
+                            name: "",
+                            id: "00000000-0000-0000-0000-000000000000",
+                            category: "",
+                        }
+                    }
+                },
+                saveSubcategory: function () {
+                    var self = this;
+                    if (self.isEditMode) {
+                        console.log('edit subcategory:', self.currentSubcategory);
+                        let cat = self.categories.filter(function (el) { return (el.name == self.currentSubcategory.category) })
+                        var request = {id: self.currentSubcategory.id, name: self.currentSubcategory.name, categoryId: cat[0].id };
+                        var url = (`${apiBase}Subcategories`);
+                        axios.put(url, request, axiosConfig)
+                            .then(function (response) {
+                                console.log('edited subcategory response: ', response)
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            })
+                            .then(function () {
+                                self.isReadOnly = true;
+                                self.feedback = `Subcategory ${self.currentSubcategory.name} has been modified`;
+                                setTimeout(function () { self.feedback = null; }, 3000);
+                            });
+                    }
+                    else {
+                        console.log('add subcategory:', self.currentSubcategory);
+                        let cat = self.categories.filter(function (el) { return (el.name == self.currentSubcategory.category)})
+                        var request = { name: self.currentSubcategory.name, categoryId: cat[0].id };
+                        var url = `${apiBase}Subcategories`;
+                        axios.post(url, request, axiosConfig)
+                            .then(function (response) {
+                                console.log('added subcategory response: ', response)
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            })
+                            .then(function () {
+                                self.isReadOnly = true;
+                                self.feedback = `Subcategory ${self.currentSubcategory.name} has been created`;
+                                setTimeout(function () { self.feedback = null; }, 3000);
+                            });
+                    }
+                },
+                deleteSubcategory: function () {
+                    var self = this;
+                    var url = `${apiBase}Subcategories/${self.currentSubcategory.id}`;
+
+                    axios.delete(url, axiosConfig)
+                        .then(function (response) {
+                            self.subcategories.forEach(function (subcategory, i) {
+                                if (subcategory.id === self.currentSubcategory.id) {
+                                    self.subcategories.splice(i, 1);
+                                }
+                            })
+                        })
+                        .catch(function (error) { console.error(error); })
+                        .then(function () {
+                            self.feedback = `Subcategory ${self.currentSubcategory.name} has been deleted successfully!`;
+                            setTimeout(function () { self.feedback = null; }, 3000);
+                        });
+                },
+                getSubcategoryDetails: function (selectedSubcategory) {
+                    var self = this;
+                    console.log(selectedSubcategory);
+                    console.log(self.currentSubcategory);
+                    let tempSubcategory = {
+                        id: selectedSubcategory.id,
+                        name: selectedSubcategory.name,
+                        category: selectedSubcategory.category
+                    }
+                    self.currentSubcategory = tempSubcategory;
+                    console.log(self.currentSubcategory);
+                    window.scrollTo(0, 0);
+                },
+            }
+        });
+    </script>
+}
