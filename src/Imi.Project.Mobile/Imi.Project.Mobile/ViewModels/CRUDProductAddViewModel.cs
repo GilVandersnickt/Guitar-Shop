@@ -122,8 +122,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SaveProduct => new Command(
             async () =>
             {
-                decimal newPrice;
-                if (ProductName != null && decimal.TryParse(ProductPrice, out newPrice))
+                if (Validate(ProductName, ProductPrice))
                 {
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Add", "Are you sure you want to add this product?", "Yes", "No");
                     if (confirmed)
@@ -181,6 +180,17 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
         #endregion
+        #region Validate
+        public bool Validate(string productName, string price)
+        {
+            decimal newPrice;
+            if (!string.IsNullOrEmpty(productName) && decimal.TryParse(price, out newPrice))
+                return true;
+            else
+                return false;
+        }
+        #endregion
+
         public async override void Init(object initData)
         {
             base.Init(initData);
