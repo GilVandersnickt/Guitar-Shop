@@ -154,7 +154,7 @@ namespace Imi.Project.Mobile.ViewModels
         );
         #endregion
         #region Validate
-        private string Validate(RegisterRequest request)
+        public string Validate(RegisterRequest request)
         {
             if (string.IsNullOrEmpty(request.UserName) || string.IsNullOrEmpty(request.Password) || string.IsNullOrEmpty(request.PasswordConfirm) || string.IsNullOrEmpty(request.EmailAddress) || string.IsNullOrEmpty(request.Address) || string.IsNullOrEmpty(request.City))
                 return "Enter all input fields";

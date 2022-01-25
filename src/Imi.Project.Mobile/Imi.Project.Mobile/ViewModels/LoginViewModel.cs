@@ -42,7 +42,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand Login => new Command(
             async () =>
             {
-                if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(Password))
+                if (!Validate(UserName, Password))
                     await CoreMethods.DisplayAlert("Invalid input", "Enter username and password", "Ok");
                 else
                 {
@@ -68,6 +68,16 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
         #endregion
+        #region Validate
+        public bool Validate(string username, string password)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
         public override void Init(object initData)
         {
             base.Init(initData);

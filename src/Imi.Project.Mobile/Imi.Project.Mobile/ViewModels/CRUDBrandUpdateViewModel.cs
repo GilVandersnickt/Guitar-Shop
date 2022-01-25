@@ -85,7 +85,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SaveBrand => new Command(
             async () =>
             {
-                if (BrandToEdit != null)
+                if (Validate(BrandToEdit))
                 {
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this brand?", "Yes", "No");
                     if (confirmed)
@@ -100,6 +100,8 @@ namespace Imi.Project.Mobile.ViewModels
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
+                else
+                    await CoreMethods.DisplayAlert("Invalid input", "Select a brand to edit", "Ok");
             }
         );
         public ICommand TakePhoto => new Command(
@@ -130,6 +132,16 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
         #endregion
+        #region Validate
+        public bool Validate(Brand brand)
+        {
+            if (brand == null)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
         public async override void Init(object initData)
         {
             base.Init(initData);

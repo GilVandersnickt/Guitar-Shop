@@ -83,7 +83,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SaveCategory => new Command(
             async () =>
             {
-                if (CategoryToEdit != null)
+                if (Validate(CategoryToEdit))
                 {
                     var confirmed = await CoreMethods.DisplayAlert("Confirm Edit", "Are you sure you want to edit this category?", "Yes", "No");
                     if (confirmed)
@@ -98,6 +98,8 @@ namespace Imi.Project.Mobile.ViewModels
                         await CoreMethods.PopModalNavigationService();
                     }
                 }
+                else
+                    await CoreMethods.DisplayAlert("Invalid input", "Select a category to edit", "Ok");
             }
         );
         public ICommand TakePhoto => new Command(
@@ -128,6 +130,16 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
         #endregion
+        #region Validate
+        public bool Validate(Category category)
+        {
+            if (category == null)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
         public async override void Init(object initData)
         {
             base.Init(initData);
