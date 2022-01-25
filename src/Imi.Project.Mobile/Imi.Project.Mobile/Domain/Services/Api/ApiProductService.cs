@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Domain.Services.Api
 {
-    class ApiProductService : IProductService
+    public class ApiProductService : IProductService
     {
         public ApiProductService()
         {
