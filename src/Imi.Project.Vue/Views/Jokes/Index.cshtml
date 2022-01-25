@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "Jokes Page";
+}
+
+<div>
+    <h2>Jokes</h2>
+</div>
+
+<div id="app">
+    <div>
+        <button class="btn btn-info" v-on:click.prevent="fetchRandomJoke">New random joke</button>
+    </div>
+    <br />
+    <div class="card">
+        <h3 class="card-header">Joke of the day</h3>
+        <article class="card-body">
+            <section class="text-center" v-for="joke in jokeOfTheDay">
+                <div>
+                    <h4>{{joke.joke.title}}</h4>
+                </div>
+                <div>
+                    <p>{{joke.joke.text}}</p>
+                </div>
+                <div>
+                    <p class="font-italic">{{joke.joke.date}}</p>
+                </div>
+            </section>
+        </article>
+    </div>
+    <br />
+    <div class="card">
+        <h3 class="card-header">Random joke</h3>
+        <article class="card-body">
+            <section class="text-center" v-for="joke in randomJoke">
+                <div>
+                    <p>{{joke}}</p>
+                </div>
+            </section>
+        </article>
+    </div>
+</div>
+
+@section scripts{
+<script src="~/lib/vue/vue.js"></script>
+<script src="~/lib/axios/axios.min.js"></script>
+
+<script>
+    var apiJokeOfTheDay = 'https://api.jokes.one/Jod';
+    var apiRandomJoke = 'https://geek-jokes.sameerkumar.website/api?format=json';
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            jokeOfTheDay: null,
+            randomJoke: null,
+        },
+        created: function () {
+            var self = this;
+            self.fetchJokeOfTheDay();
+            self.fetchRandomJoke();
+        },
+        methods: {
+            fetchJokeOfTheDay: function () {
+                var self = this;
+                axios.get(apiJokeOfTheDay)
+                    .then(function (response) {
+                        console.log('joke of the day:');
+                        console.log(response);
+                        self.jokeOfTheDay = response.data.contents.jokes;
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            },
+            fetchRandomJoke: function () {
+                var self = this;
+                axios.get(apiRandomJoke)
+                    .then(function (response) {
+                        console.log('random joke:');
+                        console.log(response);
+                        self.randomJoke = response.data;
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            },
+        }
+    });
+</script>
+}
