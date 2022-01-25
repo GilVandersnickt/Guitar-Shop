@@ -1,0 +1,76 @@
+﻿
+<div>
+    <h2>Login</h2>
+</div>
+
+<div id="app">
+    <p v-bind:title="message">{{message}}</p>
+    <div class="text-center">
+        <div v-if="!loggedIn" class="col-md-6">
+            <div class="form-group">
+                <h5>Username</h5>
+                <input type="text" v-model="loginForm.username" class="form-control">
+            </div>
+            <div class="form-group">
+                <h5>Password</h5>
+                <input type="password" v-model="loginForm.password" class="form-control">
+            </div>
+            <div class="form-group">
+                <button v-on:click="loginUser" class="btn-dark">Login</button>
+            </div>
+        </div>
+        <div v-else>
+            <figure style="background-image:url('/images//Background/guitar.jpg');background-size:cover;background-repeat:no-repeat;background-attachment:fixed;width:auto;height:600px"/>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/lib/axios/axios.min.js"></script>
+
+    <script>
+        var apiBase = 'https://localhost:5001/api/';
+        var apiURL = apiBase + 'auth/login';
+        let jwtToken = '';
+        var lastPage = 0;
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello! Please login below',
+                loggedIn: false,
+                loginForm: {
+                    username: 'admin@guitarshop.com',
+                    password: 'Test123?',
+                },
+            },
+            methods: {
+                loginUser: function () {
+                    var self = this;
+                    var logLogin = function () {
+                        console.log(apiURL);
+                        console.log(self.loginForm);
+                        axios.post(apiURL, self.loginForm)
+                            .then(function (response) {
+                                axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token;
+                                console.log(response.data.jwtToken);
+                                localStorage.setItem('jwtToken', response.data.jwtToken);
+                                alert(`User ${self.loginForm.username} logged in successfully!`);
+
+                                self.message = `Hi, ${self.loginForm.username}!`;
+                                self.loginForm.username = "";
+                                self.loginForm.password = "";
+                                self.loggedIn = true;
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                                if (error.response)
+                                    alert(`User ${self.loginForm.username} log in failed!`);
+                            });
+                    }
+                    logLogin();
+                }
+            }
+        })
+    </script>
+}
