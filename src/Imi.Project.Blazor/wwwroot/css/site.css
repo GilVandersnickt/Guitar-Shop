@@ -2,7 +2,7 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color:ghostwhite;
+    background-color: ghostwhite;
 }
 
 a, .btn-link {
@@ -42,10 +42,10 @@ app {
             margin-left: 1.5rem;
         }
 
-.main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .main .top-row a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
 .sidebar {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
@@ -118,6 +118,31 @@ app {
     color: red;
 }
 
+.float-left {
+    float: left;
+}
+
+.joke-margin {
+    margin-top: 40px;
+    padding: 15px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.product-card {
+    margin-top: 5px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 50%);
+}
+
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;
@@ -130,11 +155,67 @@ app {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.loading {
     position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
+    top: 60px;
+    left: 50%;
+    z-index: 1;
+    border: 9px solid #dddddd;
+    border-top: 9px solid #333333;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+}
+
+.button-moving {
+    position: absolute;
+    animation: run 10s linear infinite;
+}
+
+@keyframes run {
+    0% {
+        left: 0;
+        top: 0;
+    }
+
+    40% {
+        left: 100%;
+        top: 0;
+    }
+    
+    50% {
+        left: 100%;
+        top: 100%;
+    }
+
+    60% {
+        left: 100%;
+        top: 0;
+        
+    }
+
+    100% {
+        left: 0;
+        top: 0;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 767.98px) {
