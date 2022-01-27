@@ -1,0 +1,39 @@
+﻿
+<div>
+    <h2>Logout</h2>
+</div>
+
+<div id="app">
+    <div class="text-center">
+        <p v-bind:title="message">{{message}}</p>
+        <div class="form-group">
+            <button v-on:click="logoutUser" class="btn-dark">Logout</button>
+        </div>
+    </div>
+    <div>
+        <figure style="background-image:url('/images//Background/guitar.jpg');background-size:cover;background-repeat:no-repeat;background-attachment:fixed;width:auto;height:600px" />
+    </div>
+
+</div>
+@section scripts{
+    <script src="~/lib/vue/vue.js"></script>
+    <script src="~/lib/axios/axios.min.js"></script>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Are you sure you want to log out?',
+                loggedIn: true,
+            },
+            methods: {
+                logoutUser: function () {
+                    var self = this;
+                    localStorage.setItem('jwtToken', "");
+                    alert(`You logged out successfully!`);
+                    self.message = `Logged out!`;                    
+                }
+            }
+        })
+    </script>
+}
