@@ -1,4 +1,4 @@
-﻿using Imi.Project.Blazor.Models;
+﻿using Imi.Project.Blazor.Models.Local;
 using System;
 using System.Collections.Generic;
 using System.Linq;
