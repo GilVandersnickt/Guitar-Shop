@@ -19,12 +19,12 @@
         <h2>Failed attempts: @failedAttempts</h2>
         <h2>Succeeded attempts: @(wins == 0 ? "No wins yet!" : wins + (wins == 1 ? " win!" : " wins!"))</h2>
     </article>
-    <div class="col-md-6 float-left">
+    <article class="col-md-6 float-left">
         <button class="btn btn-info button-moving" @onclick="@GetRandomJoke">New random joke</button>
-        <article class="modal-content joke-margin">
-            <h4 style="color: @randomColor">@randomJoke</h4>
-        </article>
-    </div>
+        <Joke RandomJoke="@randomJoke"
+              RandomColor="@randomColor">
+        </Joke>  
+    </article>
 </div>
     @code {
         private string randomJoke;
