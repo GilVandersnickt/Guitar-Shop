@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Imi.Project.Blazor.Models
+namespace Imi.Project.Blazor.Models.Local
 {
     public class CategoryItem
     {
