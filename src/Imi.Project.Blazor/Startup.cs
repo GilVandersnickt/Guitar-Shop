@@ -1,5 +1,7 @@
-using Imi.Project.Blazor.Models;
+using Imi.Project.Blazor.Models.Local;
 using Imi.Project.Blazor.Services;
+using Imi.Project.Blazor.Services.Api;
+using Imi.Project.Blazor.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +27,9 @@ namespace Imi.Project.Blazor
             services.AddServerSideBlazor();
             services.AddTransient<ICRUDService<BrandListItem, BrandItem>, BrandsService>();
             services.AddTransient<ICRUDService<CategoryListItem, CategoryItem>, CategoriesService>();
-            services.AddTransient<ICRUDService<ProductListItem, ProductItem>, ProductsService>();
+            services.AddTransient<IProductService, ApiProductService>();
+            services.AddTransient<IUserService, ApiUserService>();
+            services.AddTransient<IJokeService, ApiJokeService>();
             services.AddTransient<MemoryGameService>();
         }
 

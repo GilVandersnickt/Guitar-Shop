@@ -1,47 +1,71 @@
-﻿@using Imi.Project.Blazor.Components
+﻿@using Imi.Project.Blazor.Constants
+@using Imi.Project.Blazor.Components
+@using Imi.Project.Blazor.Services.Interfaces
 @using Imi.Project.Blazor.Services
-@using Imi.Project.Blazor.Models
+@using Imi.Project.Blazor.Models.Local
 
 @page "/memorygame"
-@inject MemoryGameService service;
-
+@inject MemoryGameService memoryGameService;
+@inject IJokeService jokeService;
 <div>
-    <h2>Memory Game</h2>
-    <button class="btn btn-warning" style="margin:5px;" @onclick="Restart">Restart</button>
-
-    <MemoryGameCards OnFlipClick="Flip"
-                     Cards="cards">
-    </MemoryGameCards>
-
-    <h2>Failed attempts: @failedAttempts</h2>
-    <h2>Succeeded attempts: @(wins == 0 ? "No wins yet!" : wins + (wins == 1 ? " win!" : " wins!"))</h2>
+    <div class="col-md-12">
+        <h2>Memory Game</h2>
+    </div>
+    <article class="col-md-6 float-left">
+        <button class="btn btn-warning" style="margin:5px;" @onclick="Restart">Restart</button>
+        <MemoryGameCards OnFlipClick="Flip"
+                         Cards="cards">
+        </MemoryGameCards>
+        <h2>Failed attempts: @failedAttempts</h2>
+        <h2>Succeeded attempts: @(wins == 0 ? "No wins yet!" : wins + (wins == 1 ? " win!" : " wins!"))</h2>
+    </article>
+    <div class="col-md-6 float-left">
+        <button class="btn btn-info button-moving" @onclick="@GetRandomJoke">New random joke</button>
+        <article class="modal-content joke-margin">
+            <h4 style="color: @randomColor">@randomJoke</h4>
+        </article>
+    </div>
 </div>
+    @code {
+        private string randomJoke;
+        private string randomColor;
+        private List<List<MemoryGameCard>> cards;
+        private int wins;
+        private int failedAttempts;
 
-@code {
-    private List<List<MemoryGameCard>> cards;
-    private int wins;
-    private int failedAttempts;
+        protected override void OnInitialized()
+        {
+            randomJoke = JokeSettings.JokePlaceholder;
 
-    protected override void OnInitialized()
-    {
-        wins = 0;
-        failedAttempts = 0;
+            wins = 0;
+            failedAttempts = 0;
 
-        service.StartGame();
-        cards = service.Cards;
+            memoryGameService.StartGame();
+            cards = memoryGameService.Cards;
+        }
+
+        public async Task Flip(MemoryGameCard card)
+        {
+            await memoryGameService.Flip(card);
+            wins = memoryGameService.Wins;
+            failedAttempts = memoryGameService.FailedAttempts;
+        }
+
+        protected void Restart()
+        {
+            memoryGameService.ResetGame();
+            failedAttempts = memoryGameService.FailedAttempts;
+            cards = memoryGameService.Cards;
+        }
+
+        public void GetRandomColor()
+        {
+            randomColor = memoryGameService.GetRandomColorList().FirstOrDefault().ToString();
+        }
+
+        public async Task GetRandomJoke()
+        {
+            randomJoke = await jokeService.GetRandomJoke();
+            GetRandomColor();
+        }
     }
-
-    public async Task Flip(MemoryGameCard card)
-    {
-        await service.Flip(card);
-        wins = service.Wins;
-        failedAttempts = service.FailedAttempts;
-    }
-
-    protected void Restart()
-    {
-        service.ResetGame();
-        failedAttempts = service.FailedAttempts;
-        cards = service.Cards;
-    }
-}
