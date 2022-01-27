@@ -32,14 +32,12 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame>
                                     <StackLayout BackgroundColor="{StaticResource WhiteColor}">
-                                        <Frame Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
+                                        <Frame Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="140" WidthRequest="140">
                                             <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
                                         </Frame>
-                                        <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
+                                        <Label Text="{Binding Name}" TextColor="Black" FontSize="Small" Style="{StaticResource ProductTitleLabelStyle }" />
                                     </StackLayout>
-                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
