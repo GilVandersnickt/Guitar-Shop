@@ -28,7 +28,7 @@ namespace Imi.Project.Blazor.Services.Api
                 var body = await response.Content.ReadAsStringAsync();
                 var jokeResponse = JsonConvert.DeserializeObject<JokeResponse>(body);
 
-                return jokeResponse.joke;
+                return jokeResponse.Joke;
             }
         }
     }
