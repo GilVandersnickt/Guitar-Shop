@@ -1,15 +1,29 @@
-﻿@inherits LayoutComponentBase
+﻿@using Imi.Project.Blazor.Models.Local
+@using Imi.Project.Blazor.Shared
 
-<div class="sidebar">
-    <NavMenu />
+@inherits LayoutComponentBase
+
+<MainMenu MenuItems="MenuItems" />
+<div class="container mt-3" style="margin-top:40px;">
+    @Body
 </div>
 
-<div class="main">
-    <div class="top-row px-4">
-        <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-    </div>
+@code
+{
+    public MenuItem[] MenuItems { get; set; }
 
-    <div class="content px-4">
-        @Body
-    </div>
-</div>
+    protected override void OnInitialized()
+    {
+        this.loadMenuItems();
+    }
+
+    private void loadMenuItems() 
+    {
+        this.MenuItems = new MenuItem[] {
+        new MenuItem() { Caption = "Brands", Href = "brands" },
+        new MenuItem() { Caption = "Categories", Href = "categories" },
+        new MenuItem() { Caption = "Products", Href = "products"},
+        new MenuItem() { Caption = "Memory Game", Href = "memorygame"}
+            };
+    }
+}

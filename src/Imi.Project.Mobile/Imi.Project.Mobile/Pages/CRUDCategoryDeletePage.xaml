@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.CRUDCategoryDeletePage"
+             Style="{StaticResource BasePageStyle}"
+             Title="Delete">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Style="{StaticResource SlDefaultStyle}">
+                    <Label Text="Delete category" Style="{StaticResource Title}"/>
+                    <Label Text="Category" />
+                    <Picker Title="--Select--" 
+                            ItemsSource="{Binding Categories}" 
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding CategoryToDelete}"/>
+                    <Button Command="{Binding DeleteCategory}" Text="Delete category"/>
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

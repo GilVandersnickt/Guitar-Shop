@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bhv="clr-namespace:Imi.Project.Mobile.Behaviors"
+             Title="Edit"
+             Style="{StaticResource BasePageStyle}"
+             x:Class="Imi.Project.Mobile.Pages.CRUDBrandUpdatePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout Style="{StaticResource SlDefaultStyle}">
+                    <Label Text="Edit brand" Style="{StaticResource Title}"/>
+                    <Frame HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="150" WidthRequest="150">
+                        <Image Source="{Binding BrandImageSource}"/>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                        <Button Command="{Binding TakePhoto}" Text="Take Photo" VerticalOptions="Center" />
+                        <Button Command="{Binding UploadPhoto}" Text="Upload Photo" VerticalOptions="Center" />
+                    </StackLayout>
+                    <Label Text="Brand" />
+                    <Picker Title="--Select--" 
+                            ItemsSource="{Binding Brands}" 
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding BrandToEdit}">
+                        <Picker.Behaviors>
+                            <bhv:EventToCommandBehavior
+                                EventName="SelectedIndexChanged"
+                                Command="{Binding LoadBrand}">
+                            </bhv:EventToCommandBehavior>
+                        </Picker.Behaviors>
+                    </Picker>
+                    <Label Text="Brand name" />
+                    <Entry Text="{Binding BrandName}" Placeholder="Name the brand here" />
+                    <Label Text="{Binding ProductDescriptionError}" 
+                           IsVisible="{Binding ProductDescriptionErrorVisible}" 
+                           StyleClass="errormessage" />
+                    <Button Text="Save brand" Command="{Binding SaveBrand}"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

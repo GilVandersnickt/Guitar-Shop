@@ -1,0 +1,28 @@
+﻿@using Imi.Project.Blazor.Enums
+@using Imi.Project.Blazor.Models.Local
+
+<main class="center-block">
+    @foreach (List<MemoryGameCard> cardRow in Cards)
+    {
+        @foreach (MemoryGameCard card in cardRow)
+        {
+            <div class="flip-card" style=@(!card.Flipped ? "transform: rotateY(180deg);" : "")>
+                <div class="flip-card-inner" style=@(!card.Flipped ? "transform: rotateY(180deg);" : "")>
+                    <div class="flip-card-front" style="background-color: @(card.Flipped ? card.Color : Color.grey.ToString());">
+                        <img src="images/memorygame/@card.Image" />
+                    </div>
+                    <div class="flip-card-back" @onclick="e => OnFlipClick.InvokeAsync(card)">
+                    </div>
+                </div>
+            </div>
+        }
+        <br />
+    }
+</main>
+
+@code {
+    [Parameter]
+    public List<List<MemoryGameCard>> Cards { get; set; }
+    [Parameter]
+    public EventCallback<MemoryGameCard> OnFlipClick { get; set; }
+}

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource BasePageStyle}"
+             x:Class="Imi.Project.Mobile.Pages.AdminPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Spacing="10" VerticalOptions="Center" Style="{StaticResource SlDefaultStyle}">
+                    <Label Text="Add, edit or delete" Style="{StaticResource Title}"/>
+                    <Button Text="Products" Command="{Binding OpenCrudProductPage}"/>
+                    <Button Text="Brands" Command="{Binding OpenCrudBrandPage}"/>
+                    <Button Text="Categories" Command="{Binding OpenCrudCategoryPage}"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

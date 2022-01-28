@@ -103,6 +103,23 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Amps.PNG" />
+    <Content Include="Bass_Guitars.PNG" />
+    <Content Include="Cables.PNG" />
+    <Content Include="Classical_Guitars.PNG" />
+    <Content Include="Electric_Guitars.PNG" />
+    <Content Include="Fender.PNG" />
+    <Content Include="fender64customdeluxereverbGIT0042604000.png" />
+    <Content Include="fenderamericanoriginal60sprecisionbassrwsurfgreenBAS0010757000.png" />
+    <Content Include="fenderamericanultrastratocasterhssmnultraburstGIT0050645000.png" />
+    <Content Include="fenderericclaptonstratocastermnalmondgreenmasterbuilttoddkrausecz552554GIT0057454000.png" />
+    <Content Include="Gibson.PNG" />
+    <Content Include="gibsonlespaulstudiosmokehouseburstGIT0049498000.png" />
+    <Content Include="gibsonlespaultributesatintobaccosunburstGIT0049503000.png" />
+    <Content Include="Gretsch.PNG" />
+    <Content Include="gretschg5230telectromaticjetftsinglecutbigsbyairlinesilverGIT0047791000.png" />
+    <Content Include="gretschg6128tplayerseditionjetftbigsbyrounduporangeGIT0051980000.png" />
+    <Content Include="Ibanez.PNG" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
@@ -130,7 +147,17 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="ibanezstandardsr600eastantiquebrownstainedburstBAS0011488000.png" />
+    <Content Include="Placeholder.png" />
+    <Content Include="Roland.PNG" />
+    <Content Include="rolandricbpcpatchkabel015mACC0007020000.png" />
+    <Content Include="rolandricg10agoldseriesACC0007014000.png" />
+    <Content Include="Yamaha.PNG" />
+    <Content Include="guitar.jpg" />
     <Content Include="Properties\Default.rd.xml" />
+    <Content Include="yamahac40mmatGIT0019253000.png" />
+    <Content Include="yamahacs40nt34naturalGIT0000644000.png" />
+    <Content Include="yamahathr30iiwirelessGIT0051343000.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -143,9 +170,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10"/>
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xam.Plugin.Media">
+      <Version>5.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Imi.Project.Mobile\Imi.Project.Mobile.csproj">

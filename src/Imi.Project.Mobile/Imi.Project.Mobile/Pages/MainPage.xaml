@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"             
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:bhv="clr-namespace:Imi.Project.Mobile.Behaviors"
+             mc:Ignorable="d"
+             x:Name="page"
+             x:Class="Imi.Project.Mobile.Pages.MainPage"
+             Style="{StaticResource BasePageStyle}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Style="{StaticResource SlDefaultStyle}">
+                <Label Text="Welcome to the guitar shop!" Style="{StaticResource Title}"/>
+                <Grid RowSpacing="20" Margin="20,0,0,20" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Categories" Style="{StaticResource SecondaryTitle}"/>
+                    <Button Text="Show all" Style="{StaticResource SecondaryButton}" Command="{Binding OpenCategoriesPageCommand}"/>
+                    <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}" HeightRequest="200" SelectionMode="Single" > 
+                        <CollectionView.Behaviors>
+                            <bhv:EventToCommandBehavior
+                                EventName="SelectionChanged"
+                                Command="{Binding OpenCategoryProductsPageCommand}"
+                                EventArgsConverter="{StaticResource ItemTappedEventArgsConv}">
+                            </bhv:EventToCommandBehavior>
+                        </CollectionView.Behaviors>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                    <StackLayout BackgroundColor="{StaticResource WhiteColor}">
+                                        <Frame Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="140" WidthRequest="140">
+                                            <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                        </Frame>
+                                        <Label Text="{Binding Name}" TextColor="Black" FontSize="Small" Style="{StaticResource ProductTitleLabelStyle }" />
+                                    </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+                <Grid RowSpacing="20" Margin="20,0,0,20" HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="Brands" Style="{StaticResource SecondaryTitle}"/>
+                    <Button Text="Show all" Style="{StaticResource SecondaryButton}" Command="{Binding OpenBrandsPageCommand}"/>
+                    <CollectionView Grid.Row="1" ItemsSource="{Binding Brands}" HeightRequest="200" SelectionMode="Single"  >
+                        <CollectionView.Behaviors>
+                            <bhv:EventToCommandBehavior
+                                EventName="SelectionChanged"
+                                Command="{Binding OpenBrandProductsPageCommand}"
+                                EventArgsConverter="{StaticResource ItemTappedEventArgsConv}">
+                            </bhv:EventToCommandBehavior>
+                        </CollectionView.Behaviors>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout BackgroundColor="{StaticResource WhiteColor}" Padding="15">
+                                    <Frame Padding="0" HasShadow="False"  HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" HeightRequest="120" WidthRequest="200">
+                                        <Image Source="{Binding Image}" Aspect="Fill" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                                    </Frame>
+                                    <Label Text="{Binding Name}" TextColor="Black" FontSize="Medium" Style="{StaticResource ProductTitleLabelStyle }" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,39 @@
+﻿@using Imi.Project.Blazor.Models.Local
+
+<button class="btn btn-primary" @onclick="OnAddClick">Add Brand</button>
+<div>
+    @foreach (var brand in BrandListItems)
+    {
+        <article class="list-group-item">
+            <a>
+                <div class="card-body">
+                    <h5 class="card-title">@brand.Name</h5>
+                </div>
+                <figure class="card-image-top text-center">
+                    <img src="/images/@brand.Image" width="100" />
+                </figure>
+            </a>
+            <dl>
+                <dd>
+                    <button class="btn btn-warning" @onclick="e => OnDeleteClick.InvokeAsync(brand)">Edit</button>
+                    <button class="btn btn-danger" @onclick="e => OnEditClick.InvokeAsync(brand)">Delete</button>
+                </dd>
+            </dl>
+        </article>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public BrandListItem[] BrandListItems { get; set; }
+
+    [Parameter]
+    public EventCallback OnAddClick { get; set; }
+
+    [Parameter]
+    public EventCallback<BrandListItem> OnEditClick { get; set; }
+
+    [Parameter]
+    public EventCallback<BrandListItem> OnDeleteClick { get; set; }
+}

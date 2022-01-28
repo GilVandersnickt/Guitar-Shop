@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.LoginPage"
+             Style="{StaticResource BasePageStyle}">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Style="{StaticResource SlDefaultStyle}">
+                <Label Text="Log in" Style="{StaticResource Title}"/>
+                <Frame HorizontalOptions="FillAndExpand" >
+                    <Image Source="guitar.jpg"  HorizontalOptions="Fill" Aspect="AspectFit" />
+                </Frame>
+                <Label Text="Log in for access to admin page"/>
+                <Entry Text="{Binding UserName}" Placeholder="Username" HorizontalOptions="FillAndExpand" Margin="20"/>
+                <Entry Text="{Binding Password}" Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
+                <Button Text="Forgot your password?" Command="{Binding ForgotPassword}" HorizontalOptions="Center" BackgroundColor="Transparent" BorderWidth="0" FontSize="Micro" />
+                <Button Text="Log in" Style="{StaticResource PrimaryButton}" Command="{Binding Login}" />
+
+                <Label/>
+                <Label Text="Flashlight" Style="{StaticResource Title}"/>
+                <Button Text="On" Command="{Binding TurnOnFlashlight}"/>
+                <Button Text="Off" Command="{Binding TurnOffFlashlight}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

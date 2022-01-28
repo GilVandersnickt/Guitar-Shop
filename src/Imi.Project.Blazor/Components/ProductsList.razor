@@ -1,0 +1,49 @@
+﻿@using Imi.Project.Blazor.Models.Api
+
+<button class="btn btn-primary margin-bottom-5" @onclick="OnAddClick">Add Product</button>
+<div>
+    @foreach (var product in ProductResponses)
+    {
+        <article class="product-card">
+            <div class="text-center">
+                <h5>@product.Category.Name</h5>
+                <h6>@product.Subcategory.Name</h6>
+                <a>
+                    <figure class="card-image-top text-center">
+                        <img src="@product.Image" width="150" />
+                    </figure>
+                </a>
+                <figure class="card-image-top text-center">
+                    <img src="@product.Brand.Image" width="80" />
+                </figure>
+                <div>
+                    <h4 style="font-weight:bold;">@product.Name</h4>
+                </div>
+                <div>
+                    <div>€@product.Price</div>
+                </div>
+            </div>
+            <dl>
+                <dd>
+                    <button class="btn btn-warning" @onclick="e => OnEditClick.InvokeAsync(product)">Edit</button>
+                    <button class="btn btn-danger" @onclick="e => OnDeleteClick.InvokeAsync(product)">Delete</button>
+                </dd>
+            </dl>
+        </article>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public List<ProductResponse> ProductResponses { get; set; }
+
+    [Parameter]
+    public EventCallback OnAddClick { get; set; }
+
+    [Parameter]
+    public EventCallback<ProductResponse> OnEditClick { get; set; }
+
+    [Parameter]
+    public EventCallback<ProductResponse> OnDeleteClick { get; set; }
+}

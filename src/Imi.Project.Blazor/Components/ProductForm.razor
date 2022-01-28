@@ -1,0 +1,76 @@
+﻿@using Imi.Project.Blazor.Models.Api
+@using System.IO
+
+<EditForm Model="@SelectedProductItem" OnValidSubmit="@(e => OnSaveClick.InvokeAsync(SelectedProductItem))">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <figure class="card-image-top text-center">
+        <img src="@SelectedProductItem.Image" width="150" />
+    </figure>
+    <div>
+        <label for="image">Image:</label>
+        <div>
+            <InputFile OnChange="@GetImageStream"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name">Name: </label>
+        <InputText id="name" @bind-Value="SelectedProductItem.Name" class="form-control" />
+        <ValidationMessage For="@(() => SelectedProductItem.Name)" />
+    </div>
+    <div class="form-group">
+        <label for="price">Price: </label>
+        <InputNumber id="price" @bind-Value="SelectedProductItem.PriceDecimal" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="brand">Brand: </label>
+        <InputSelect id="brand" @bind-Value="SelectedProductItem.BrandId" class="form-control">
+            @foreach (var brand in SelectedProductItem.Brands)
+            {
+                <option value="@brand.Id">@brand.Name</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => SelectedProductItem.BrandId)" />
+    </div>
+    <div class="form-group">
+        <label for="category">Category: </label>
+        <InputSelect id="category" @bind-Value="SelectedProductItem.CategoryId" class="form-control">
+            @foreach (var category in SelectedProductItem.Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => SelectedProductItem.CategoryId)" />
+    </div>
+    <div class="form-group">
+        <label for="brand">Subcategory: </label>
+        <InputSelect id="brand" @bind-Value="SelectedProductItem.SubcategoryId" class="form-control">
+            @foreach (var subcategory in SelectedProductItem.Subcategories)
+            {
+                <option value="@subcategory.Id">@subcategory.Name</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => SelectedProductItem.BrandId)" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-warning" @onclick="OnCancelClick">Cancel</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public ProductRequestForm SelectedProductItem { get; set; }
+    [Parameter]
+    public EventCallback<ProductRequestForm> OnSaveClick { get; set; }
+    [Parameter]
+    public EventCallback OnCancelClick { get; set; }
+
+    public void GetImageStream(InputFileChangeEventArgs e)
+    {
+        IBrowserFile file = e.File;
+        var stream = e.File.OpenReadStream();
+        SelectedProductItem.ImageInputFile = stream;
+    }
+
+}

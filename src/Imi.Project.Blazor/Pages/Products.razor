@@ -1,0 +1,132 @@
+﻿@using Imi.Project.Blazor.Components
+@using Imi.Project.Blazor.Models.Api
+@using Imi.Project.Blazor.Constants
+@using Imi.Project.Blazor.Services.Interfaces
+
+@page "/products"
+@inject IProductService productService;
+@inject IUserService userService;
+
+<h2>Product</h2>
+<div class="text-center">
+    <div class="@isLoading"></div>
+</div>
+<div class="mt-3">
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <div class="alert alert-danger">
+            @error
+        </div>
+    }
+
+    @if (selectedProduct == null)
+    {
+        <ProductsList ProductResponses="products"
+                      OnAddClick="AddProduct"
+                      OnEditClick="EditProduct"
+                      OnDeleteClick="DeleteProduct">
+        </ProductsList>
+    }
+    else
+    {
+        <ProductForm SelectedProductItem="selectedProduct"
+                     OnSaveClick="SaveProduct"
+                     OnCancelClick="ShowProducts">
+        </ProductForm>
+    }
+</div>
+
+@code {
+    private List<ProductResponse> products = new List<ProductResponse>();
+    private ProductRequestForm selectedProduct;
+    private ProductRequestForm baseRequestForm;
+    private string isLoading;
+
+    private string error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Login(ApiSettings.AdminUsername, ApiSettings.AdminPassword);
+        await GetDataForLists();
+        await ShowProducts();
+    }
+
+    public async Task ShowProducts()
+    {
+        isLoading = ApiSettings.LoadingClass;
+        products = await productService.Get();
+        this.selectedProduct = null;
+        isLoading = string.Empty;
+    }
+    public async Task AddProduct()
+    {
+        isLoading = ApiSettings.LoadingClass;
+        this.selectedProduct = await productService.GetRequest();
+        isLoading = string.Empty;
+    }
+    public async Task EditProduct(ProductResponse product)
+    {
+        isLoading = ApiSettings.LoadingClass;
+        //var baseRequest = await productService.GetRequest();
+        var productToEdit = await productService.Get(product.Id);
+
+        ProductRequestForm request = productService.GetRequest(productToEdit, baseRequestForm).Result;
+        this.selectedProduct = request;
+        isLoading = string.Empty;
+    }
+    public async Task SaveProduct(ProductRequestForm product)
+    {
+        isLoading = ApiSettings.LoadingClass;
+        try
+        {
+            var request = productService.GetRequest(product).Result;
+
+            if (product.Id == Guid.Empty)
+            {
+                request.Id = Guid.NewGuid();
+                await productService.Add(request);
+            }
+            else
+            {
+                await productService.Update(request);
+            }
+
+            if (product.ImageInputFile != null)
+                await productService.AddImage(request.Id, product.ImageInputFile);
+
+            await this.ShowProducts();
+        }
+        catch (Exception ex)
+        {
+            this.error = ex.Message;
+        }
+        isLoading = string.Empty;
+    }
+    public async Task DeleteProduct(ProductResponse product)
+    {
+        isLoading = ApiSettings.LoadingClass;
+        try
+        {
+            await productService.Delete(product.Id);
+            await this.ShowProducts();
+        }
+        catch (Exception ex)
+        {
+            this.error = ex.Message;
+        }
+        isLoading = string.Empty;
+    }
+    public async Task Login(string username, string password)
+    {
+        isLoading = ApiSettings.LoadingClass;
+        await userService.Login(username, password);
+        isLoading = string.Empty;
+    }
+    private async Task GetDataForLists()
+    {
+        isLoading = ApiSettings.LoadingClass;
+        baseRequestForm = await productService.GetRequest();
+        isLoading = string.Empty;
+    }
+
+}

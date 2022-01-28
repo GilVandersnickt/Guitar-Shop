@@ -1,0 +1,29 @@
+﻿@using Imi.Project.Blazor.Models.Local
+
+<EditForm Model="@ProductBrand" OnValidSubmit="@(e => OnSaveClick.InvokeAsync(ProductBrand))">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Name: </label>
+        <InputText id="name" @bind-Value="ProductBrand.Name" class="form-control" />
+        <ValidationMessage For="@(() => ProductBrand.Name)" />
+    </div>
+
+    <div class="form-group">
+        <label for="description">Image: </label>
+        <button id="image" class="btn btn-primary">Add image</button>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-warning" @onclick="OnCancelClick">Cancel</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public BrandItem ProductBrand { get; set; }
+    [Parameter]
+    public EventCallback<BrandItem> OnSaveClick { get; set; }
+    [Parameter]
+    public EventCallback OnCancelClick { get; set; }
+}

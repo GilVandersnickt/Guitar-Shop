@@ -1,15 +1,12 @@
-using Imi.Project.Blazor.Data;
+using Imi.Project.Blazor.Models.Local;
+using Imi.Project.Blazor.Services;
+using Imi.Project.Blazor.Services.Api;
+using Imi.Project.Blazor.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor
 {
@@ -28,7 +25,12 @@ namespace Imi.Project.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddTransient<ICRUDService<BrandListItem, BrandItem>, BrandsService>();
+            services.AddTransient<ICRUDService<CategoryListItem, CategoryItem>, CategoriesService>();
+            services.AddTransient<IProductService, ApiProductService>();
+            services.AddTransient<IUserService, ApiUserService>();
+            services.AddTransient<IJokeService, ApiJokeService>();
+            services.AddTransient<MemoryGameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

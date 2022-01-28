@@ -1,0 +1,11 @@
+﻿
+<article class="modal-content joke-margin">
+    <h4 style="color: @RandomColor">@RandomJoke</h4>
+</article>
+
+@code {
+    [Parameter]
+    public string RandomJoke { get; set; }
+    [Parameter]
+    public string RandomColor { get; set; }
+}

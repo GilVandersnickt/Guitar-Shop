@@ -1,0 +1,39 @@
+﻿@using Imi.Project.Blazor.Models.Local
+
+<button class="btn btn-primary" @onclick="OnAddClick">Add Category</button>
+<div>
+    @foreach (var category in CategoryListItems)
+    {
+        <article class="list-group-item">
+            <a>
+                <div class="card-body">
+                    <h5 class="card-title">@category.Name</h5>
+                </div>
+                <figure class="card-image-top text-center">
+                    <img src="/images/@category.Image" width="100" />
+                </figure>
+            </a>
+            <dl>
+                <dd>
+                    <button class="btn btn-warning" @onclick="e => OnEditClick.InvokeAsync(category)">Edit</button>
+                    <button class="btn btn-danger" @onclick="e => OnDeleteClick.InvokeAsync(category)">Delete</button>
+                </dd>
+            </dl>
+        </article>
+    }
+</div>
+
+@code {
+
+    [Parameter]
+    public CategoryListItem[] CategoryListItems { get; set; }
+
+    [Parameter]
+    public EventCallback OnAddClick { get; set; }
+
+    [Parameter]
+    public EventCallback<CategoryListItem> OnEditClick { get; set; }
+
+    [Parameter]
+    public EventCallback<CategoryListItem> OnDeleteClick { get; set; }
+}
