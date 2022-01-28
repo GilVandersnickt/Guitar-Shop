@@ -11,10 +11,12 @@ namespace Imi.Project.Mobile.ViewModels
     public class LoginViewModel : FreshBasePageModel
     {
         private readonly IUserService _userService;
+        private readonly IDeviceFlashlightService _deviceFlashlightService;
 
-        public LoginViewModel(IUserService userService)
+        public LoginViewModel(IUserService userService, IDeviceFlashlightService deviceFlashlightService)
         {
             _userService = userService;
+            _deviceFlashlightService = deviceFlashlightService;
         }
         #region Properties
         private string userName;
@@ -67,6 +69,19 @@ namespace Imi.Project.Mobile.ViewModels
                 await CoreMethods.DisplayAlert("Forgot your password?", "Too bad ...", "Thanks!");
             }
         );
+        public ICommand TurnOnFlashlight => new Command(
+            () =>
+            {
+                _deviceFlashlightService.TurnOn();
+            }
+        );
+        public ICommand TurnOffFlashlight => new Command(
+            () =>
+            {
+                _deviceFlashlightService.TurnOff();
+            }
+        );
+
         #endregion
         #region Validate
         public bool Validate(string username, string password)

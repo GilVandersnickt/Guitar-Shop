@@ -15,6 +15,11 @@
                 <Entry Text="{Binding Password}" Placeholder="Password" HorizontalOptions="FillAndExpand" Margin="20, 0, 20, 0"/>
                 <Button Text="Forgot your password?" Command="{Binding ForgotPassword}" HorizontalOptions="Center" BackgroundColor="Transparent" BorderWidth="0" FontSize="Micro" />
                 <Button Text="Log in" Style="{StaticResource PrimaryButton}" Command="{Binding Login}" />
+
+                <Label/>
+                <Label Text="Flashlight" Style="{StaticResource Title}"/>
+                <Button Text="On" Command="{Binding TurnOnFlashlight}"/>
+                <Button Text="Off" Command="{Binding TurnOffFlashlight}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
