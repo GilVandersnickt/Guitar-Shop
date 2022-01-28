@@ -22,6 +22,10 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IBrandService>(new ApiBrandsService());
             FreshIOC.Container.Register<ICategoryService>(new ApiCategoryService());
             FreshIOC.Container.Register<IUserService>(new ApiUserService());
+
+            //devices
+            FreshIOC.Container.Register(DependencyService.Get<IDeviceFlashlightService>());
+
         }
 
         protected override void OnStart()
