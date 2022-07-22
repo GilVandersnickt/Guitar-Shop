@@ -16,7 +16,7 @@ project te kunnen uitvoeren:
   | SuperAdmin@guitarshop.com  | Test123?    |
   
 - Api instellingen
-  - Base uri voor het instellen van ipadress is te vinden in de klasse ApiSettings.cs in de folder Constants in elk project
+  - Base uri voor het instellen van ipadress is te vinden in de klasse ApiSettings.cs in de folder Constants in elk project.
 
 ## Rollen
 
