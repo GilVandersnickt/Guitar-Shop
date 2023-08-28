@@ -16,11 +16,7 @@ namespace Imi.Project.Blazor.Services.Api
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(JokeSettings.JokeUri),
-                Headers = {
-                    { "x-rapidapi-host", JokeSettings.JokeHost },
-                    { "x-rapidapi-key", JokeSettings.JokeKey }
-                },
+                RequestUri = new Uri(JokeSettings.JokeUri)
             };
             using (var response = await client.SendAsync(request))
             {
@@ -28,7 +24,7 @@ namespace Imi.Project.Blazor.Services.Api
                 var body = await response.Content.ReadAsStringAsync();
                 var jokeResponse = JsonConvert.DeserializeObject<JokeResponse>(body);
 
-                return jokeResponse.Joke;
+                return jokeResponse.Value;
             }
         }
     }

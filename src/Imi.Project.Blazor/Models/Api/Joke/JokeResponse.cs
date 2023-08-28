@@ -2,6 +2,6 @@
 {
     public class JokeResponse
     {
-        public string Joke { get; set; }
+        public string Value { get; set; }
     }
 }
